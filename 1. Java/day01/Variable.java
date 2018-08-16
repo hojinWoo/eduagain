@@ -17,6 +17,6 @@ public class Variable{
 
     String name = "nn";
     String message = "bored";
-    System.out.println(name + "is" + message);
+    System.out.println(name + " is " + message);
   }
 }
