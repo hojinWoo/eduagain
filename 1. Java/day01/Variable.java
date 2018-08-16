@@ -14,5 +14,9 @@ public class Variable{
     System.out.println(a);
     System.out.println(b);
     System.out.println(c);
+
+    String name = "nn";
+    String message = "bored";
+    System.out.println(name + "is" + message);
   }
 }
