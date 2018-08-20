@@ -31,6 +31,8 @@ class AccountExample{
     Account account1 = new Account();
     System.out.println(account1.getRestMoney());
 
+  
+    Account account3 = new Account("","");
 
     System.out.println("End Account Application");
   }

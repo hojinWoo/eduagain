@@ -11,11 +11,24 @@ class Account{
   private int passwd;
   private long restMoney;
 
-  //Constructor
   //default Constructor
   public Account(){
+    //init
+    this(null, null); //default : JVM init
 
+    // accountNum = null;
+    // accountOwner = null;
+    // passwd = 0;
+    // restMoney = 0L;
   }
+  //Constructor Overloading
+  public Account(String accountNum, String accountOwner){
+    // this.accountNum = accountNum;
+    // this.accountOwner = accountOwner;
+    // this();
+    this(accountNum, accountOwner, 0, 0);
+  }
+  //Constructor
   public Account(String accountNum, String accountOwner, int passwd, long restMoney){
     this.accountNum = accountNum;
     this.accountOwner = accountOwner;
