@@ -14,5 +14,6 @@ public class Package{ //namespace
     // dir -> C:\Program Files\Java\jdk1.8.0_181\bin\javap.exe
 
     System.out.println("compile in D.O.S");
+    // exec -> $ java kr.or.kosta.Package
   }
 }
