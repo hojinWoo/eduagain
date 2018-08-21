@@ -12,29 +12,31 @@ public class ArrayExample {
 		array[2] = 3;
 //		System.out.println(array[2]);
 		for (int i = 0; i < array.length; i++) {
-			System.out.println(array[i]);
+			System.out.print(array[i]+" ");
 		}
 		System.out.println();
 		//at once
 //		int[] p = new int[] {5,4,3,2,1};
 		int[] pp = {4,5,1,2,3};
 		for (int i = 0; i < pp.length; i++) {
-			System.out.println(pp[i]);
+			System.out.print(pp[i]+" ");
 		}
+		System.out.println();
 		for (int i : pp) {
-			System.out.println(i);
+			System.out.print(i+" ");
 		}
 		
-		System.out.println("Array copy");
+		System.out.println("\nMission1 : Array copy");
 		//array copy
 		int[] array3 = {3,1,9,2,5};
-		int[] array4 = new int[5];
-		for (int i = 0; i < array4.length; i++) {
+		int[] array4 = new int[7];
+		for (int i = 0; i < array3
+				.length; i++) {
 			array4[i] = array3[i];
 			System.out.print(array4[i]+" ");
 		}
 		
-		System.out.println("\nlotto");
+		System.out.println("\nMission2 : lotto");
 		//array sort
 		int[] lottos = {4,22,13,44,24};
 		//Arrays.sort(lottos);
@@ -49,7 +51,7 @@ public class ArrayExample {
 			}
 		}
 		for (int i : lottos) {
-			System.out.println(i+ " ");
+			System.out.print(i+ " ");
 		}
 	}
 }
