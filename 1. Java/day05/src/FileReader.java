@@ -8,11 +8,12 @@ public class FileReader {
 		 //java.lang.ArrayIndexOutOfBoundsException : 실행하면서 값을 저장하지 않았기 때문
 		if(args.length != 2) {
 			System.out.println("error");
-		}else {
-			String fileName1 = args[0];
-			String fileName2 = args[1];
-			System.out.println(fileName1);
-			System.out.println(fileName2);
+			return;
 		}
+		String fileName1 = args[0];
+		String fileName2 = args[1];
+		System.out.println(fileName1);
+		System.out.println(fileName2);
+		
 	}
 }
