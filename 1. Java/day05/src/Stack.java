@@ -2,13 +2,20 @@
  * 과제1. 배열 데이터 구조 중 1개 만들기
  * 지역변수가 할당되는 영역인 stack을 만들기
  * LIFO 구조의 스택 구현
- * @author hojin
+ * @author 우호진
  *
  */
 public class Stack {
 	private int top;		// stack의 위치를 나타낼 변수
 	private int[] array;	// stack 담을 공간
 	
+	
+	/**
+	 * Default constructor
+	 */
+	public Stack() {
+		this(0);
+	}
 	/**
 	 * 생성자(Constructor)
 	 * 
@@ -16,8 +23,8 @@ public class Stack {
 	 * 크기만큼 stack을 생성한다.
 	 */
 	public Stack(int size) {
-		this.top = -1;
-		this.array = new int[size];		
+		top = -1;
+		array = new int[size];		
 	}
 	
 	/**
@@ -61,5 +68,4 @@ public class Stack {
 		System.out.println(stack.pop());
 		System.out.println(stack.length());
 	}
-
 }

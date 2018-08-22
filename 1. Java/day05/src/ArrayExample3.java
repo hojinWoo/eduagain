@@ -1,4 +1,8 @@
-
+/**
+ * 레퍼런스 타입 배열 선언, 생성, 초기화
+ * @author hojin
+ *
+ */
 public class ArrayExample3 {
 
 	public static void main(String[] args) {
