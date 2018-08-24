@@ -94,6 +94,10 @@ class Account {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.toString().equals((obj).toString());
+		boolean flag = false;
+		if (obj instanceof Account) {
+			flag = toString().equals(obj.toString());
+		}
+		return flag;
 	}
 }

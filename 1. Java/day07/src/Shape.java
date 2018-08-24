@@ -1,41 +1,15 @@
 /**
- * 모든 도형의 공통적인 속성과 기능 정의
+ * 모든 도형의 공통적인 속성과 기능 정의 - 추상 클래스
  * @author hojin
  *
  */
-public class Shape {
-	private double x, y;
+public abstract class Shape {
+	protected double x, y;
 	
-	public Shape() {
-		this(0.0, 0.0);
-	}
-	public Shape(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
-	public double getX() {
-		return x;
-	}
-	public void setX(double x) {
-		this.x = x;
-	}
-	public double getY() {
-		return y;
-	}
-	public void setY(double y) {
-		this.y = y;
-	}
-	public void draw() {
-		System.out.println(x + ", "+y+"의 도령힙니다");
-	}
-	public double getLength() {
-		return 0.0;
-	}
-	public double getArea() {
-		return 0.0;
-	}
-	@Override
-	public String toString() {
-		return "Shape [x=" + x + ", y=" + y + "]";
-	}
+	//추상메소드
+	//서브클래스가 반드시 구현해야 할 수직적 규악
+	public abstract void draw();
+	public abstract double getLength();
+	public abstract double getArea();
+
 }
