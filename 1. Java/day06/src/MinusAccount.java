@@ -39,13 +39,21 @@ public class MinusAccount extends Account{
 		return super.getRestMoney()-getBorrowMoney();
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return super.toString()+" "+getBorrowMoney();
+	}
+
 	public static void main(String[] args) {
 		MinusAccount minusAccount = new MinusAccount();
 		System.out.println(minusAccount.getBorrowMoney());
 		
 		MinusAccount minusAccount2 = new MinusAccount("1231-1234-2222", "minus", 4321, 0, 1000000);
 		minusAccount2.deposit(100000);
-		System.out.println(minusAccount2.getRestMoney());
+		System.out.println("현재잔액 : "+ minusAccount2.getRestMoney());
+		System.out.println(minusAccount2);
 		
 	}
 }
