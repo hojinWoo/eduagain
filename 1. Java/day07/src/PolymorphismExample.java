@@ -21,5 +21,9 @@ public class PolymorphismExample {
 		Rectangle rectangle = (Rectangle)shapes[2];
 		System.out.println(rectangle.getWidth());
 		
+		System.out.println(shapes[0] instanceof Shape);
+		System.out.println(shapes[1] instanceof Circle);
+		System.out.println(shapes[2] instanceof Rectangle);
+		
 	}
 }

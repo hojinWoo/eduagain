@@ -91,4 +91,9 @@ class Account {
 	public static int sum(int a, int b) {
 		return a + b;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals((obj).toString());
+	}
 }
