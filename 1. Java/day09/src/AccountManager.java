@@ -10,19 +10,19 @@ import java.util.Vector;
  */
 public class AccountManager {
 	
-	private Vector accounts;
+	private Vector<Account> accounts;
 	
 	public AccountManager() {
 		this(0);
 	}
 	public AccountManager(int capacity) {
-		accounts = new Vector(capacity, 5); //5개씩 늘어나는 것으로 설정
+		accounts = new Vector<Account>(capacity, 5); //5개씩 늘어나는 것으로 설정
 	}
 	
 	public Vector getAccounts() {
 		return accounts;
 	}
-	public void setAccounts(Vector accounts) {
+	public void setAccounts(Vector<Account> accounts) {
 		this.accounts = accounts;
 	}
 	
