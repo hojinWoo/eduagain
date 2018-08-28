@@ -34,9 +34,6 @@ public class AccountManager {
 		accounts.addElement(account);
 	}
 	
-	/** 실제 들어있는 개수의 크기만큼만 Account 객체 반환
-	 * @return 실제 null이 아닌 Account들의 배열
-	 */
 	public List list() {
 //		return accounts;
 		List list = new ArrayList(accounts.size());
