@@ -20,7 +20,13 @@ public class MapExample2 {
 			String key = e.nextElement();
 			System.out.println(key);
 		}
+		System.out.println();
 		
 		Enumeration<Account> e2 = set.elements();
+		while(e2.hasMoreElements()) {
+			Account account = e2.nextElement();
+			e2.nextElement();
+			System.out.println(account);
+		}
 	}
 }
