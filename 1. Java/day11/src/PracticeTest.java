@@ -84,6 +84,7 @@ public class PracticeTest extends Panel{
 			gridBagConstraints.fill = gridBagConstraints.VERTICAL;
 			break;
 		default:
+			gridBagConstraints.fill = gridBagConstraints.NONE;
 			break;
 		}
 		
@@ -98,7 +99,7 @@ public class PracticeTest extends Panel{
 		PracticeTest panel = new PracticeTest();
 		panel.setContents();
 		frame.add(panel);
-		frame.setSize(500,600);
+		frame.setSize(300,600);
 		frame.setVisible(true);
 	}
 	

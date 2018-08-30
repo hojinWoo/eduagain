@@ -7,17 +7,23 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.peer.KeyboardFocusManagerPeer;
 
-public class LoginPanel extends Panel {
+public class LoginPanel extends Panel implements ActionListener{
 	
 	GridBagLayout gridBagLayout;
 	GridBagConstraints gridBagConstraints;
+	
+	TalkFrame talkFrame;
 	
 	Label emailL, passwdL;
 	TextField emailTF, passwdTF;
 	Button loginB, registB;
 	
-	public LoginPanel() {
+	public LoginPanel(TalkFrame talkFrame) {
+		this.talkFrame = talkFrame;
 		gridBagLayout = new GridBagLayout();
 		gridBagConstraints = new GridBagConstraints();
 		
@@ -29,8 +35,9 @@ public class LoginPanel extends Panel {
 		loginB = new Button("LOGIN");
 		registB = new Button("REGIST");
 		setContents();
+		
+		loginB.addActionListener(this);
 	}
-	
 	private void add(Component component, int gridx, int gridy, int gridwidth, int gridheight, double weightx, double weighty) {
 		gridBagConstraints.gridx = gridx;
 		gridBagConstraints.gridy = gridy;
@@ -64,15 +71,23 @@ public class LoginPanel extends Panel {
 		
 	}
 	
-	public static void main(String[] args) {
-		Frame frame = new Frame("메인화면");
-		
-		LoginPanel loginPanel = new LoginPanel();
-		
-		frame.add(loginPanel);
-		frame.setSize(300, 500);
+//	public static void main(String[] args) {
+//		Frame frame = new Frame("메인화면");
+//		
+//		LoginPanel loginPanel = new LoginPanel();
+//		
+//		frame.add(loginPanel);
+//		frame.setSize(300, 500);
 //		frame.pack();
-		frame.setVisible(true);
-	}
+//		frame.setVisible(true);
+//	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+//		talkFrame.cardLayout.show(talkFrame.cardPanel, "Main"); //좋은 코드X
+		
+		//클래스 캡슐화 (자기 기능은 자신이 제공..) 
+		//!= 은닉화
+		talkFrame.changeCard("Main");
+	}
 }
