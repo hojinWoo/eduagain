@@ -104,11 +104,11 @@ public class ChatFrame extends Frame{
 	}
 	
 	public static void main(String[] args) {
-		ChatFrame frame = new ChatFrame("This is Title..");
-		frame.setSize(500,600);
+		ChatFrame panel = new ChatFrame("This is Title..");
+		panel.setSize(500,600);
 //		frame.setBounds(x, y, width, height); //한 번에 size와 location 설정 가능
-		frame.setContents();
-		frame.setCenter();
-		frame.setVisible(true);
+		panel.setContents();
+		panel.setCenter();
+		panel.setVisible(true);
 	}
 }

@@ -72,7 +72,7 @@ public class GridBagLayoutPanel extends Panel {
 		gridBagConstraints.gridheight = gridheight;
 		gridBagConstraints.weightx = weigthx;
 		gridBagConstraints.weighty = weighty;
-		gridBagConstraints.fill = gridBagConstraints.HORIZONTAL;
+		gridBagConstraints.fill = gridBagConstraints.HORIZONTAL; //가중치가 있을 때 사용이 된다.
 		
 		gridBagLayout.setConstraints(component, gridBagConstraints);
 		
@@ -83,7 +83,8 @@ public class GridBagLayoutPanel extends Panel {
 		GridBagLayoutPanel panel = new GridBagLayoutPanel();
 		panel.setContents();
 		frame.add(panel);
-		frame.setSize(500, 500);
+//		frame.setSize(500, 500);
+		frame.pack(); //size를 지정하지 않아도 내부에 있는 것에 맞춰서 size가 자동적으로 지정 된다.
 		frame.setVisible(true);
 	}
 }
