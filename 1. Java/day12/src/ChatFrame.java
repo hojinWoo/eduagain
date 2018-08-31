@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.List;
 import java.awt.Panel;
@@ -13,9 +14,18 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import javax.swing.JOptionPane;
 
 /**
  * 한글 안 깨지는 법 : [Run configuration]- [Arguments] - [VM Arguments]에 "-Dfile.encoding=MS949" 입력
@@ -40,11 +50,20 @@ public class ChatFrame extends Frame{
 		serverL = new Label("Server");
 		serverTF = new TextField(10); //10 column
 		inputTF = new TextField(10);
-		connectBt = new Button("PRESS CONNECT");
+		connectBt = new Button("PRESS CONNECT") /*{
+			//local inner class 활용
+			@Override
+			public void paint(Graphics g) {
+				g.drawLine(10, 10, 40, 10);
+			}
+		}*/;
 		sendBt = new Button("PRESS SEND");
 		messageTA = new TextArea(10, 20); //row, column
 		userList = new List(20); //row
 		
+		userList.add("temp1");
+		userList.add("temp2");
+		userList.add("temp3");
 	}
 	//화면 배치
 	public void setContents() {
@@ -170,6 +189,39 @@ public class ChatFrame extends Frame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				appendMessage();
+			}
+		});
+		
+		serverTF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+//				e.getModifiers(); //alt, shift, ctrl 키 가져오기
+				System.out.println(e.getKeyChar());
+				System.out.println(KeyEvent.VK_ENTER); //Enter를 입력했을 때 Keycode값///?
+			}
+		});
+		
+		//method가 한 개만 있기 때문에 따로 Adapter는 없다
+		inputTF.addTextListener(new TextListener() {
+			
+			@Override
+			public void textValueChanged(TextEvent e) {
+				System.out.println(inputTF.getText()); //값이 변경될 때마다 textfield의 값을 읽어오기
+			}
+		});
+		
+		userList.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					String name = userList.getSelectedItem();
+					//Swing 간단히 사용
+//					JOptionPane.showMessageDialog(parentComponent, message, title, messageType);
+					JOptionPane.showMessageDialog(null, name + " be choiced", "Alarm", JOptionPane.INFORMATION_MESSAGE);
+					//error message보이고 싶으면
+//					JOptionPane.showMessageDialog(null, name + " be choiced", "Alarm", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}
