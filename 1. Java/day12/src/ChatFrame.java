@@ -11,6 +11,11 @@ import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /**
  * 한글 안 깨지는 법 : [Run configuration]- [Arguments] - [VM Arguments]에 "-Dfile.encoding=MS949" 입력
@@ -109,9 +114,80 @@ public class ChatFrame extends Frame{
 		System.exit(0);
 	}
 	
-	public void eventRegist() {
-		addWindowListener(new ExitHandler(this));
+	public void appendMessage() {
+		String message = inputTF.getText();
+		inputTF.setText("");
+//		messageTA.setText();
+		messageTA.append(message + "\n");
 	}
+	
+	public void eventRegist() {
+		//Adapter or WindowListener 사용해서 만든 Handler Class를 사용 할 때
+//		addWindowListener(new ExitHandler(this));
+		
+		//inner class
+//		addWindowListener(new Exiter());
+		
+		/**
+		 * Local inner class
+		 * method 안에서 class를 생성해서 재사용성을 높인다.
+		 */
+
+//		class Exiter extends WindowAdapter{
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				finish();
+//			}
+//		}
+//		addWindowListener(new Exiter());
+		
+		
+		/**
+		 * *****************************************************
+		 * Anonymous Inner Class
+		 * 기존 클래스의 특정 메서드를 오버라이딩하여 원하는 형태로 재정의하여 사용하는 방식
+		 * *****************************************************
+		 */
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				finish();
+			}
+		});
+		
+		
+		//Action Event처리
+		inputTF.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				appendMessage();
+			}
+		});
+		
+		sendBt.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				appendMessage();
+			}
+		});
+	}
+	
+	/*
+	 * Inner class를 이용한 이벤트 처리, 재사용성이 높지 않음..
+	 * 이벤트는 생성되고 나서 남아있을 필요 없이 사라지면 되기 때문에..
+	 */
+//	
+//	class Exiter extends WindowAdapter{
+//		@Override
+//		public void windowClosing(WindowEvent e) {
+//			finish();
+////			finalize(); //cf. garbage collector가 수거해 가기 전 사용할 일이 있을 때 사용
+//		}
+//	}
+	
+
 	
 	public static void main(String[] args) {
 		ChatFrame frame = new ChatFrame("This is Title..");

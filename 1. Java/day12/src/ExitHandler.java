@@ -6,7 +6,7 @@ import java.awt.event.WindowEvent;
  * @author hojin
  *
  */
-public class ExitHandler extends WindowAdapter {
+public class ExitHandler extends WindowAdapter{
 
 	ChatFrame frame;
 	
