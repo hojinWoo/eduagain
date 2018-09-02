@@ -6,7 +6,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * Hashtableì„ ì´ìš©í•œ íš¨ìœ¨ì ì¸ ì€í–‰ê³„ì¢Œ ê´€ë¦¬
+ * HashtableÀ» ÀÌ¿ëÇÑ È¿À²ÀûÀÎ ÀºÇà°èÁÂ °ü¸®
  * @author hojin
  *
  */
@@ -28,13 +28,14 @@ public class AccountManager {
 		this.accounts = accounts;
 	}
 
-	public void add(Account account) {
-		//ì¤‘ë³µì²´í¬
-		if(accounts.contains(account)) {
-//			System.out.println("ì´ë¯¸ ê³„ì¢Œê°€ ì¡´ì¬í•©ë‹ˆë‹¤..");
-			return;
+	public boolean add(Account account) {
+		//°èÁÂ¹øÈ£ Áßº¹Ã¼Å©
+		if(accounts.containsKey(account.getAccountNum())) {
+			return false;
+		}else{
+			accounts.put(account.getAccountNum(), account);
+			return true;
 		}
-		accounts.put(account.getAccountNum(), account);
 	}
 	
 	public Enumeration<Account> list() {
@@ -52,7 +53,7 @@ public class AccountManager {
 				list.add(ac);
 			}
 		}else if(num == 1) {
-			//ì…ì¶œê¸ˆ ê³„ì¢Œ
+			//ÀÔÃâ±İ °èÁÂ
 			while(e.hasMoreElements()) {
 				Account ac = e.nextElement();
 				if(!(ac instanceof MinusAccount)) {
@@ -60,7 +61,7 @@ public class AccountManager {
 				}
 			}
 		}else {
-			//ì¶œê¸ˆ ê³„ì¢Œ
+			//Ãâ±İ °èÁÂ
 			while(e.hasMoreElements()) {
 				Account ac = e.nextElement();
 				if(ac instanceof MinusAccount) {
@@ -86,7 +87,7 @@ public class AccountManager {
 				list.add(ac);
 			}
 		}
-		//ê³„ì¢Œë²ˆí˜¸ ê¸°ì¤€ ì •ë ¬
+		//°èÁÂ¹øÈ£ ±âÁØ Á¤·Ä
 		Collections.sort(list, new NumberComparator());
 		return list;
 	}

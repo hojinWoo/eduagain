@@ -1,6 +1,6 @@
 package kr.or.kosta.entity;
 /**
- * Accountë¥¼ í™•ì¥í•œ ë§ˆì´ë„ˆìŠ¤ ê³„ì¢Œ
+ * Account¸¦ È®ÀåÇÑ ¸¶ÀÌ³Ê½º °èÁÂ
  * @author hojin
  *
  */
@@ -44,7 +44,8 @@ public class MinusAccount extends Account{
 	
 	@Override
 	public String toString() {
-		return "ë§ˆì´ë„ˆìŠ¤\t"+getAccountNum() + "\t" + getAccountOwner() + "\t" + getRestMoney()+"\t"+borrowMoney;
+		return String.format("¸¶ÀÌ³Ê½º\t%-20s%-10s%,15d%,15d", getAccountNum(), getAccountOwner(), getRestMoney(), borrowMoney);
+//		return "¸¶ÀÌ³Ê½º\t"+getAccountNum() + "\t" + getAccountOwner() + "\t" + getRestMoney()+"\t"+borrowMoney;
 	}
 
 //	public static void main(String[] args) {
@@ -53,7 +54,7 @@ public class MinusAccount extends Account{
 //		
 //		MinusAccount minusAccount2 = new MinusAccount("1231-1234-2222", "minus", 4321, 0, 1000000);
 //		minusAccount2.deposit(100000);
-//		System.out.println("í˜„ì¬ì”ì•¡ : "+ minusAccount2.getRestMoney());
+//		System.out.println("ÇöÀçÀÜ¾× : "+ minusAccount2.getRestMoney());
 //		System.out.println(minusAccount2);
 //		
 //	}

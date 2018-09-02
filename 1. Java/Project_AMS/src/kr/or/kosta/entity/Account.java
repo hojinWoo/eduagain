@@ -6,12 +6,12 @@ package kr.or.kosta.entity;
  */
 public class Account {
 	// Class(Static) variable
-	public final static String bankName = "KOSTA ì€í–‰";
+	public final static String bankName = "KOSTA ÀºÇà";
 
-	private String accountNum;	 //ê³„ì¢Œë²ˆí˜¸
-	private String accountOwner; //ê³„ì¢Œì£¼ì¸
-	private int passwd;			 //ë¹„ë°€ë²ˆí˜¸
-	private long restMoney;		 //ì”ì•¡
+	private String accountNum;	 //°èÁÂ¹øÈ£
+	private String accountOwner; //°èÁÂÁÖÀÎ
+	private int passwd;			 //ºñ¹Ğ¹øÈ£
+	private long restMoney;		 //ÀÜ¾×
 	
 	/**
 	 * Default Constructor
@@ -72,38 +72,38 @@ public class Account {
 	}
 
 	/**
-	 * ëˆ ì…ê¸ˆí•˜ê¸°
+	 * µ· ÀÔ±İÇÏ±â
 	 * @param money
 	 * @return
 	 * @throws AccountException
 	 */
 	public long deposit(long money) throws AccountException {
 		if (money <= 0) {
-			throw new AccountException("ì…ê¸ˆí•˜ê³ ì í•˜ëŠ” ê¸ˆì•¡ì€ ìŒìˆ˜ì¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", -3);
+			throw new AccountException("ÀÔ±İÇÏ°íÀÚ ÇÏ´Â ±İ¾×Àº À½¼öÀÏ ¼ö ¾ø½À´Ï´Ù.", -3);
 		}
 		restMoney += money;
 		return restMoney;
 	}
 
 	/**
-	 * ëˆ ì¶œê¸ˆí•˜ê¸°
+	 * µ· Ãâ±İÇÏ±â
 	 * @param money
 	 * @return
 	 * @throws AccountException
 	 */
 	public long withdraw(long money) throws AccountException  {
 		if (money <= 0) {
-			throw new AccountException("ì¶œê¸ˆí•˜ê³ ì í•˜ëŠ” ê¸ˆì•¡ì€ ìŒìˆ˜ì¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", -1);
+			throw new AccountException("Ãâ±İÇÏ°íÀÚ ÇÏ´Â ±İ¾×Àº À½¼öÀÏ ¼ö ¾ø½À´Ï´Ù.", -1);
 		}
 		if (money > restMoney) {
-			throw new AccountException("ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.", -2);
+			throw new AccountException("ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.", -2);
 		}
 		restMoney -= money; // Not check validate this
 		return restMoney;
 	}
 
 	/**
-	 * ì”ì•¡ ì¡°íšŒ
+	 * ÀÜ¾× Á¶È¸
 	 * @return
 	 */
 	public long getRestMoney() {
@@ -111,7 +111,7 @@ public class Account {
 	}
 
 	/**
-	 * ë¹„ë°€ë²ˆí˜¸ í™•ì¸í•˜ê¸°
+	 * ºñ¹Ğ¹øÈ£ È®ÀÎÇÏ±â
 	 * @param passwd
 	 * @return
 	 */
@@ -120,11 +120,11 @@ public class Account {
 	}
 
 	/* (non-Javadoc)
-	 * ì€í–‰ì˜ ê²ƒì„ Stringìœ¼ë¡œ returní•˜ê¸° ìœ„í•´ ì¬ì‚¬ìš©
+	 * ÀºÇàÀÇ °ÍÀ» StringÀ¸·Î returnÇÏ±â À§ÇØ Àç»ç¿ë
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "ì…ì¶œê¸ˆ\t"+getAccountNum() + "\t" + getAccountOwner() + "\t" + getRestMoney();
+		return String.format("ÀÔÃâ±İ\t%-20s%-10s%,15d", getAccountNum(), getAccountOwner(), getRestMoney());
 	}
 	
 
@@ -147,8 +147,8 @@ public class Account {
 	@Override
 	public int hashCode() {	
 		return Integer.parseInt(accountNum);
-//		return 1; //ì´ë ‡ê²Œë§Œ í•´ë„ ê°€ëŠ¥í•´ì§„ë‹¤. 
-		//Objectì˜ hashì•Œê³ ë¦¬ì¦˜ê³¼ ê´€ë ¨.
-		//memoryì˜ ì£¼ì†Œë¥¼ ê¸°ë°˜ìœ¼ë¡œ hashCodeë¥¼ ë§Œë“ ë‹¤.
+//		return 1; //ÀÌ·¸°Ô¸¸ ÇØµµ °¡´ÉÇØÁø´Ù. 
+		//ObjectÀÇ hash¾Ë°í¸®Áò°ú °ü·Ã.
+		//memoryÀÇ ÁÖ¼Ò¸¦ ±â¹İÀ¸·Î hashCode¸¦ ¸¸µç´Ù.
 	}	
 }

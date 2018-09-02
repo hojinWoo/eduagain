@@ -3,15 +3,15 @@ import java.util.Comparator;
 
 public class NumberComparator implements Comparator<Account>{
 
-	//ì¶”ìƒ ë©”ì†Œë“œ, ì •ë ¬ ê¸°ì¤€ ì œì‹œ (ex. ê³„ì¢Œë²ˆí˜¸)
+	//Ãß»ó ¸Þ¼Òµå, Á¤·Ä ±âÁØ Á¦½Ã (ex. °èÁÂ¹øÈ£)
 	@Override
 	public int compare(Account o1, Account o2) {
 		//o1 > o2 : positive
 		//o1 = o2 : 0
 		//o1 < o2 : negative
 		
-		//Stringì—ì„œë„ compareToë¥¼ ì‚¬ìš© ê°€ëŠ¥
-		//ê°™ì´ í¬ê¸°ë¥¼ ê¸°ì¤€ìœ¼ë¡œ returnê°’ì´ ìœ„ì™€ ê°™ë‹¤
+		//String¿¡¼­µµ compareTo¸¦ »ç¿ë °¡´É
+		//°°ÀÌ Å©±â¸¦ ±âÁØÀ¸·Î return°ªÀÌ À§¿Í °°´Ù
 		return o1.getAccountNum().compareTo(o2.getAccountNum());
 	}
 
