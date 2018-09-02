@@ -1,6 +1,6 @@
 package kr.or.kosta.entity;
 /**
- * 
+ * Account 계좌 객체
  * @author hojin
  *
  */
@@ -22,15 +22,15 @@ public class Account {
 
 	/**
 	 * Constructor
-	 * @param accountNum
-	 * @param accountOwner
+	 * @param accountNum	
+	 * @param accountOwner	
 	 */
 	public Account(String accountNum, String accountOwner) {
 		this(accountNum, accountOwner, 0, 0);
 	}
 
 	/**
-	 * Constructor
+	 * Account Constructor
 	 * @param accountNum
 	 * @param accountOwner
 	 * @param passwd
@@ -43,41 +43,63 @@ public class Account {
 		this.restMoney = restMoney;
 	}
 
+	/**
+	 * @return 계좌번호
+	 */
 	public String getAccountNum() {
 		return accountNum;
 	}
 
+	/**
+	 * @param accountNum 계좌번호 설정
+	 */
 	public void setAccountNum(String accountNum) {
 		this.accountNum = accountNum;
 	}
 
+	/**
+	 * @return 계좌주인 
+	 */
 	public String getAccountOwner() {
 		return accountOwner;
 	}
 
+	/**
+	 * @param accountOwner	계좌주인 설정
+	 */
 	public void setAccountOwner(String accountOwner) {
 		this.accountOwner = accountOwner;
 	}
 
+	/**
+	 * @return	비밀번호
+	 */
 	public int getPasswd() {
 		return passwd;
 	}
 
+	/**
+	 * @param passwd	비밀번호 설정
+	 */
 	public void setPasswd(int passwd) {
 		this.passwd = passwd;
 	}
 
+	/**
+	 * @param restMoney 잔액 설정하기
+	 */
 	public void setRestMoney(long restMoney) {
 		this.restMoney = restMoney;
 	}
 
 	/**
 	 * 돈 입금하기
-	 * @param money
-	 * @return
+	 * @param money	입금하는 금액
+	 * @return		총 금액
 	 * @throws AccountException
 	 */
 	public long deposit(long money) throws AccountException {
+		//혹시 음수가 들어온 경우 exception 처리 (이번 프로젝트에는 음수(-)자체를 사전에 입력할 수 없다)
 		if (money <= 0) {
 			throw new AccountException("입금하고자 하는 금액은 음수일 수 없습니다.", -3);
 		}
@@ -87,7 +109,7 @@ public class Account {
 
 	/**
 	 * 돈 출금하기
-	 * @param money
+	 * @param money	출금하고자 하는 금액
 	 * @return
 	 * @throws AccountException
 	 */
@@ -103,8 +125,7 @@ public class Account {
 	}
 
 	/**
-	 * 잔액 조회
-	 * @return
+	 * @return	잔액
 	 */
 	public long getRestMoney() {
 		return restMoney;
@@ -112,8 +133,8 @@ public class Account {
 
 	/**
 	 * 비밀번호 확인하기
-	 * @param passwd
-	 * @return
+	 * @param passwd	비밀번호
+	 * @return	기존 비밀번호 일치 여부
 	 */
 	public boolean checkPasswd(int passwd) {
 		return this.passwd == passwd;
@@ -124,10 +145,9 @@ public class Account {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
+		//출력 형식 맞추기
 		return String.format("입출금\t%-20s%-10s%,15d", getAccountNum(), getAccountOwner(), getRestMoney());
 	}
-	
-
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -147,8 +167,5 @@ public class Account {
 	@Override
 	public int hashCode() {	
 		return Integer.parseInt(accountNum);
-//		return 1; //이렇게만 해도 가능해진다. 
-		//Object의 hash알고리즘과 관련.
-		//memory의 주소를 기반으로 hashCode를 만든다.
 	}	
 }
