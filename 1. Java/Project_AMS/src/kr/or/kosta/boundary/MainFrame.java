@@ -26,7 +26,11 @@ import java.util.List;
 import kr.or.kosta.entity.Account;
 import kr.or.kosta.entity.AccountManager;
 import kr.or.kosta.entity.MinusAccount;
-
+/**
+ * MainFrame을 통해 AMS의 화면을 구성
+ * @author dnghwls7
+ *
+ */
 public class MainFrame extends Frame {
 
 	AccountManager manager; // AccountManager와 연결하기 위해 등록
