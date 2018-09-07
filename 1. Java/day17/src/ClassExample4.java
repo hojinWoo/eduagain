@@ -17,8 +17,10 @@ public class ClassExample4 {
 		
 		Class cls = String.class;
 		Method method =  cls.getMethod(methodName, null);
-		// 매개변수 없는 메소드 호출
-		Object ret = method.invoke(str, null);
+		// 매개변수 없는 메소드 동적 호출
+		Object ret = method.invoke(str, null); //parameter가 없으므로 null
+		//Hello Wordl.length:Integer
+		
 		System.out.println(ret instanceof Integer);
 		System.out.println(ret);
 	}

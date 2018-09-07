@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * Field를 이용하여 동적 필드값 읽기
+ * 잘 사용 안함, method를 통해서 접근하기 때문
  * 
  * @author 김기정
  *
