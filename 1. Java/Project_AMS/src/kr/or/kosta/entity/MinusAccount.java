@@ -1,60 +1,77 @@
 package kr.or.kosta.entity;
 /**
- * Accountë¥¼ í™•ì¥í•œ ë§ˆì´ë„ˆìŠ¤ ê³„ì¢Œ
+ * Account¸¦ »ó¼Ó¹ŞÀº ¸¶ÀÌ³Ê½º °èÁÂ °´Ã¼
  * @author hojin
  *
  */
 public class MinusAccount extends Account{
 
-	private long borrowMoney;
+	private long borrowMoney; //´ëÃâ±İ¾×
 
+	/**
+	 * Default constructor
+	 */
 	public MinusAccount() {
 		super();
 	}
 
+	/**
+	 * @param accountNum
+	 * @param accountOwner
+	 */
 	public MinusAccount(String accountNum, String accountOwner) {
 		super(accountNum, accountOwner);
 	}
 
+	/**
+	 * MinusAccount Constructor
+	 * @param accountNum
+	 * @param accountOwner
+	 * @param passwd
+	 * @param restMoney
+	 * @param borrowMoney
+	 */
 	public MinusAccount(String accountNum, String accountOwner, int passwd, long restMoney, long borrowMoney) {
 		super(accountNum, accountOwner, passwd, restMoney);
 		this.borrowMoney = borrowMoney;
 	}
 	
+	/**
+	 * @return ´ëÃâ±İ¾×
+	 */
 	public long getBorrowMoney() {
 		return borrowMoney;
 	}
 
+	/**
+	 * ´ëÃâ±İ¾× ¼³Á¤ÇÏ±â
+	 * @param borrowMoney ´ëÃâ±İ¾×
+	 */
 	public void setBorrowMoney(long borrowMoney) {
 		this.borrowMoney = borrowMoney;
 	}
 
+	/* (non-Javadoc)
+	 * @see kr.or.kosta.entity.Account#deposit(long)
+	 * Ãß°¡·Î ±İ¾×À» ÀÎÃâÇÑ °æ¿ì
+	 */
 	@Override
 	public long deposit(long money) {
 		super.setRestMoney(super.getRestMoney()+money);
 		return super.getRestMoney();
 	}
 
+	/* (non-Javadoc)
+	 * @see kr.or.kosta.entity.Account#getRestMoney()
+	 * ³²Àº ±İ¾×¿¡¼­ ÇöÀç ºô¸° ±İ¾×ÀÇ Â÷¾×
+	 */
 	@Override
 	public long getRestMoney() {
 		return super.getRestMoney()-getBorrowMoney();
 	}
 	
-	
-	
 	@Override
 	public String toString() {
-		return "ë§ˆì´ë„ˆìŠ¤\t"+getAccountNum() + "\t" + getAccountOwner() + "\t" + getRestMoney()+"\t"+borrowMoney;
+		return String.format("¸¶ÀÌ³Ê½º\t%-20s%-10s%,15d%,15d", getAccountNum(), getAccountOwner(), getRestMoney(), borrowMoney);
 	}
-
-//	public static void main(String[] args) {
-//		MinusAccount minusAccount = new MinusAccount();
-//		System.out.println(minusAccount.getBorrowMoney());
-//		
-//		MinusAccount minusAccount2 = new MinusAccount("1231-1234-2222", "minus", 4321, 0, 1000000);
-//		minusAccount2.deposit(100000);
-//		System.out.println("í˜„ì¬ì”ì•¡ : "+ minusAccount2.getRestMoney());
-//		System.out.println(minusAccount2);
-//		
-//	}
 }

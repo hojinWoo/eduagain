@@ -6,42 +6,71 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * Hashtableì„ ì´ìš©í•œ íš¨ìœ¨ì ì¸ ì€í–‰ê³„ì¢Œ ê´€ë¦¬
+ * HashtableÀ» ÀÌ¿ëÇÑ È¿À²ÀûÀÎ ÀºÇà°èÁÂ °ü¸®
  * @author hojin
  *
  */
 public class AccountManager {
 	
+	/**
+	 * HashtableÀ» ÀÌ¿ëÇÏ¿© Account °´Ã¼µéÀ» °ü¸®
+	 */
 	private Hashtable<String, Account> accounts;
 	
+	/**
+	 * Default constructor
+	 */
 	public AccountManager() {
 		this(0);
 	}
+	/**
+	 * @param capacity
+	 */
 	public AccountManager(int capacity) {
 		accounts = new Hashtable<String, Account>();
 	}
 	
+	/**
+	 * @return °¡Áö°í ÀÖ´Â ¸ğµç Account°´Ã¼µéÀÇ ÁıÇÕÀÎ Hashtable
+	 */
 	public Hashtable<String, Account> getAccounts() {
 		return accounts;
 	}
+	/**
+	 * @param accounts Account°´Ã¼µéÀÇ ÁıÇÕÀ» ¼³Á¤
+	 */
 	public void setAccounts(Hashtable<String, Account> accounts) {
 		this.accounts = accounts;
 	}
 
-	public void add(Account account) {
-		//ì¤‘ë³µì²´í¬
-		if(accounts.contains(account)) {
-//			System.out.println("ì´ë¯¸ ê³„ì¢Œê°€ ì¡´ì¬í•©ë‹ˆë‹¤..");
-			return;
+	/**
+	 * @param account Ãß°¡ÇÏ°íÀÚ ÇÏ´Â Account °´Ã¼
+	 * @return	Áßº¹Ã¼Å©¸¦ ÅëÇØ °èÁÂ µî·Ï ¼º°ø ¿©ºÎ
+	 */
+	public boolean add(Account account) {
+		//°èÁÂ¹øÈ£ Áßº¹Ã¼Å©
+		if(accounts.containsKey(account.getAccountNum())) {
+			return false;
+		}else{
+			accounts.put(account.getAccountNum(), account);
+			return true;
 		}
-		accounts.put(account.getAccountNum(), account);
 	}
 	
+	
+	/**
+	 * @return	ÇöÀç Account °´Ã¼µéÀ» List·Î return
+	 */
 	public Enumeration<Account> list() {
 		return accounts.elements();
 		
 	}
 	
+	/**
+	 * Override
+	 * @param num	0:ÀüÃ¼ °èÁÂ, 1:ÀÔÃâ±İ °èÁÂ, 2:¸¶ÀÌ³Ê½º °èÁÂ
+	 * @return	°¢°¢ÀÇ ¸Â´Â °èÁÂ¸¦ return
+	 */
 	public List list(int num) {
 		List<Account> list = new ArrayList<>();
 		Enumeration<Account> e = accounts.elements();
@@ -52,7 +81,7 @@ public class AccountManager {
 				list.add(ac);
 			}
 		}else if(num == 1) {
-			//ì…ì¶œê¸ˆ ê³„ì¢Œ
+			//ÀÔÃâ±İ °èÁÂ
 			while(e.hasMoreElements()) {
 				Account ac = e.nextElement();
 				if(!(ac instanceof MinusAccount)) {
@@ -60,7 +89,7 @@ public class AccountManager {
 				}
 			}
 		}else {
-			//ì¶œê¸ˆ ê³„ì¢Œ
+			//Ãâ±İ °èÁÂ
 			while(e.hasMoreElements()) {
 				Account ac = e.nextElement();
 				if(ac instanceof MinusAccount) {
@@ -69,14 +98,23 @@ public class AccountManager {
 			}
 			
 		}
+		//°èÁÂ¹øÈ£¿¡ ¸Â´Â ¿À¸§Â÷¼ø Á¤·Ä ÈÄ return
 		Collections.sort(list, new NumberComparator());
 		return list;
 			
 	}
 	
+	/**
+	 * @param accountNum	°èÁÂ¹øÈ£
+	 * @return	ÀÏÄ¡ÇÏ´Â °èÁÂ¹øÈ£¸¦ °¡Áø Account °´Ã¼ ¸®ÅÏ
+	 */
 	public Account get(String accountNum) {
 		return accounts.get(accountNum);
 	}
+	/**
+	 * @param name	°èÁÂÁÖÀÎ
+	 * @return	ÀÏÄ¡ÇÏ´Â °èÁÂÁÖÀÎ¸¦ °¡Áø Account °´Ã¼µéÀ» List·Î ¸®ÅÏ
+	 */
 	public List search(String name) {
 		List<Account> list = new ArrayList<>();
 		Enumeration<Account> e = accounts.elements();
@@ -86,10 +124,15 @@ public class AccountManager {
 				list.add(ac);
 			}
 		}
-		//ê³„ì¢Œë²ˆí˜¸ ê¸°ì¤€ ì •ë ¬
+		//°èÁÂ¹øÈ£ ±âÁØ Á¤·Ä
 		Collections.sort(list, new NumberComparator());
 		return list;
 	}
+	
+	/**
+	 * @param accountNum	°èÁÂ¹øÈ£
+	 * @return	ÀÏÄ¡ÇÏ´Â °èÁÂÁÖÀÎ¸¦ °¡Áø Account °´Ã¼ÀÇ »èÁ¦ ¿©ºÎ
+	 */
 	public boolean remove(String accountNum) {
 		return accounts.remove(accountNum) != null;
 		

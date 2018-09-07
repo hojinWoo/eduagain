@@ -1,19 +1,25 @@
 package kr.or.kosta.entity;
-import java.util.Arrays;
 
 public class AccountException extends Exception{
 	//String message;
 	private int errorCode;
 	
 	public AccountException() {
-		this("ê³„ì¢Œì²˜ë¦¬ ì¤‘ ì˜ˆê¸°ì¹˜ ì•Šì€ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.", -9);
+		this("°èÁÂÃ³¸® Áß ¿¹±âÄ¡ ¾ÊÀº ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù.", -9);
 	}
 
+	/**
+	 * @param message	Ãâ·ÂÇÏ°íÀÚ ÇÏ´Â ¸Ş½ÃÁö
+	 * @param errorCode	»çÀü¿¡ Á¤ÀÇÇÑ ¿¡·¯ÄÚµå
+	 */
 	public AccountException(String message, int errorCode) {
 		super(message);
 		this.errorCode = errorCode;
 	}
 
+	/**
+	 * @return	errorcode
+	 */
 	public int getErrorCode() {
 		return errorCode;
 	}
@@ -22,7 +28,4 @@ public class AccountException extends Exception{
 	public String toString() {
 		return "AccountException [errorCode=" + errorCode + ", getMessage()=" + getMessage() + "]";
 	}
-	
-	
-	
 }
