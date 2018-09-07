@@ -15,8 +15,8 @@ public class SocketExample {
 //	public static final String ip = "www.naver.com";
 //	public static final String domain = "115.91.131.92";
 	
-//	public static final String domain = "localhost";
-	public static final String domain = "192.168.0.117";
+	public static final String domain = "localhost";
+//	public static final String domain = "192.168.0.117";
 	public static final int port = 7777;
 	
 	
