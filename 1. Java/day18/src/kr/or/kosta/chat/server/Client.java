@@ -27,8 +27,10 @@ public class Client extends Thread {
 	public Client(Socket socket, ChatServer chatServer) throws IOException {
 		this.socket = socket;
 		this.chatServer = chatServer;
+		
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(), true);
+
 		running = true;
 	}
 	
@@ -75,8 +77,9 @@ public class Client extends Thread {
 	/**
 	 * 클라이언트의 메시지를 파싱하여 서비스 제공
 	 * @param message
+	 * @throws IOException 
 	 */
-	public void process(String message) {
+	public void process(String message) throws IOException {
 		String[] tokens = message.split(Protocol.DELEMETER);
 		int protocol = Integer.parseInt(tokens[0]);
 		nickName = tokens[1];
@@ -91,9 +94,19 @@ public class Client extends Thread {
 				chatServer.addClient(this);
 				System.out.println("[Debug] : 접속 클라이언트 수 : " + chatServer.getClientCount());
 				sendMessage(Protocol.CONNECT_RESULT + Protocol.DELEMETER + nickName + Protocol.DELEMETER +  "SUCCESS");
+				chatServer.sendAllMessage(Protocol.CONNECT_ALERT+Protocol.DELEMETER+"###" + nickName + "님이 연결하였습니다. ###");
+//				chatServer.sendAllMessage(Protocol.CURRENT_USER+Protocol.DELEMETER+"ADD");
 			}
 			break;
-
+		case Protocol.MULTICHAT:
+			chatServer.sendAllMessage(Protocol.CURRENT_USER+Protocol.DELEMETER+tokens[2]);
+			break;
+		case Protocol.DISCONNECT:
+			running = false;
+			chatServer.removeClient(nickName);
+			chatServer.sendAllMessage(Protocol.DISCONNECT+Protocol.DELEMETER+"DELETE");
+			socket.close();
+			
 		default:
 			break;
 		}

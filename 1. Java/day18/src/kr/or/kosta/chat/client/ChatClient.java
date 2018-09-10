@@ -51,7 +51,9 @@ public class ChatClient {
 	}
 	
 	public void sendMessage(String message) {
-		if(out != null) out.println(message);
+		if(out != null) {
+			out.println(message);
+		}
 	}
 	
 	public void receiveMessage() {
@@ -64,7 +66,6 @@ public class ChatClient {
 						serverMessage = in.readLine();
 						System.out.println("[Debug] : Server Receive Message: " + serverMessage);
 						process(serverMessage);
-						
 					} catch (IOException e) {
 						System.out.println("네트워크가 단절되었습니다..");
 						break;
@@ -90,14 +91,29 @@ public class ChatClient {
 		switch (protocol) {
 		case Protocol.CONNECT_RESULT:
 			String result = tokens[2];
-			if(result.equalsIgnoreCase("SUCCESS")) {
-				chatFrame.appendMessage("###"+nickName+"님이 연결하였습니다. ###");
+			if (result.equalsIgnoreCase("SUCCESS")) {
 				chatFrame.connectEnable(false);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "이미 사용중인 대화명입니다.\n다른 대화명을 사용하세요.", "경고", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 
+		case Protocol.MULTICHAT:
+			String chatMessage = tokens[2];
+			chatFrame.appendMessage("["+nickName+"] : "+chatMessage);
+			break;
+		case Protocol.CONNECT_ALERT:
+			String alertUser = tokens[2];
+			chatFrame.appendMessage(alertUser);
+			break;
+		case Protocol.CURRENT_USER:
+//			String user = tokens[2];
+//			String flag = tokens[3];
+//			chatFrame.changeCurrentUser(user, flag);
+			break;
+		case Protocol.DISCONNECT:
+			System.out.println("연결 끊어짐");
+			break;
 		default:
 			break;
 		}

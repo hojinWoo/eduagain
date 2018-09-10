@@ -55,9 +55,6 @@ public class ChatFrame extends Frame {
 		sendB = new Button("전송");
 		messageTA = new TextArea();
 		userList = new List();
-		userList.add("말미잘");
-		userList.add("꼴뚜기");
-		userList.add("머저리");
 		
 		menuBar = new MenuBar();
 		menu = new Menu("File");
@@ -101,6 +98,10 @@ public class ChatFrame extends Frame {
 		menu.add(exitMI);
 	}
 	
+	public String getNickName() {
+		return nickName;
+	}
+	
 	public void setCenter() {
 		Toolkit.getDefaultToolkit().beep();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -114,10 +115,8 @@ public class ChatFrame extends Frame {
 		nickName = nickNameTF.getText();
 		try {
 			chatClient.connectServer();
-			
 			// 최초 연결 메시지 전송
 			chatClient.sendMessage(Protocol.CONNECT + Protocol.DELEMETER + nickName);
-//			appendMessage("@@@ ChatServer와 연결되었습니다 @@@@");
 			chatClient.receiveMessage();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "연결 실패", JOptionPane.ERROR_MESSAGE);
@@ -136,8 +135,7 @@ public class ChatFrame extends Frame {
 			return;
 		}
 		inputTF.setText("");
-		System.out.println(message);
-		
+		chatClient.sendMessage(Protocol.MULTICHAT + Protocol.DELEMETER + nickName + Protocol.DELEMETER + message);
 	}
 	
 	public void appendMessage(String message) {
@@ -146,10 +144,20 @@ public class ChatFrame extends Frame {
 	
 	
 	public void finish() {
+		chatClient.stopClient();
 		setVisible(false);
 		dispose();
 		System.exit(0);
 	}
+	
+	public void changeCurrentUser(String user, String flag) {
+		if(flag.equals("add")) {
+			userList.add(user);
+		}else {
+			userList.remove(user);
+		}
+	}
+	
 	
 	public void eventRegist() {
 		nickNameTF.addActionListener(new ActionListener() {
@@ -169,12 +177,7 @@ public class ChatFrame extends Frame {
 		});
 		
 		
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				finish();
-			}
-		});
+
 		
 		inputTF.addActionListener(new ActionListener() {
 			@Override
@@ -203,6 +206,16 @@ public class ChatFrame extends Frame {
 		exitMI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				chatClient.sendMessage(Protocol.DISCONNECT + Protocol.DELEMETER + nickName);
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if(nickName!=null) {
+					chatClient.sendMessage(Protocol.DISCONNECT + Protocol.DELEMETER + nickName);
+				}
 				finish();
 			}
 		});

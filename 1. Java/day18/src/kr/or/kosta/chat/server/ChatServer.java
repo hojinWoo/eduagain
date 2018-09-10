@@ -3,6 +3,7 @@ package kr.or.kosta.chat.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import kr.or.kosta.chat.common.Protocol;
@@ -61,8 +62,21 @@ public class ChatServer {
 		return clients.containsKey(nickName);
 	}
 	
-	public void removeClient(Client client) {}
-	public void sendAllMessage(String message) {}
+	public void removeClient(String nickName) {
+		clients.remove(nickName);
+	}
+	
+	public void sendAllMessage(String message) {
+		String[] tokens = message.split(Protocol.DELEMETER);
+		Enumeration<Client> e = clients.elements();
+		while (e.hasMoreElements()) {
+			Client client = e.nextElement();
+			client.sendMessage(tokens[0]+Protocol.DELEMETER+client.getNickName()+Protocol.DELEMETER+tokens[1]);
+		}
+	}
+	
+	public void showCurrentUser() {
+	}
 	
 }
 
