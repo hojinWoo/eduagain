@@ -20,11 +20,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 
 import kr.or.kosta.entity.Account;
 import kr.or.kosta.entity.AccountDao;
+import kr.or.kosta.entity.AccountException;
 import kr.or.kosta.entity.MinusAccount;
 
 public class MainFrame extends Frame {
@@ -189,7 +191,12 @@ public class MainFrame extends Frame {
 					showListTA.setText("계좌번호를 입력해주세요");
 				} else {
 
-					Account account = manager.get(numAccounTF.getText());
+					Account account =null;
+					try {
+						account = manager.get(numAccounTF.getText());
+					} catch (AccountException | IOException e1) {
+						e1.printStackTrace();
+					}
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (account == null) {
 							showListTA.setText("계좌번호가 존재하지 않습니다.");
@@ -229,12 +236,21 @@ public class MainFrame extends Frame {
 					showListTA.setText("계좌번호를 입력해주세요");
 				}
 				else {
-					Account account = manager.get(accountNum);
+					Account account = null;
+					try {
+						account = manager.get(accountNum);
+					} catch (AccountException | IOException e1) {
+						e1.printStackTrace();
+					}
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (account.equals("")) {
 							showListTA.setText("계좌번호가 존재하지 않습니다.");
 						} else {
-							manager.remove(accountNum);
+							try {
+								manager.remove(accountNum);
+							} catch (AccountException | IOException e1) {
+								e1.printStackTrace();
+							}
 							showListTA.setText("계좌가 삭제되었습니다");
 
 						}
@@ -242,14 +258,22 @@ public class MainFrame extends Frame {
 						if (account.equals("") || account instanceof MinusAccount) {
 							showListTA.setText("계좌번호가 존재하지 않습니다.");
 						} else {
-							manager.remove(accountNum);
+							try {
+								manager.remove(accountNum);
+							} catch (AccountException | IOException e1) {
+								e1.printStackTrace();
+							}
 							showListTA.setText("계좌가 삭제되었습니다");
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 2) {
 						if (account.equals("") || !(account instanceof MinusAccount)) {
 							showListTA.setText("계좌번호가 존재하지 않습니다.");
 						} else {
-							manager.remove(accountNum);
+							try {
+								manager.remove(accountNum);
+							} catch (AccountException | IOException e1) {
+								e1.printStackTrace();
+							}
 							showListTA.setText("계좌가 삭제되었습니다");
 						}
 					}
@@ -334,7 +358,11 @@ public class MainFrame extends Frame {
 					if (kindAccountCB.getSelectedIndex() == 1) {
 						try {
 							depositMoney = Long.parseLong(depositTF.getText());
-							manager.add(new Account(accountNum, accountName, password, depositMoney));
+							try {
+								manager.add(new Account(accountNum, accountName, password, depositMoney));
+							} catch (IOException | AccountException e1) {
+								e1.printStackTrace();
+							}
 							showListTA.setText("입출금계좌가 생성되었습니다.");
 						} catch (NumberFormatException e2) {
 							showListTA.setText("입금금액을 입력해주세요");
@@ -351,7 +379,11 @@ public class MainFrame extends Frame {
 						}
 						try {
 							minusMoney = Long.parseLong(minusMoneyTF.getText());
-							manager.add(new MinusAccount(accountNum, accountName, password, depositMoney, minusMoney));
+							try {
+								manager.add(new MinusAccount(accountNum, accountName, password, depositMoney, minusMoney));
+							} catch (IOException | AccountException e1) {
+								e1.printStackTrace();
+							}
 							showListTA.setText("마이너스계좌가 생성되었습니다.");
 						} catch (NumberFormatException e2) {
 							showListTA.setText("계좌번호를 입력해주세요");
@@ -418,7 +450,6 @@ public class MainFrame extends Frame {
 		depositTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
 				char c = e.getKeyChar(); 
 				if(!(Character.isDigit(c)) && (c != '\b') ) {
 					e.consume();
@@ -429,7 +460,6 @@ public class MainFrame extends Frame {
 		minusMoneyTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
 				char c = e.getKeyChar(); 
 				if(!(Character.isDigit(c)) && (c != '\b') ) {
 					e.consume();
@@ -442,14 +472,5 @@ public class MainFrame extends Frame {
 
 	public void setAccountManager(AccountDao dao) {
 		manager = dao;
-		
-		//테스트를 위해 미리 넣어놓는 예제 데이터
-		manager.add(new Account("111-222-333", "우호진", 1111, 100000));
-		manager.add(new Account("333-222-666", "박지성", 1112, 400000));
-		manager.add(new Account("444-777-111", "김연아", 1113, 300000));
-		manager.add(new Account("666-444-222", "손흥민", 1114, 200000));
-		manager.add(new Account("446-224-123", "박지성", 1115, 100000));
-		manager.add(new MinusAccount("1231-1234-2222", "백종현", 4321, 0, 1000000));
-		manager.add(new MinusAccount("1231-1234-2241", "김기정", 1234, 0, 100000));
 	}
 }
