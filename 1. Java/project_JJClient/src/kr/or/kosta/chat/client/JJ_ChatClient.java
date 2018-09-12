@@ -29,12 +29,10 @@ public class JJ_ChatClient {
 	
 	public void connectServer() throws Exception {
 		try {
-			
 			socket = new Socket(SERVER, PORT);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			running = true;
-
 		}catch (Exception e) {
 			throw new Exception("서버를 찾을 수 없습니다..");
 		}
@@ -74,9 +72,16 @@ public class JJ_ChatClient {
 
 		}.start();
 	}
+	public void stopClient() {
+		if(socket != null) {
+			try {
+				socket.close();
+			} catch (IOException e) {}
+		}		
+	}
 	
 	public Socket getSocket() {
 		return socket;
 	}
-
+	
 }

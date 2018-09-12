@@ -24,16 +24,20 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 	
 	JJ_ChatClient client;
 
+	String key_nickName;
+	
 	public JJ_ChatUI() {
 		this("noname");
 	}
 	public JJ_ChatUI(String title) {
 		super(title);
+		key_nickName = "";
 		loginPanel = new LoginPanel(this);
 		waitingPanel = new WaitingPanel(this);
 		roomPanel = new RoomPanel(this);
 		loginPanel.eventRegist();
 		waitingPanel.eventRegist();
+		roomPanel.eventRegist();
 		
 		cardPanel = new Panel();
 		cardLayout = new CardLayout();
@@ -68,6 +72,14 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 		}
 	}
 	
+	public void setKey_nickName(String key_nickName) {
+		this.key_nickName = key_nickName;
+	}
+	
+	public String getKey_nickName() {
+		return key_nickName;
+	}
+	
 	public void sendMessage(String message) {
 		client.sendMessage(message);
 	}
@@ -76,13 +88,44 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 		addWindowListener(this);
 	}
 	
+	public LoginPanel getLoginPanel() {
+		return loginPanel;
+	}
+	
 	public void process(String message) {
 		String[] token = message.split(Protocol.DELEMETER);
 		switch (Integer.parseInt(token[0])) {
 		case Protocol.SC_LOGIN_RESULT:
 			loginPanel.sc_checkNickName(token[2]);
 			break;
-			
+		case Protocol.SC_UPDATE_WAITINGROOM_USER_LIST:
+			String nickNames = token[1];
+			waitingPanel.sc_getWaiting(nickNames);
+//			System.out.println(nickNames);
+			roomPanel.sc_getWaiting(nickNames);
+			break;
+		case Protocol.SC_UPDATE_CHATROOM_LIST:
+			waitingPanel.sc_getRoomInfo(token[1]);
+			break;
+		case Protocol.SC_ROOM_NAME_RESULT:
+			waitingPanel.sc_checkRoomName(token[1]);
+			break;
+		case Protocol.SC_ROOM_CREATE_RESULT:
+			waitingPanel.sc_checkCreateRoom(token[1]);
+			break;
+		case Protocol.SC_GETROOM_INFO_RESULT:
+			waitingPanel.sc_getRoomUserInfo(token[1]);
+			break;
+		case Protocol.SC_REQUEST_ENTER_CHATROOM_RESULT:
+			if(token[1].equalsIgnoreCase("SUCCESS")){
+				waitingPanel.sc_enterRoom();
+			}
+			break;
+		case Protocol.SC_ROOM_CHAT_RESULT:
+			roomPanel.uploadMessage(token[1], token[2]);
+			break;
+		case Protocol.SC_UPDATE_ROOM_USER:
+			roomPanel.sc_getRoomUserInfo(token[1]);
 		default:
 			break;
 		}
@@ -93,6 +136,8 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 	}
 	
 	public void finish() {
+		sendMessage(Protocol.CS_DISCONNECT+Protocol.DELEMETER);
+		client.stopClient();
 		setVisible(false);
 		dispose();
 		System.exit(0);
@@ -112,13 +157,11 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 	
 	@Override
 	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 

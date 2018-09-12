@@ -37,7 +37,7 @@ public class LoginPanel extends Panel implements ActionListener{
 		gridBagConstraints = new GridBagConstraints();
 		
 		nickNameL = new Label("닉네임");
-		nickNameTF = new TextField();
+		nickNameTF = new TextField(10);
 		duplicateB = new Button("중복체크");
 		loginB = new Button("입장");
 		exitB = new Button("종료");
@@ -58,9 +58,14 @@ public class LoginPanel extends Panel implements ActionListener{
 		
 		loginB.addActionListener(this);
 		this.frame = frame;
-		setContents();		
+		init();
+		setContents();	
 	}
-	
+	public void init() {
+		isCheck = false;
+		nickNameTF.setEditable(true);
+		nickNameTF.setText("");
+	}
 	
 	public void setContents() {
 		
@@ -133,10 +138,10 @@ public class LoginPanel extends Panel implements ActionListener{
 			nickNameTF.setEditable(false);
 		}
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		frame.setKey_nickName(nickNameTF.getText());
 		frame.sendMessage(Protocol.CS_ENTER+Protocol.DELEMETER+"Login");
 		frame.pack();
 		frame.setCenter();
