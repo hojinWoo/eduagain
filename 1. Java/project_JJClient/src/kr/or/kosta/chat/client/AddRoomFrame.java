@@ -5,10 +5,10 @@ import java.awt.Button;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
@@ -21,7 +21,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class AddRoomFrame extends Frame{
 	
@@ -30,12 +33,14 @@ public class AddRoomFrame extends Frame{
 	
 //	roomNum, roomName, roomOwner, roomCapacity
 	
-	Label roomNameL, roomOwnerL, roomCapacityL;
-	TextField roomNameTF, roomOwnerTF, roomCapacityTF;
-	Button checkNameB, createRoomB, cancelB; 
+	JLabel roomNameL, roomCapacityL, jLabel;
+	JTextField roomNameTF, roomCapacityTF;
+	JButton checkNameB, createRoomB, cancelB;
+	
+	Font font;
 	
 	WaitingPanel waitingPanel;
-	
+		
 	boolean isCheck = false;
 	
 	public AddRoomFrame() {}
@@ -44,27 +49,28 @@ public class AddRoomFrame extends Frame{
 		super(title);
 		this.waitingPanel = waitingPanel;
 		
+		font = new Font(Font.DIALOG, Font.PLAIN, 14);
+		
 		gridBagLayout = new GridBagLayout();
 		gridBagConstraints = new GridBagConstraints();
 		
-		roomNameL = new Label("이름");
-//		roomOwnerL = new Label("방장");
-		roomCapacityL = new Label("참여자 수");
+		roomNameL = new JLabel("이름");
+		roomNameL.setFont(font);
+		roomCapacityL = new JLabel("참여자 수");
+		roomCapacityL.setFont(font);
 		
-		roomNameTF = new TextField(10);
-//		roomOwnerTF = new TextField(10);
+		roomNameTF = new JTextField(10);
+		roomNameTF.setFont(font);
+		roomNameTF.setSize(10, 25);
+		roomCapacityTF = new JTextField(10);
+		roomCapacityTF.setFont(font);
 		
-//		try {
-//			roomOwnerTF.setText(waitingPanel.getNickName());
-//			roomOwnerTF.setEditable(false);
-//		}catch (NullPointerException e) {
-//		}
-		
-		roomCapacityTF = new TextField(10);
-		
-		checkNameB = new Button("중복체크");
-		createRoomB = new Button("방 추가");
-		cancelB = new Button("취소");
+		checkNameB = new JButton("중복체크");
+		checkNameB.setFont(font);
+		createRoomB = new JButton("방 추가");
+		createRoomB.setFont(font);
+		cancelB = new JButton("취소");
+		cancelB.setFont(font);
 		
 		setContents();
 	}
@@ -77,11 +83,7 @@ public class AddRoomFrame extends Frame{
 		nameP.add(roomNameTF, BorderLayout.CENTER);
 		nameP.add(checkNameB, BorderLayout.EAST);
 		
-//		Panel ownerP = new Panel(new BorderLayout(40, 10));
-//		ownerP.add(roomOwnerL, BorderLayout.WEST);
-//		ownerP.add(roomOwnerTF, BorderLayout.CENTER);
-		
-		Panel capacityP = new Panel(new BorderLayout(13, 10));
+		Panel capacityP = new Panel(new BorderLayout(10, 10));
 		capacityP.add(roomCapacityL, BorderLayout.WEST);
 		capacityP.add(roomCapacityTF, BorderLayout.CENTER);
 		
@@ -91,13 +93,12 @@ public class AddRoomFrame extends Frame{
 		settingP.add(cancelB);
 		
 		add(nameP, 		0,0,1,1,0,0,0);
-//		add(ownerP, 	0,1,1,1,0,0,0);
 		add(capacityP, 	0,2,1,1,0,0,0);
 		add(settingP, 	0,4,1,1,0,0,0);
 		
 		
 	}
-	
+
 	private void add(Component component, int gridx, int gridy, int gridwidth, int gridheight, double weigthx,
 			double weighty, int fill) {
 		gridBagConstraints.gridx = gridx;
@@ -142,6 +143,13 @@ public class AddRoomFrame extends Frame{
 	public void finish() {
 		setVisible(false);
 		dispose();
+	}
+	
+	public void init() {
+		isCheck = false;
+		roomNameTF.setEditable(true);
+		roomNameTF.setText("");
+		roomCapacityTF.setText("");
 	}
 	
 	public void cs_checkName() {
@@ -189,6 +197,7 @@ public class AddRoomFrame extends Frame{
 	//실제 방 개설 완성
 	public void sc_checkCreate(String msg) {
 		if(msg.equalsIgnoreCase("SUCCESS")) {
+			waitingPanel.setRoomName(roomNameTF.getText());
 			waitingPanel.changeCardPanel(2);
 			finish();
 		}

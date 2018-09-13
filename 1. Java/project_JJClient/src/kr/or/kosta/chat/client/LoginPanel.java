@@ -1,7 +1,10 @@
 package kr.or.kosta.chat.client;
 
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,7 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import kr.or.kosta.chat.common.Protocol;
 
@@ -22,25 +28,37 @@ public class LoginPanel extends Panel implements ActionListener{
 	GridBagLayout gridBagLayout;
 	GridBagConstraints gridBagConstraints;
 	
-	Label nickNameL, emptyL1, emptyL2;
-	TextField nickNameTF;
-	Button duplicateB, loginB, exitB;
+	JLabel nickNameL, emptyL1, emptyL2;
+	JTextField nickNameTF;
+	JButton duplicateB, loginB, exitB;
 	
 	JJ_ChatUI frame;
 	
-	static boolean isCheck = true;
+	Font font;
+	
+	Color buttonColor;
+
+	static boolean isCheck = false;
 	
 	public LoginPanel() {}
 	
 	public LoginPanel(JJ_ChatUI frame) {
 		gridBagLayout = new GridBagLayout();
 		gridBagConstraints = new GridBagConstraints();
+		font = new Font(Font.DIALOG, Font.PLAIN, 14);
+		buttonColor = new Color(255, 204, 000);
 		
-		nickNameL = new Label("닉네임");
-		nickNameTF = new TextField(10);
-		duplicateB = new Button("중복체크");
-		loginB = new Button("입장");
-		exitB = new Button("종료");
+		nickNameL = new JLabel("닉네임");
+		nickNameL.setFont(font);
+		nickNameTF = new JTextField(30);
+		nickNameTF.setFont(font);
+		
+		duplicateB = new JButton("중복체크");
+		duplicateB.setFont(font);
+		loginB = new JButton("입장");
+		loginB.setFont(font);
+		exitB = new JButton("종료");
+		exitB.setFont(font);
 		
 		exitB.addActionListener(new ActionListener() {
 			
@@ -50,12 +68,7 @@ public class LoginPanel extends Panel implements ActionListener{
 				System.exit(0);
 			}
 		});
-		
-		emptyL1 = new Label();
-		emptyL1.setSize(400, 200);
-		emptyL2 = new Label();
-		emptyL2.setSize(400, 200);
-		
+	
 		loginB.addActionListener(this);
 		this.frame = frame;
 		init();
@@ -70,24 +83,15 @@ public class LoginPanel extends Panel implements ActionListener{
 	public void setContents() {
 		
 		setLayout(gridBagLayout);
-		add(emptyL1,		0, 0, 1, 1, 0, 0, 1);		
+		add(new Label(" "),	0, 0, 1, 1, 0, 0, 1);		
 		
 		add(nickNameL,  	0, 1, 1, 1, 0, 0, 0);
-		add(nickNameTF, 	1, 1, 1, 1, 0, 0, 2);
+		add(nickNameTF, 	1, 1, 1, 1, 0, 0, 1);
 		add(duplicateB,   	2, 1, 1, 1, 0, 0, 0);
-		add(new Label(""),	3, 1, 1, 1, 0, 0, 0);
-		
-		Panel buttonPanel = new Panel();
+		Panel buttonPanel = new Panel(new FlowLayout(FlowLayout.CENTER,30,40));
 		buttonPanel.add(loginB);
 		buttonPanel.add(exitB);
-		add(new Label(""),	0, 2, 1, 1, 0, 0, 0);
 		add(buttonPanel, 	1, 2, 1, 1, 0, 0, 0);
-		add(new Label(""),	2, 2, 1, 1, 0, 0, 0);
-		add(new Label(""),	3, 2, 1, 1, 0, 0, 0);
-		
-		add(emptyL2,		0, 3, 1, 1, 0, 0, 1);		
-
-		
 	}
 	private void add(Component component, int gridx, int gridy, int gridwidth, int gridheight, double weigthx,
 			double weighty, int fill) {
@@ -99,7 +103,7 @@ public class LoginPanel extends Panel implements ActionListener{
 		gridBagConstraints.weighty = weighty;
 		gridBagConstraints.anchor = gridBagConstraints.WEST;
 
-		gridBagConstraints.insets = new Insets(5, 5, 5, 5); // margin
+		gridBagConstraints.insets = new Insets(5, 5, 5, 5); // top, left, bottom, right
 
 		switch (fill) {
 		case 1:

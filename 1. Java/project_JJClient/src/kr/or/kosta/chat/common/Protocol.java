@@ -12,12 +12,9 @@ public interface Protocol {
 	   public static final int CS_LOGIN = 1000;          // 닉네임 중복체크
 	   public static final int SC_LOGIN_RESULT = 1001;    // 닉네임 중복체크 결과 반환
 	   public static final int CS_ENTER = 1002;          // 입장 시 사용자 리스트에 추가
-	   public static final int CS_CHATROOM_CLICK = 1003;    // 대기자 리스트 업데이트
 
 	   public static final int SC_UPDATE_WAITINGROOM_USER_LIST = 2000;    // 대기자 리스트 업데이트
 	   public static final int SC_UPDATE_CHATROOM_LIST = 2001;          // 채팅방 리스트 업데이트
-
-	   public static final int SC_UPDATE_CHATROOM_USER_LIST = 2001;    // 해당 채팅방 참가자 업데이트
 
 	   public static final int CS_ROOM_NAME = 2002;       // 채팅방 이름 중복체크
 	   public static final int SC_ROOM_NAME_RESULT = 2003;   // 채팅방 이름 중복체크 결과 반환 
@@ -32,16 +29,26 @@ public interface Protocol {
 	   
 	   public static final int CS_ROOM_CHAT = 3000;         // 다중 채팅 시작 
 	   public static final int SC_ROOM_CHAT_RESULT = 3001;   // 다중 채팅 결과 반환 
-	   
-	   public static final int SC_UPDATE_ROOM_USER = 3006;
-	   
-	   public static final int CS_SECRET_CHAT = 3004; 
-	   public static final int CS_SECRET_CHAT_RESULT = 3005; 
-	   
-	   
-	   public static final int CS_ALL_CHAT = 3002;         // 다중 채팅 시작 
-	   public static final int SC_ALL_CHAT_RESULT = 3003;         // 다중 채팅 시작 
+	   	   
+	   public static final int CS_ALL_CHAT = 3002;         	// 전체 채팅 시작 
+	   public static final int SC_ALL_CHAT_RESULT = 3003;         // 전체 채팅 시작 
 
+	   public static final int CS_SECRET_CHAT = 3004; 			// 귓속말
+	   public static final int SC_SECRET_CHAT_ROOM_RESULT = 3005; 	// 방이 있는 경우 귓속말 보내기
+	   public static final int SC_SECRET_CHAT_WAIT_RESULT = 3006; 	// 대기방에 있는 경우 귓속말 보내기
+	   
+	   public static final int SC_UPDATE_ROOM_USER = 3007; //현재 채팅방의 유저 업데이트
+	   
+	   public static final int CS_INVITE= 3008; //초대하기 sender가 receiver에게 초대 요청하기
+	   public static final int SC_INVITE_RESULT= 3009; // receiver는 초대 요청에 응할수도 있고 거절할 수도 있음, 그 결과를 반환하기 
+	   
+	   public static final int CS_INVITE_ISACCEPT=3010; // receiver는 초대 요청에 응할(Accept)수도 있고 거절(Reject)할 수도 있음, 그 결과를 반환하기 
+	   public static final int SC_INVITE_ISACCEPT_RESULT=3011; // Accept하거나 Reject하는 결과를 sender에게 보내주기
+	   
+	   public static final int CS_LEAVEROOM = 3012; //방 나가기
+	   public static final int SC_LEAVEROOM_RESULT = 3013; //방 나가기 결과
+	   
+	  
 	   public static final int CS_DISCONNECT = 4000;         // 종료 요청
 	   public static final int SC_DISCONNECT_RESULT = 4001;   // 종료 
 	   public static final int CS_LOGOUT = 4002;   // 로그아웃 

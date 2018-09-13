@@ -101,7 +101,6 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 		case Protocol.SC_UPDATE_WAITINGROOM_USER_LIST:
 			String nickNames = token[1];
 			waitingPanel.sc_getWaiting(nickNames);
-//			System.out.println(nickNames);
 			roomPanel.sc_getWaiting(nickNames);
 			break;
 		case Protocol.SC_UPDATE_CHATROOM_LIST:
@@ -119,13 +118,46 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 		case Protocol.SC_REQUEST_ENTER_CHATROOM_RESULT:
 			if(token[1].equalsIgnoreCase("SUCCESS")){
 				waitingPanel.sc_enterRoom();
+				roomPanel.setRoomName(waitingPanel.getRoomName());
+			}else {
+				waitingPanel.sc_failEnterRoom();
 			}
 			break;
 		case Protocol.SC_ROOM_CHAT_RESULT:
-			roomPanel.uploadMessage(token[1], token[2]);
+			roomPanel.uploadMessage(token[1], token[2], token[3]);
+			break;
+		case Protocol.SC_ALL_CHAT_RESULT:
+			waitingPanel.uploadMessage(token[1], token[2], token[3]);
 			break;
 		case Protocol.SC_UPDATE_ROOM_USER:
 			roomPanel.sc_getRoomUserInfo(token[1]);
+			break;
+		case Protocol.SC_SECRET_CHAT_ROOM_RESULT:
+			roomPanel.uploadWisperMsg(token[1], token[2], token[3]);
+			break;
+		case Protocol.SC_SECRET_CHAT_WAIT_RESULT:
+			waitingPanel.uploadWisperMsg(token[1], token[2], token[3]);
+			break;
+		case Protocol.SC_INVITE_RESULT:
+			String roomName = token[2];
+			int sc_invite = JOptionPane.showConfirmDialog(null, token[1]+"님이 [" + roomName + "]방에 초대하였습니다\n참여하시겠습니까?", "방초대", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if(sc_invite == 0) {
+				sendMessage(Protocol.CS_INVITE_ISACCEPT + Protocol.DELEMETER + roomName +Protocol.DELEMETER + "ACCEPT");
+			}else {
+				sendMessage(Protocol.CS_INVITE_ISACCEPT + Protocol.DELEMETER + roomName +Protocol.DELEMETER + "REJECT");
+			}
+			break;
+		case Protocol.SC_INVITE_ISACCEPT_RESULT:
+			if(token[1].equalsIgnoreCase("SUCCESS")){
+				waitingPanel.sc_enterRoom();
+				roomPanel.setRoomName(waitingPanel.getRoomName());
+			}else {
+				waitingPanel.sc_failEnterRoom();
+			}
+			break;
+		case Protocol.SC_LEAVEROOM_RESULT:
+			roomPanel.sc_leaveRoom();
+			break;
 		default:
 			break;
 		}
