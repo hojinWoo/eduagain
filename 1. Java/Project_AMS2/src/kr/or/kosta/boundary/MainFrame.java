@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -172,6 +174,16 @@ public class MainFrame extends Frame {
 		minusMoneyTF.setText("");
 	}
 	
+
+//	public void setCenter() {
+//		Toolkit.getDefaultToolkit().beep();
+//		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//		
+//		int x = (dim.width - getSize().width)/2;
+//		int y = (dim.height - getSize().height)/2;
+//		setLocation(x, y);
+//	}
+	
 	
 	public void eventRegist() {
 		
@@ -290,8 +302,12 @@ public class MainFrame extends Frame {
 				if (accountOwner.equals("")) {
 					showListTA.setText("예금주명을 입력해주세요");
 				}else {
-					List searchList = manager.search(accountOwner);
-
+					List searchList = null;
+					try {
+						searchList = manager.search(accountOwner);
+					} catch (AccountException | IOException e1) {
+						e1.printStackTrace();
+					}
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (searchList == null) {
 							showListTA.setText("이름이 존재하지 않습니다");
@@ -344,10 +360,12 @@ public class MainFrame extends Frame {
 				String accountNum = numAccounTF.getText();
 				if(accountNum.equals("")) {
 					showListTA.setText("계좌번호를 입력해주세요");
+					return;
 				}
 				String accountName = nameAccountTF.getText();
 				if(accountName.equals("")) {
 					showListTA.append(", 예금주명을 입력해주세요");
+					return;
 				}
 				
 				int password = 0;
@@ -366,6 +384,7 @@ public class MainFrame extends Frame {
 							showListTA.setText("입출금계좌가 생성되었습니다.");
 						} catch (NumberFormatException e2) {
 							showListTA.setText("입금금액을 입력해주세요");
+							return;
 						}
 
 					} else if (kindAccountCB.getSelectedIndex() == 2) {
@@ -387,12 +406,13 @@ public class MainFrame extends Frame {
 							showListTA.setText("마이너스계좌가 생성되었습니다.");
 						} catch (NumberFormatException e2) {
 							showListTA.setText("계좌번호를 입력해주세요");
+							return;
 						}
 					}
 				} catch (NumberFormatException e2) {
 					showListTA.append(" 비밀번호를 입력해주세요");
+					return;
 				}
-
 				setBlank();
 			}
 		});
@@ -404,7 +424,13 @@ public class MainFrame extends Frame {
 				print();
 				
 				//Override된 객체를 사용해서 숫자(0(전체), 1(입출금), 2(마이나스))를 통해 원하는 list를 return받아서 출력한다.
-				List searchList = manager.list(kindAccountCB.getSelectedIndex());
+				List searchList = null;
+				try {
+					searchList = manager.list();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if(!searchList.isEmpty()) {
 					for (Object object : searchList) {
 						showListTA.append(object+"\n");
@@ -473,4 +499,5 @@ public class MainFrame extends Frame {
 	public void setAccountManager(AccountDao dao) {
 		manager = dao;
 	}
+
 }

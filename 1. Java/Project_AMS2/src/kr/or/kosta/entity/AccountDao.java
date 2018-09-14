@@ -66,8 +66,7 @@ public class AccountDao {
 		// 파일의 마지막 레코드 끝으로 파일 포인터 이동
 		file.seek((recordCount * RECORD_LENGTH) + RECORD_COUNT_LENGTH);
 
-		// 새로운 레코드(계좌) 추가
-		// 30 + 20 + 4 + 8 + 8
+		// 새로운 레코드(계좌) 추가(30 + 20 + 4 + 8 + 8)
 		String accountNum = account.getAccountNum();
 		List<Account> list = list();
 		for (Account account2 : list) {
@@ -77,7 +76,10 @@ public class AccountDao {
 			}
 		}
 
-		String acacountOwner = account.getAccountOwner();
+		String ac_acountOwner = account.getAccountOwner();
+		if(ac_acountOwner.equals("")) {
+			return;
+		}
 		int passwd = account.getPasswd();
 		long deposit = account.getRestMoney();
 		if (account instanceof MinusAccount) {
@@ -96,10 +98,10 @@ public class AccountDao {
 			file.writeChar((i < charCount ? accountNum.charAt(i) : ' '));
 		}
 
-		charCount = acacountOwner.length();
+		charCount = ac_acountOwner.length();
 		// 20바이트로 이름 저장
 		for (int i = 0; i < (OWNER_LENGTH / 2); i++) {
-			file.writeChar((i < charCount ? acacountOwner.charAt(i) : ' '));
+			file.writeChar((i < charCount ? ac_acountOwner.charAt(i) : ' '));
 		}
 
 		// 4바이트로 비밀번호 저장
@@ -127,39 +129,13 @@ public class AccountDao {
 		return list;
 
 	}
-
-//	public List list(int num) {
-//		List<Account> list = new ArrayList<>();
-//		Enumeration<Account> e = accounts.elements();
-//		
-//		if(num==0) {
-//			while(e.hasMoreElements()) {
-//				Account ac = e.nextElement();
-//				list.add(ac);
-//			}
-//		}else if(num == 1) {
-//			//입출금 계좌
-//			while(e.hasMoreElements()) {
-//				Account ac = e.nextElement();
-//				if(!(ac instanceof MinusAccount)) {
-//					list.add(ac);
-//				}
-//			}
-//		}else {
-//			//출금 계좌
-//			while(e.hasMoreElements()) {
-//				Account ac = e.nextElement();
-//				if(ac instanceof MinusAccount) {
-//					list.add(ac);
-//				}
-//			}
-//			
-//		}
-//		Collections.sort(list, new NumberComparator());
-//		return list;
-//			
-//	}
 	
+	/**
+	 * 파일에서 계좌 읽기
+	 * @param index	
+	 * @return
+	 * @throws IOException
+	 */
 	private Account read(int index) throws IOException {
 		Account account = null;
 
@@ -194,6 +170,12 @@ public class AccountDao {
 	}
 
 
+	/**
+	 * @param accountNum 	계좌번호
+	 * @return				해당 계좌
+	 * @throws AccountException
+	 * @throws IOException
+	 */
 	public Account get(String accountNum) throws AccountException, IOException {
 		List<Account> list = list();
 		boolean flag = false;
@@ -205,21 +187,42 @@ public class AccountDao {
 		}
 
 		if (accountNum.length() < 1) {
-
-			JOptionPane.showMessageDialog(null, "계좌번호를 입력해주세요.", "경고", JOptionPane.ERROR_MESSAGE);
+//			JOptionPane.showMessageDialog(null, "계좌번호를 입력해주세요.", "경고", JOptionPane.ERROR_MESSAGE);
 			throw new AccountException("계좌번호를 입력해주세요.", -300);
 
 		} else if (!flag && accountNum.length() > 0) {
-
 			JOptionPane.showMessageDialog(null, "해당 계좌가 존재하지 않습니다.", "경고", JOptionPane.ERROR_MESSAGE);
 			throw new AccountException("존재하지 않는 계좌입니다.", -200);
-
 		}
-
 		return null;
 
 	}
+	
 
+	/**
+	 * @param accountOwner
+	 * @return 검색결과
+	 * @throws AccountException
+	 * @throws IOException
+	 */
+	public List<Account> search(String accountOwner) throws AccountException, IOException {
+		List<Account> list = list();
+		List<Account> accountList = new ArrayList<Account>();
+		for (Account account : list) {
+			if (accountOwner.equals(account.getAccountOwner())) {
+				accountList.add(account);
+			}
+		}
+		return accountList;
+
+	}
+
+	/**
+	 * @param accountNum 계좌번호
+	 * @return
+	 * @throws AccountException
+	 * @throws IOException
+	 */
 	public boolean remove(String accountNum) throws AccountException, IOException {
 		// 삭제할 계좌의 index 찾기
 		int findIdx = 0;

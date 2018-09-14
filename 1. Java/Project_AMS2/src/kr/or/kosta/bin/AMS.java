@@ -19,6 +19,7 @@ public class AMS {
 		MainFrame frame = new MainFrame("KOSTA AMS - 메인화면");
 		frame.setAccountManager(dao);
 		frame.setContents();
+//		frame.setCenter();
 		frame.eventRegist();
 		frame.pack();
 		frame.setVisible(true);
