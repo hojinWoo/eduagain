@@ -50,7 +50,7 @@ public interface Protocol {
 	   
 	  
 	   public static final int CS_DISCONNECT = 4000;         // 종료 요청
-	   public static final int SC_DISCONNECT_RESULT = 4001;   // 종료 
+	   public static final int SC_DISCONNECT_RESULT = 4001;   // 종료 결과
 	   public static final int CS_LOGOUT = 4002;   // 로그아웃 
 
 }

@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import kr.or.kosta.chat.common.Protocol;
-
 public class JJ_ChatClient {
 	
 	public static final String SERVER = "192.168.0.117";
@@ -27,6 +25,10 @@ public class JJ_ChatClient {
 		this.frame = frame;
 	}
 	
+	/**
+	 * 서버 연결
+	 * @throws Exception
+	 */
 	public void connectServer() throws Exception {
 		try {
 			socket = new Socket(SERVER, PORT);
@@ -39,6 +41,10 @@ public class JJ_ChatClient {
 		
 	}
 	
+	/**
+	 * 서버에 메시지 보내기
+	 * @param message
+	 */
 	public void sendMessage(String message) {
 		if(out != null) {
 			out.println(message);
@@ -46,6 +52,9 @@ public class JJ_ChatClient {
 		}
 	}
 	
+	/**
+	 * 서버로부터 메시지 받기
+	 */
 	public void receiveMessage() {
 		new Thread() {
 			@Override

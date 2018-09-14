@@ -15,7 +15,6 @@ import java.awt.List;
 import java.awt.MenuItem;
 import java.awt.Panel;
 import java.awt.PopupMenu;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -117,9 +116,6 @@ public class WaitingPanel extends Panel implements ActionListener {
 		userTF.setFont(font);
 		sendMsgTF = new JTextField(50);
 		sendMsgTF.setFont(font);
-//		jTextField = new JTextField(15);
-//		jTextField.setFont(font);
-	
 		chattingTA = new JTextArea(10,70); // 크기 조절 필요
 		chattingTA.setFont(font);
 		chattingTA.setBackground(new Color(137, 168, 183));
@@ -148,8 +144,6 @@ public class WaitingPanel extends Panel implements ActionListener {
 		
 		jTable = new JTable(tableModel);
 		jTable.setFont(font);
-//		jTable.setFillsViewportHeight(true);
-//		jTable.getParent().setBackground(new Color(139, 21	4, 190));
 		
 		jTable.setRowHeight(20);
 		scrollPane = new JScrollPane(jTable);
@@ -174,9 +168,6 @@ public class WaitingPanel extends Panel implements ActionListener {
 		setContents();
 	}
 	
-	
-	
-	
 	public void setContents() {
 		setLayout(gridBagLayout);
 		
@@ -185,7 +176,6 @@ public class WaitingPanel extends Panel implements ActionListener {
 		menuP.add(addRoomB);
 		menuP.add(logoutB);
 		menuP.add(exitB);
-//		menuP.add(settingC);
 		
 		Panel roomListandChatting = new Panel(new BorderLayout());
 		Panel roomP = new Panel(new BorderLayout(10, 10));
@@ -335,9 +325,24 @@ public class WaitingPanel extends Panel implements ActionListener {
 		
 		tcmSchedule = jTable.getColumnModel();
 		
+		int[] widths = {20, 100, 50, 50};
 		for (int i = 0; i < tcmSchedule.getColumnCount(); i++) {
+//			jTable.getColumnModel().getColumn(i).setPreferredWidth(widths[i]); //열 크기 조절 실패...
 			tcmSchedule.getColumn(i).setCellRenderer(tScheduleCellRenderer);
 		}
+		
+//		jTable.getColumn("방 번호").setPreferredWidth(5);
+//		jTable.getColumn("방 제목").setPreferredWidth(40);
+//		jTable.getColumn("방장 이름").setPreferredWidth(30);
+//		jTable.getColumn("(현재인원/최대인원)").setPreferredWidth(10);
+//		jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+//		jTable.getColumnModel().getColumn(1).setPreferredWidth(40);
+//		jTable.getColumnModel().getColumn(2).setPreferredWidth(30);
+//		jTable.getColumnModel().getColumn(3).setPreferredWidth(10);
+//		tcmSchedule.getColumn(0).setPreferredWidth(5);
+//		tcmSchedule.getColumn(1).setPreferredWidth(40);
+//		tcmSchedule.getColumn(2).setPreferredWidth(30);
+//		tcmSchedule.getColumn(3).setPreferredWidth(10);
 
 	}
 	
@@ -383,14 +388,14 @@ public class WaitingPanel extends Panel implements ActionListener {
 	//화면 전환
 	public void changeCardPanel(int num) {
 		if(num==0) {
-			//logout
+			//logout 누른 경우
 			frame.setSize(400, 500);
 			frame.setCenter();
 			frame.getLoginPanel().init();
 			frame.changeCard("login");
 			return;
 		}else if(num==2) {
-			//채팅방
+			//채팅방으로 들어간 경우
 			frame.pack();
 			frame.setCenter();
 			frame.changeCard("room");
@@ -435,7 +440,7 @@ public class WaitingPanel extends Panel implements ActionListener {
 		}
 	}
 	
-	//채팅하기
+	//채팅하기 출력
 	public void uploadMessage(String sender, String msg, String time) {
 		chattingTA.append("["+time+"] "+sender + " : " + msg + "\n");
 	}

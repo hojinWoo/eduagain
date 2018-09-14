@@ -1,7 +1,6 @@
 package kr.or.kosta.chat.client;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,7 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
-import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,8 +28,6 @@ public class AddRoomFrame extends Frame{
 	
 	GridBagLayout gridBagLayout;
 	GridBagConstraints gridBagConstraints;
-	
-//	roomNum, roomName, roomOwner, roomCapacity
 	
 	JLabel roomNameL, roomCapacityL, jLabel;
 	JTextField roomNameTF, roomCapacityTF;
@@ -131,6 +127,9 @@ public class AddRoomFrame extends Frame{
 		add(component);
 	}
 	
+	/**
+	 * frame 중간에 위치시키기
+	 */
 	public void setCenter() {
 		Toolkit.getDefaultToolkit().beep();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -145,6 +144,10 @@ public class AddRoomFrame extends Frame{
 		dispose();
 	}
 	
+	
+	/**
+	 * frame 정보 초기화
+	 */
 	public void init() {
 		isCheck = false;
 		roomNameTF.setEditable(true);
@@ -152,6 +155,9 @@ public class AddRoomFrame extends Frame{
 		roomCapacityTF.setText("");
 	}
 	
+	/**
+	 * 방이름 중복확인 설정
+	 */
 	public void cs_checkName() {
 		String name = roomNameTF.getText();
 		if(name.trim().equals("")) {
@@ -161,6 +167,10 @@ public class AddRoomFrame extends Frame{
 		waitingPanel.cs_checkRoomName(name);
 	}
 	
+	/**
+	 * 방 이름 중복확인 결과
+	 * @param message 중복확인 결과
+	 */
 	public void sc_CheckName(String message) {
 		if(!(message.equalsIgnoreCase("SUCCESS"))){
 			JOptionPane.showMessageDialog(null, "방이름이 이미 존재합니다.", "중복체크", JOptionPane.ERROR_MESSAGE);
@@ -174,11 +184,15 @@ public class AddRoomFrame extends Frame{
 		}
 	}
 	
+	/**
+	 *  방 생성
+	 */
 	public void createRoom() {
 		if(roomCapacityTF.getText().trim().equals("")) {
 			JOptionPane.showMessageDialog(null, "인원을 입력해주세요", "최대 인원", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		// 방 생성 누르긴 한 경우 방 정보를 서버에 보낸다
 		if(isCheck) {
 			int checkRoom = JOptionPane.showConfirmDialog(null, "방을 만드시겠습니까?", "방이름 사용", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(checkRoom == 0){
@@ -216,6 +230,7 @@ public class AddRoomFrame extends Frame{
 			}
 		});
 		
+		/**방이름 중복확인 */
 		roomNameTF.addActionListener(new ActionListener() {
 			
 			@Override
@@ -224,6 +239,7 @@ public class AddRoomFrame extends Frame{
 			}
 		});
 		
+		/**방이름 중복확인 */
 		checkNameB.addActionListener(new ActionListener() {
 			
 			@Override
@@ -231,6 +247,8 @@ public class AddRoomFrame extends Frame{
 				cs_checkName();
 			}
 		});
+		
+		/**방 개설 */
 		createRoomB.addActionListener(new ActionListener() {
 			
 			@Override
@@ -239,6 +257,7 @@ public class AddRoomFrame extends Frame{
 			}
 		});
 		
+		/**방 개설 */
 		cancelB.addActionListener(new ActionListener() {
 			
 			@Override

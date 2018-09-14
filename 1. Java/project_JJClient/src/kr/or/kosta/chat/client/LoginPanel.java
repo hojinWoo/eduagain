@@ -125,11 +125,19 @@ public class LoginPanel extends Panel implements ActionListener{
 		add(component);
 	}
 	
+	/**
+	 * 닉네임 중복 확인 물어보기
+	 */
 	public void cs_checkNickName() {
 		String nickName = nickNameTF.getText();
 		frame.sendMessage(Protocol.CS_LOGIN+Protocol.DELEMETER+nickName);
 	}
 	
+	
+	/** 
+	 * 닉네임 중복확인 결과에 따라 처리
+	 * @param message 닉네임 중복확인 결과 메시지
+	 */
 	public void sc_checkNickName(String message) {
 		if(!(message.equalsIgnoreCase("SUCCESS"))){
 			JOptionPane.showMessageDialog(null, "닉네임이 이미 존재합니다.", "중복체크", JOptionPane.ERROR_MESSAGE);

@@ -24,7 +24,7 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 	
 	JJ_ChatClient client;
 
-	String key_nickName;
+	String key_nickName;	//연결하는 nickname 기록
 	
 	public JJ_ChatUI() {
 		this("noname");
@@ -61,6 +61,10 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 		setLocation(x, y);
 	}
 	
+	/**
+	 * cardPanel에 보이는 panel 바꾸기
+	 * @param name 원하는 카드 이름
+	 */
 	public void changeCard(String name) {
 		cardLayout.show(cardPanel, name);
 		if(name.equalsIgnoreCase("login")) {
@@ -95,26 +99,33 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 	public void process(String message) {
 		String[] token = message.split(Protocol.DELEMETER);
 		switch (Integer.parseInt(token[0])) {
+		/** 로그인 체크 */
 		case Protocol.SC_LOGIN_RESULT:
 			loginPanel.sc_checkNickName(token[2]);
 			break;
+		/** 대기실 유저 업데이트 */
 		case Protocol.SC_UPDATE_WAITINGROOM_USER_LIST:
 			String nickNames = token[1];
 			waitingPanel.sc_getWaiting(nickNames);
 			roomPanel.sc_getWaiting(nickNames);
 			break;
+		/** 대기실 업데이트 */
 		case Protocol.SC_UPDATE_CHATROOM_LIST:
 			waitingPanel.sc_getRoomInfo(token[1]);
 			break;
+		/** 채팅방 중복확인 */	
 		case Protocol.SC_ROOM_NAME_RESULT:
 			waitingPanel.sc_checkRoomName(token[1]);
 			break;
+		/** 채팅방 생성 결과 */
 		case Protocol.SC_ROOM_CREATE_RESULT:
 			waitingPanel.sc_checkCreateRoom(token[1]);
 			break;
+		/** 채팅방 참여 인원 목록*/
 		case Protocol.SC_GETROOM_INFO_RESULT:
 			waitingPanel.sc_getRoomUserInfo(token[1]);
 			break;
+		/** 채팅방입장결과 */
 		case Protocol.SC_REQUEST_ENTER_CHATROOM_RESULT:
 			if(token[1].equalsIgnoreCase("SUCCESS")){
 				waitingPanel.sc_enterRoom();
@@ -123,21 +134,27 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 				waitingPanel.sc_failEnterRoom();
 			}
 			break;
+		/** 방에서 채팅하기 */
 		case Protocol.SC_ROOM_CHAT_RESULT:
 			roomPanel.uploadMessage(token[1], token[2], token[3]);
 			break;
+		/** 대기실 전체채팅  */
 		case Protocol.SC_ALL_CHAT_RESULT:
 			waitingPanel.uploadMessage(token[1], token[2], token[3]);
 			break;
+		/** 대기실 유저 변경 시 */
 		case Protocol.SC_UPDATE_ROOM_USER:
 			roomPanel.sc_getRoomUserInfo(token[1]);
 			break;
+		/** 귓속말 결과(receiver 채팅방에 있는 경우) */
 		case Protocol.SC_SECRET_CHAT_ROOM_RESULT:
 			roomPanel.uploadWisperMsg(token[1], token[2], token[3]);
 			break;
+		/** 귓속말 결과(receiver 대기실에 있는 경우) */
 		case Protocol.SC_SECRET_CHAT_WAIT_RESULT:
 			waitingPanel.uploadWisperMsg(token[1], token[2], token[3]);
 			break;
+		/** 방에 초대하기 요청 */
 		case Protocol.SC_INVITE_RESULT:
 			String roomName = token[2];
 			int sc_invite = JOptionPane.showConfirmDialog(null, token[1]+"님이 [" + roomName + "]방에 초대하였습니다\n참여하시겠습니까?", "방초대", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -147,6 +164,7 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 				sendMessage(Protocol.CS_INVITE_ISACCEPT + Protocol.DELEMETER + roomName +Protocol.DELEMETER + "REJECT");
 			}
 			break;
+		/** 방에 초대받아서 들어갈 경우 */
 		case Protocol.SC_INVITE_ISACCEPT_RESULT:
 			if(token[1].equalsIgnoreCase("SUCCESS")){
 				waitingPanel.sc_enterRoom();
@@ -155,6 +173,7 @@ public class JJ_ChatUI extends Frame implements WindowListener{
 				waitingPanel.sc_failEnterRoom();
 			}
 			break;
+		/** 방에서 나가는 경우*/
 		case Protocol.SC_LEAVEROOM_RESULT:
 			roomPanel.sc_leaveRoom();
 			break;
