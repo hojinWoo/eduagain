@@ -151,7 +151,7 @@ public class ChatFrame extends Frame {
 	}
 	
 	public void changeCurrentUser(String user, String flag) {
-		if(flag.equals("add")) {
+		if(flag.equalsIgnoreCase("add")) {
 			userList.add(user);
 		}else {
 			userList.remove(user);
@@ -175,9 +175,6 @@ public class ChatFrame extends Frame {
 				
 			}
 		});
-		
-		
-
 		
 		inputTF.addActionListener(new ActionListener() {
 			@Override

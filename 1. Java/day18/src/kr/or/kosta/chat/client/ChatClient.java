@@ -87,7 +87,7 @@ public class ChatClient {
 		String[] tokens = message.split(Protocol.DELEMETER);
 		int protocol = Integer.parseInt(tokens[0]);
 		String nickName = tokens[1];
-
+		String flag = null;
 		switch (protocol) {
 		case Protocol.CONNECT_RESULT:
 			String result = tokens[2];
@@ -107,12 +107,12 @@ public class ChatClient {
 			chatFrame.appendMessage(alertUser);
 			break;
 		case Protocol.CURRENT_USER:
-//			String user = tokens[2];
-//			String flag = tokens[3];
-//			chatFrame.changeCurrentUser(user, flag);
+			flag = tokens[2];
+			chatFrame.changeCurrentUser(nickName, flag);
 			break;
 		case Protocol.DISCONNECT:
-			System.out.println("연결 끊어짐");
+			flag = tokens[2];
+			chatFrame.changeCurrentUser(nickName, flag);
 			break;
 		default:
 			break;

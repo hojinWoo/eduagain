@@ -94,8 +94,8 @@ public class Client extends Thread {
 				chatServer.addClient(this);
 				System.out.println("[Debug] : 접속 클라이언트 수 : " + chatServer.getClientCount());
 				sendMessage(Protocol.CONNECT_RESULT + Protocol.DELEMETER + nickName + Protocol.DELEMETER +  "SUCCESS");
-				chatServer.sendAllMessage(Protocol.CONNECT_ALERT+Protocol.DELEMETER+"###" + nickName + "님이 연결하였습니다. ###");
-//				chatServer.sendAllMessage(Protocol.CURRENT_USER+Protocol.DELEMETER+"ADD");
+				chatServer.sendAllMessage(Protocol.CONNECT_ALERT+Protocol.DELEMETER+nickName+Protocol.DELEMETER+"###" + nickName + "님이 연결하였습니다. ###");
+				chatServer.sendAllMessage(Protocol.CURRENT_USER+Protocol.DELEMETER+nickName+Protocol.DELEMETER+"ADD");
 			}
 			break;
 		case Protocol.MULTICHAT:
@@ -104,7 +104,7 @@ public class Client extends Thread {
 		case Protocol.DISCONNECT:
 			running = false;
 			chatServer.removeClient(nickName);
-			chatServer.sendAllMessage(Protocol.DISCONNECT+Protocol.DELEMETER+"DELETE");
+			chatServer.sendAllMessage(Protocol.DISCONNECT+Protocol.DELEMETER+nickName+Protocol.DELEMETER+"DELETE");
 			socket.close();
 			
 		default:

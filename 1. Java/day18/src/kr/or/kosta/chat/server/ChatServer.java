@@ -71,7 +71,7 @@ public class ChatServer {
 		Enumeration<Client> e = clients.elements();
 		while (e.hasMoreElements()) {
 			Client client = e.nextElement();
-			client.sendMessage(tokens[0]+Protocol.DELEMETER+client.getNickName()+Protocol.DELEMETER+tokens[1]);
+			client.sendMessage(tokens[0]+Protocol.DELEMETER+tokens[1]+Protocol.DELEMETER+tokens[2]);
 		}
 	}
 	
