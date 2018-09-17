@@ -211,6 +211,10 @@ SELECT first_name, hire_date
 FROM employees
 WHERE hire_date = TO_DATE(20030617, 'YYYY-MM-DD');
 
+SELECT first_name, hire_date
+FROM employees
+WHERE hire_date = TO_DATE('2003/06/17', 'YYYY-MM-DD');
+
 -- TO_NUMBER(colum | expression [,숫자포맷형식])
 -- 전달인자로 숫자형식의 문자열을 입력 받아 숫자 형으로 변환하여 반환
 SELECT TO_NUMBER('12345') + 1
@@ -221,3 +225,83 @@ FROM dual;
 
 SELECT TO_NUMBER('1000') + TO_NUMBER('2,000', '0,000') + 1
 FROM dual;
+
+-- TO_CHAR(colum | expression, ‘문자포맷형식’ [, nls_parameter])
+-- 전달인자로 숫자나 날짜를  입력 받아 문자열 형으로 변환하여 반환
+
+
+SELECT TO_CHAR(12345), TO_CHAR(12345.67)
+FROM dual;
+
+SELECT TO_CHAR(12345, '999,999'), TO_CHAR(12345.677, '999,999.99')
+FROM dual;
+
+SELECT TO_CHAR(12345, '000,000'), TO_CHAR(12345.677, '000,000.00')
+FROM dual;
+
+SELECT TO_CHAR(150, '$9999'), TO_CHAR(150, '$0000')
+FROM dual;
+
+SELECT TO_CHAR(150, 'S9999'), TO_CHAR(150, 'S0000')
+FROM dual;
+
+SELECT TO_CHAR(150, '9999MI'), TO_CHAR(-150, '9999MI')
+FROM dual;
+
+SELECT TO_CHAR(150, '9999EEEE'), TO_CHAR(150, '99999B')
+FROM dual;
+
+-- 로마자 대(소)문자로 표시
+SELECT TO_CHAR(150, 'RN'), TO_CHAR(150, 'rn')
+FROM dual;
+
+-- 16진수 알파벳 대(소)문자로 표시
+SELECT TO_CHAR(10, 'X'), TO_CHAR(10, 'x'), TO_CHAR(15, 'X')
+FROM dual;
+
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD AM HH:MI:SS DAY')
+FROM dual;
+
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD AM HH:MI:SS DAY', 'NLS_DATE_LANGUAGE=KOREAN')
+--SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD AM HH:MI:SS DAY', 'NLS_DATE_LANGUAGE=ENGLISH')
+FROM dual;
+
+-- 초기 파라메터(환경설정) 목록 검색, 프로그램에서 환경 변수 조회 *********
+SELECT * FROM  NLS_SESSION_PARAMETERS;
+
+SELECT first_name, hire_date, TO_CHAR(hire_date, 'YYYY-MM-DD HH24:MI')
+FROM employees;
+
+-- 입사년도가 2002년도인 사원들
+SELECT first_name, hire_date
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') = '2002';
+
+SELECT 10 * NULL, 10 * NVL(NULL, 1)
+FROM dual;
+
+-- NVL
+-- test NULL인 경우 모두 NULL로 나오게 됨
+SELECT first_name, 
+          salary, 
+          commission_pct, 
+          ( salary + ( salary * commission_pct ) ) * 12 "연봉"
+FROM   employees;
+
+-- NULL인 경우 모두 0으로 변환해서 나오게 됨
+SELECT first_name, 
+          salary, 
+          commission_pct, 
+          ( salary + ( salary * NVL(commission_pct, 0) ) ) * 12 "연봉" 
+FROM   employees;
+
+
+-- DECODE (if, else가 없기 때문에 함수로 제어문)
+SELECT first_name, 
+          job_id, 
+          salary, 
+          DECODE(job_id, 'IT_PROG', salary * 1.5, 
+                              'AC_MRG', salary * 1.3, 
+                              'AC_ASST', salary * 1.1, 
+                              salary) "인상된급여" 
+FROM   employees;
