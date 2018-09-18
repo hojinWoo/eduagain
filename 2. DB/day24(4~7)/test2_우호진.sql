@@ -6,9 +6,9 @@ SELECT employee_id     "사원번호",
        job_title       "업무이름", 
        department_name "부서이름", 
        city            "부서위치" 
-FROM   employees 
+FROM   employees
        JOIN departments using(department_id) 
-       JOIN jobs using(job_id) 
+       LEFT OUTER JOIN jobs using(job_id) 
        JOIN locations using(location_id) 
 WHERE  city = 'London'; 
 
@@ -35,7 +35,8 @@ WHERE  e.salary >= 3000
 --   - 입사일 출력 형식 - 2007년 05월 21일(월요일) 
 SELECT last_name "사원이름", 
 --      To_char(hire_date, 'dl')
-       To_char(hire_date, 'yyyy')||'년 '||  To_char(hire_date, 'mm')||'월 '|| To_char(hire_date, 'dd')||'일('||  To_char(hire_date, 'day')||')' 
+--       To_char(hire_date, 'yyyy')||'년 '||  To_char(hire_date, 'mm')||'월 '|| To_char(hire_date, 'dd')||'일('||  To_char(hire_date, 'day')||')' 
+        To_char(hire_date, 'yyyy"년 "mm"월 "dd"일"(day)')
 FROM   employees e 
        JOIN departments d 
          ON e.department_id = d.department_id 
@@ -135,6 +136,6 @@ SELECT job_id      "업무번호",
        Avg(salary) "평균급여" 
 FROM   employees 
 GROUP  BY job_id 
-HAVING Avg(salary) <= ALL (SELECT Avg(salary) 
+HAVING Avg(salary) = (SELECT Min(Avg(salary)) 
                            FROM   employees 
                            GROUP  BY job_id); 

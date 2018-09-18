@@ -20,13 +20,13 @@ ORA-12560: TNS:protocol adapter error
 >
 > 시작> 설정> 제어판> 서비스 > 데이터베이스 상태 확인 
 
-![error](./image/error.png)
+![error](./image/error.PNG)
 
 **oracleServiceXE** 와 **OracleXETNSLitener**를 시작 시켜줘야 한다.
 
 (OracleXETNSLitener는 SQL DEVELOPER를 사용 시에 연결시켜주는 Listener)
 
-![error complete](./image/error_complete.png)
+![error complete](./image/error_complete.PNG)
 
 > 해결 완료
 
