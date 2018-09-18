@@ -1,13 +1,12 @@
 desc employees;
 
-
 --1. employees 테이블에서 급여가 5000이상 15000이하 사이에 포함되지 않는 사원의 사원번호(employee_id), 이름(last_name), 급여(salary), 입사일자(hire_date)를 조회하시오.
 SELECT employee_id AS 사원번호, 
        last_name   AS 이름, 
        salary      "급여", 
        hire_date   "입사일자" 
 FROM   employees 
-WHERE  salary BETWEEN 5000 AND 15000;  
+WHERE  salary NOT BETWEEN 5000 AND 15000;  
 
 --2. 부서번호(department_id) 50, 업무(job_id) 'ST_MAN', 입사일 2004-7-18일인 사원의 사원번호, 이름, 업무, 입사일을 조회하시오.
 SELECT employee_id "사원번호", 
@@ -22,7 +21,7 @@ WHERE  department_id = 50
 --3. 2002년 이후 입사한 사원중에 재고('ST_MAN', 'ST_CLERK')업무를 담당하는 사원들의 모든 컬럼을 조회하시오.
 SELECT * 
 FROM   employees 
-WHERE  job_id IN( 'SA_MAN', 'IT_PROG' ) 
+WHERE  job_id IN( 'ST_MAN', 'ST_CLERK' ) 
        AND hire_date >= '2002/01/01'; 
        
 --4. 상사(manager_id)가 없는 사원의 모든 컬럼을 조회하시오.
@@ -87,17 +86,19 @@ FROM   employees;
 --   Steven King     *****($5,000) // $1000달러당 별 1개추가.
 --   Neena Kochhar   ***($3,000)--    .........
 --   XXXX XXXXX      *****************($17,000)
-SELECT last_name "이름", 
-       Lpad(salary, Trunc(salary/1000, 3) + Length(salary), '*') 
-FROM   employees; 
+SELECT first_name || ' ' ||last_name "이름", 
+   LPAD('(' || TRIM(to_char(salary,'$99,999B')) ||')', salary/1000 + 8, '*')
+FROM  employees; 
+-- LENGTH('(' || TRIM(to_char(salary,'$99,999B')) ||')') = 8
 
 --13.2002년 3월부터 2003년 2월 기간 동안 입사한 사원을 대상으로 부서별 인원수를 조회하시오.
 --   (결과는 인원수가 많은 순서대로 정렬하여 출력)
-select department_id "부서", count(department_id) "부서벌 인원수" 
-from EMPLOYEES 
-where to_char(hire_date) Between '02/01/01' And '03/02/29' 
-GROUP BY department_id
-ORDER BY count(department_id) desc;
+SELECT department_id        "부서", 
+       Count(department_id) "부서벌 인원수" 
+FROM   employees 
+WHERE  To_char(hire_date) BETWEEN '02/01/01' AND '03/02/29' 
+GROUP  BY department_id 
+ORDER  BY Count(department_id) DESC; 
 
 --14.업무별 평균 급여를 계산하라. 단, 평균급여가 10000을 초과하는 경우는 제외하고 평균 급여에 대해 내림차순으로 정렬하시오.
 SELECT job_id      "업무", 
@@ -113,7 +114,11 @@ ORDER  BY Avg(salary) DESC;
 --1      3
 --2      1
 --3      2
-SELECT To_char(To_date(hire_date), 'Q') "분기", 
-       Count(*) 
+SELECT To_char(hire_date, 'Q') "분기", 
+       Count(*)                "사원수" 
 FROM   employees 
-GROUP  BY To_char(To_date(hire_date), 'Q'); 
+WHERE  To_char(hire_date, 'yy') = 04 
+GROUP  BY To_char(hire_date, 'Q'); 
+
+select To_date('02-01-02', 'Q')
+from dual;

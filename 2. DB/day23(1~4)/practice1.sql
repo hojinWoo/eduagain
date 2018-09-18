@@ -301,7 +301,79 @@ SELECT first_name,
           job_id, 
           salary, 
           DECODE(job_id, 'IT_PROG', salary * 1.5, 
-                              'AC_MRG', salary * 1.3, 
-                              'AC_ASST', salary * 1.1, 
+                              'SA_MAN', salary * 1.3, 
+                              'SA_REP', salary * 1.1, 
                               salary) "인상된급여" 
-FROM   employees;
+FROM   employees
+WHERE job_id in('IT_PROG', 'SA_MAN', 'SA_REP');
+
+-- CASE ~ END 구문
+-- 다중 IF 문과 유사한 함수   
+SELECT first_name, 
+          department_id, 
+          CASE 
+             WHEN department_id = 10 THEN '영업부' 
+             WHEN department_id = 20 THEN '총무부' 
+             WHEN department_id = 30 THEN '인사부' 
+             ELSE '인사발령' 
+          END "부서명" 
+FROM   employees 
+ORDER  BY department_id ASC;
+
+-- 커미션을 받는 사원의 수(이때 NULL은 개수에 포함하지 않음)
+SELECT COUNT(commission_pct)
+FROM employees;
+
+-- NULL값을 개수에 포함
+SELECT COUNT(*) "전체사원수", COUNT(commission_pct) "커미션사원수"
+FROM employees;
+
+-- 급여 총액(NULL은 무시)
+SELECT SUM(salary), SUM(commission_pct)
+FROM employees;
+
+-- 급여 평균(NULL은 무시)
+SELECT AVG(salary)
+FROM employees;
+
+SELECT AVG(commission_pct), AVG(NVL(commission_pct, 0))
+FROM employees;
+
+-- 최대값, 최소값
+SELECT MAX(salary), MAX(commission_pct)
+FROM employees;
+
+SELECT MAX(hire_date), MIN(hire_date), MAX(hire_date) - MIN(hire_date) "짬밥차" 
+FROM employees;
+
+-- GROUP BY 절(특정 컬럼을 기준으로 그룹핑)
+SELECT department_id
+FROM employees
+GROUP BY department_id;
+
+-- 부서별 급여총액, 평균
+SELECT department_id, SUM(salary), AVG(salary)
+FROM employees
+GROUP BY department_id;
+
+-- HAVING 절(그룹에 대한 조건)
+SELECT department_id, SUM(salary), AVG(salary)
+FROM employees
+GROUP BY department_id
+HAVING department_id = 10;
+
+SELECT department_id, SUM(salary), AVG(salary)
+FROM employees
+GROUP BY department_id
+HAVING AVG(salary) >= 3000;
+
+SELECT department_id, MAX(salary), MIN(salary)
+FROM employees
+GROUP BY department_id
+HAVING MAX(salary) > 20000; 
+
+SELECT  hire_date, COUNT(*)
+FROM employees
+GROUP BY hire_date
+ORDER BY hire_date;  
+--ORDER BY COUNT(*);

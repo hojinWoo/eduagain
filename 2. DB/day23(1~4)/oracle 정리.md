@@ -164,3 +164,17 @@ SQL> spool off
 #### 							[, default]))
 
 - SWITCH문과 유사한 함수 (조건에 맞는 문장을 수행)
+
+
+
+#### CASE~END 구문
+
+- 다중 IF문과 유사
+
+
+
+### 다중 행(그룹) 함수
+
+- GROUP BY :  결과값을 지정한 컬럼 기준으로 그룹화
+- HAVING      : Group by에 의한 결과에 대한 조건
+- ORDER By  : 결과값을 sorting 할 때
