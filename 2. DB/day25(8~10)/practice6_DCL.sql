@@ -13,6 +13,9 @@ TO bangry;
 REVOKE SELECT, INSERT, UPDATE, DELETE ON hr.employees
 FROM bangry;
 
+/* #cf synonym 생성 권한 주기 */
+GRANT CREATE SYNONYM TO READWRITE;
+
 /* 롤(ROLE) : 여러 권한들의 묶음(내장 롤 / 사용자 정의 롤) */
 /* #1. User에 내장 롤 부여(전부 다 부여) */
 GRANT CONNECT, RESOURCE, dba TO bangry;
