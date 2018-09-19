@@ -169,6 +169,7 @@ RENAME sometable TO sometable2;
 -- 저장공간 해제
 -- DML의 DELETE와 달리 삭제된 행은 복구 할수 없다(Auto Commit)
 -- INDEX가 있을 경우 다시 생성해야 한다.
+-- (속도는 엄청 빠르다 DB를 file로 unload하고 삭제 시 자주 사용)
 TRUNCATE table person ;
 
 /* DROP : 테이블 삭제 */

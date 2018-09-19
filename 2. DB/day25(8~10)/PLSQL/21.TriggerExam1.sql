@@ -7,6 +7,9 @@ CREATE OR REPLACE TRIGGER dept_insert_trigger
 AFTER INSERT -- 인서트 이벤트 발생 후에..
 ON DEPARTMENTS
 --FOR EACH ROW
+
+
+
 /*
  * 트리거유형
    - 문장레벨트리거: DML 발생시 한번만 트리거 실행

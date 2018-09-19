@@ -1,6 +1,6 @@
 CREATE OR REPLACE TRIGGER emp_insert_trigger
 BEFORE INSERT --AFTER INSERT OR UPDATE OR delete
-ON employees
+ON emp
 FOR EACH ROW
 -- 사원 추가시 salary를 설정
 BEGIN
