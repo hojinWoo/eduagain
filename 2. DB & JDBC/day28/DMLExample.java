@@ -1,14 +1,8 @@
-
-
-import java.sql.Connection;
-import java.sql.Driver;
+﻿import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
-import oracle.jdbc.OracleDriver;
 //권장 방법 XXX!!!
 public class DMLExample {
 	static String driver = "oracle.jdbc.OracleDriver";
