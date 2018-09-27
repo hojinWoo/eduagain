@@ -64,6 +64,7 @@ public class DMLExample2 {
 		create2(new Department(0, departmentName, managerId, locationId));
 	}
 	
+	//DTO(VO)사용, data 전달 목적
 	public static void create2(Department dept) {
 		sql = "INSERT INTO departments \r\n" + 
 				"            (department_id, \r\n" + 
