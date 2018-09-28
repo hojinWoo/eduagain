@@ -1,11 +1,16 @@
+package pattern_factory;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  * 아파치그룹에서 제공하는 DataSource 구현클래스 라이브러리(DBCP) 사용
  * 커넥션풀링 지원  
- * @author 김기정
+ * @author hojin
  *
  */
 public class ApacheDataSourceExample {
@@ -19,6 +24,7 @@ public class ApacheDataSourceExample {
 	
 	public static void main(String[] args) throws SQLException {
 		// Connection Pooling 지원 DataSource
+//		DataSource ds = new BasicDataSource();
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(DRIVER_NAME);
 		dataSource.setUrl(DB_URL);
@@ -33,7 +39,8 @@ public class ApacheDataSourceExample {
 		
 		// Connection 사용
 		
-		// 사용한 Connection DataSource에 반환
+		// 사용한 Connection DataSource에 반환 
+		// (Overriding을 통해서 이름은 close지만 반환처리임)
 		con.close();
 	}
 

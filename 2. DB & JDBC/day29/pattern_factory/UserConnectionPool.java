@@ -1,7 +1,10 @@
+package pattern_factory;
+
 import java.sql.*;
 import java.util.*;
 /**
  * 사용자 정의 ConnectionPooling 구현 클래스
+ * 여기는 connection을 늘리는 것은 있지만 줄이는 방법은 없다(구현이 어려움)
  * Singleton 패턴 적용
  */
 public class UserConnectionPool{
@@ -18,7 +21,7 @@ public class UserConnectionPool{
 
 	private static UserConnectionPool instance;
 	
-	/** 직접 생성하지 못하도록 private 선언 */
+	/** 직접 생성하지 못하도록 private 선언(Singleton) */
 	private UserConnectionPool() throws Exception{
 		Class.forName(DB_DRIVER);
 		connections = new Hashtable<Connection, Boolean>();		
@@ -28,6 +31,7 @@ public class UserConnectionPool{
 		}
 	}
 	
+	//요청이 올 때 메모리 할당 하는 방법, 유연
 	public static UserConnectionPool getInstance() throws Exception{
 		if(instance == null){
 			synchronized (UserConnectionPool.class) {
@@ -42,16 +46,17 @@ public class UserConnectionPool{
 		Enumeration<Connection> cons = connections.keys();		
 		while(cons.hasMoreElements()){
 			Connection con = cons.nextElement();
-			Boolean use = connections.get(con);				
+			boolean use = connections.get(con);				
 			// 사용중이지 않은 경우...
-			if (use == Boolean.FALSE){
+			if (!use){
 				connections.put(con, true);
 				return con;
 			}
 		}
 		
+		//connection 부족해서 증가
 		for(int i = 0; i < INCREMENT; i++){
-			System.out.println("[디버깅] : 사용 가능한 커넥션이 없어서 새로운 Connection 생성>>");
+//			System.out.println("[디버깅] : 사용 가능한 커넥션이 없어서 새로운 Connection 생성>>");
 			connections.put(DriverManager.getConnection(DB_URL, USER_ID, USER_PW), Boolean.FALSE);
 		}
 		// 재귀호출
@@ -66,7 +71,7 @@ public class UserConnectionPool{
 		while (e.hasMoreElements()){
 			con = (Connection)e.nextElement();			
 			if (con == usedConnection){
-				connections.put(con, Boolean.FALSE);
+				connections.put(con, false);
 				break;
 			}
 		}
