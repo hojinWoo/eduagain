@@ -27,22 +27,22 @@ import kr.or.kosta.entity.Account;
 import kr.or.kosta.entity.AccountManager;
 import kr.or.kosta.entity.MinusAccount;
 /**
- * MainFrameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AMSï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ * MainFrameÀ» ÅëÇØ AMSÀÇ È­¸éÀ» ±¸¼º
  * @author dnghwls7
  *
  */
 public class MainFrame extends Frame {
 
-	AccountManager manager; // AccountManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	AccountManager manager; // AccountManager¿Í ¿¬°áÇÏ±â À§ÇØ µî·Ï
 
-	Label kindAccountL; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	Label numAccountL; // ï¿½ï¿½ï¿½Â¹ï¿½È£
-	Label nameAccountL; // ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½
-	Label passwordL; // ï¿½ï¿½Ð¹ï¿½È£
-	Label depositL; // ï¿½Ô±Ý±Ý¾ï¿½
-	Label minusMoneyL; // ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½
-	Label listAccoutnL; // ï¿½ï¿½ï¿½Â¸ï¿½ï¿½
-	Label unitMoney; // ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½
+	Label kindAccountL; // °èÁÂÁ¾·ù
+	Label numAccountL; // °èÁÂ¹øÈ£
+	Label nameAccountL; // ¿¹±ÝÁÖ¸í
+	Label passwordL; // ºñ¹Ð¹øÈ£
+	Label depositL; // ÀÔ±Ý±Ý¾×
+	Label minusMoneyL; // ´ëÃâ±Ý¾×
+	Label listAccoutnL; // °èÁÂ¸ñ·Ï
+	Label unitMoney; // ´ÜÀ§ : ¿ø
 
 	Button searchAccountBt, deleteAccountBt, searchNameBt, registerAccountBt, searchAllBt;
 
@@ -56,7 +56,7 @@ public class MainFrame extends Frame {
 	GridBagConstraints gridBagConstraints;
 
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * µðÆúÆ® »ý¼ºÀÚ
 	 */
 	public MainFrame() {
 		super();
@@ -64,29 +64,29 @@ public class MainFrame extends Frame {
 
 	/**
 	 * @param string
-	 *            Frameï¿½ï¿½ titleï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+	 *            FrameÀÇ titleÀ» ¿øÇÒ ½Ã »ç¿ë
 	 */
 	public MainFrame(String string) {
 		super(string);
-		kindAccountL = new Label("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-		numAccountL = new Label("ï¿½ï¿½ï¿½Â¹ï¿½È£");
-		nameAccountL = new Label("ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½");
-		passwordL = new Label("ï¿½ï¿½Ð¹ï¿½È£");
-		depositL = new Label("ï¿½Ô±Ý±Ý¾ï¿½");
-		minusMoneyL = new Label("ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½");
-		listAccoutnL = new Label("ï¿½ï¿½ï¿½Â¸ï¿½ï¿½");
-		unitMoney = new Label("(ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½)");
+		kindAccountL = new Label("°èÁÂÁ¾·ù");
+		numAccountL = new Label("°èÁÂ¹øÈ£");
+		nameAccountL = new Label("¿¹±ÝÁÖ¸í");
+		passwordL = new Label("ºñ¹Ð¹øÈ£");
+		depositL = new Label("ÀÔ±Ý±Ý¾×");
+		minusMoneyL = new Label("´ëÃâ±Ý¾×");
+		listAccoutnL = new Label("°èÁÂ¸ñ·Ï");
+		unitMoney = new Label("(´ÜÀ§ : ¿ø)");
 
-		searchAccountBt = new Button("ï¿½ï¿½È¸");
+		searchAccountBt = new Button("Á¶È¸");
 		searchAccountBt.setBackground(Color.LIGHT_GRAY);
-		deleteAccountBt = new Button("ï¿½ï¿½ï¿½ï¿½");
+		deleteAccountBt = new Button("»èÁ¦");
 		deleteAccountBt.setBackground(Color.LIGHT_GRAY);
-		searchNameBt = new Button("ï¿½Ë»ï¿½");
+		searchNameBt = new Button("°Ë»ö");
 		searchNameBt.setBackground(Color.LIGHT_GRAY);
-		registerAccountBt = new Button("ï¿½Å±Ôµï¿½ï¿½");
+		registerAccountBt = new Button("½Å±Ôµî·Ï");
 		registerAccountBt.setBackground(Color.LIGHT_GRAY);
-		registerAccountBt.setEnabled(false); // ï¿½Ê±â¿¡ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
-		searchAllBt = new Button("ï¿½ï¿½Ã¼ï¿½ï¿½È¸");
+		registerAccountBt.setEnabled(false); // ÃÊ±â¿¡ ÀüÃ¼ °èÁÂÁ¾·ùÀÌ±â ¶§¹®¿¡ ºñÈ°¼ºÈ­
+		searchAllBt = new Button("ÀüÃ¼Á¶È¸");
 		searchAllBt.setBackground(Color.LIGHT_GRAY);
 
 		numAccounTF = new TextField("****-****-****");
@@ -100,9 +100,9 @@ public class MainFrame extends Frame {
 		showListTA.setBackground(Color.LIGHT_GRAY);
 
 		kindAccountCB = new Choice();
-		kindAccountCB.add("ï¿½ï¿½Ã¼");
-		kindAccountCB.add("ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½");
-		kindAccountCB.add("ï¿½ï¿½ï¿½Ì³Ê½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		kindAccountCB.add("ÀüÃ¼");
+		kindAccountCB.add("ÀÔÃâ±Ý°èÁÂ");
+		kindAccountCB.add("¸¶ÀÌ³Ê½º°èÁÂ");
 
 		gridBagLayout = new GridBagLayout();
 		gridBagConstraints = new GridBagConstraints();
@@ -110,7 +110,7 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 * setContents, eventRegist, pack ï¿½ï¿½ï¿½ï¿½
+	 * setContents, eventRegist, pack ¼³Á¤
 	 */
 	public void setAll() {
 		setContents();
@@ -120,7 +120,7 @@ public class MainFrame extends Frame {
 
 	/**
 	 * setContents
-	 * layout ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ 
+	 * layout ¼³Á¤ ¹× ¸ðµç °´Ã¼µéÀÇ µî·Ï ¹× À§Ä¡ Á¶Àý 
 	 */
 	private void setContents() {
 		setLayout(gridBagLayout);
@@ -154,14 +154,14 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 * @param component		component ï¿½ï¿½ï¿½
-	 * @param gridx			xï¿½ï¿½Ç¥
-	 * @param gridy			yï¿½ï¿½Ç¥
-	 * @param gridwidth		xï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	 * @param gridheight	yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	 * @param weigthx		xï¿½ï¿½ margin ï¿½ï¿½ï¿½ï¿½
-	 * @param weighty		yï¿½ï¿½ margin ï¿½ï¿½ï¿½ï¿½
-	 * @param fill			ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ã¼ ï¿½ï¿½ Ä­ ï¿½ï¿½Ã¼ï¿½ï¿½ Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	 * @param component		component µî·Ï
+	 * @param gridx			xÁÂÇ¥
+	 * @param gridy			yÁÂÇ¥
+	 * @param gridwidth		xÀÇ Â÷Áö °³¼ö
+	 * @param gridheight	yÀÇ Â÷Áö °³¼ö
+	 * @param weigthx		xÀÇ margin ºñÀ²
+	 * @param weighty		yÀÇ margin ºñÀ²
+	 * @param fill			¼öÁ÷, ¼öÆò, ÀüÃ¼ µî Ä­ ÀüÃ¼¸¦ Ã¤¿ï Á¶°Ç ¿©ºÎ ¼³Á¤
 	 */
 	private void add(Component component, int gridx, int gridy, int gridwidth, int gridheight, double weigthx,
 			double weighty, int fill) {
@@ -171,9 +171,9 @@ public class MainFrame extends Frame {
 		gridBagConstraints.gridheight = gridheight;
 		gridBagConstraints.weightx = weigthx;
 		gridBagConstraints.weighty = weighty;
-		gridBagConstraints.anchor = gridBagConstraints.WEST; // ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		gridBagConstraints.anchor = gridBagConstraints.WEST; // ¿ÞÂÊ¿¡¼­ ½ÃÀÛ
 
-		gridBagConstraints.insets = new Insets(5, 5, 5, 5); // margin ï¿½Ö±ï¿½
+		gridBagConstraints.insets = new Insets(5, 5, 5, 5); // margin ÁÖ±â
 
 		switch (fill) {
 		case 1:
@@ -196,7 +196,7 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 *ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ method ï¿½ï¿½ï¿½ï¿½ 
+	 *Á¾·á ¹öÆ° ´­·¶À» °æ¿ì ²ø ¼ö ÀÖµµ·Ï method »ý¼º 
 	 */
 	private void finish() {
 		setVisible(false);
@@ -206,12 +206,12 @@ public class MainFrame extends Frame {
 	
 	
 	/**
-	 * @param num 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¹ï¿½, 2ï¿½Ì¸ï¿½ ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	 * @param num 1ÀÌ¸é À§¿¡ Ãâ·Â¹®, 2ÀÌ¸é ¾Æ·¡ ¹®Àå Ãâ·Â
 	 */
 	private void print(int num) {
 		if (num == 1) {
 			showListTA.setText("-------------------------------------------------------------------\n");
-			showListTA.append(String.format("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\t%-18s%-10s%-15s%-15s\n", "ï¿½ï¿½ï¿½Â¹ï¿½È£", "ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½", "ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½"));
+			showListTA.append(String.format("°èÁÂÁ¾·ù\t%-18s%-10s%-15s%-15s\n", "°èÁÂ¹øÈ£", "¿¹±ÝÁÖ¸í", "ÇöÀçÀÜ¾×", "´ëÃâ±Ý¾×"));
 			showListTA.append("===================================================================\n");
 		} else if (num == 2) {
 			showListTA.append("-------------------------------------------------------------------\n");
@@ -220,7 +220,7 @@ public class MainFrame extends Frame {
 
 	
 	/**
-	 * ï¿½ï¿½ï¿½ textField ï¿½Ê±ï¿½È­ï¿½Ï±ï¿½
+	 * ¸ðµç textField ÃÊ±âÈ­ÇÏ±â
 	 */
 	private void setBlank() {
 		numAccounTF.setText("****-****-****");
@@ -231,18 +231,18 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 * ï¿½Ô·Â¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½ 
-	 * @param accountNum	ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½Ô·Â¹Þ±ï¿½
-	 * @return			ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°Å³ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½Ì°Å³ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½ false, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ true return
+	 * ÀÔ·Â¹ÞÀº °èÁÂ¹øÈ£ Çü½Ä È®ÀÎÇÏ±â 
+	 * @param accountNum	°èÁÂ¹øÈ£ ÀÔ·Â¹Þ±â
+	 * @return			°èÁÂ¹øÈ£°¡ °ø¹éÀÌ°Å³ª ÃÊ±â °ªÀÌ°Å³ª Çü½Ä¿¡ ¸ÂÁö ¾Ê´Â´Ù¸é false, Á¶°ÇÀÌ ¼º¸³ÇÑ´Ù¸é true return
 	 */
 	private boolean checkAccountNum(String accountNum) {
 		if (accountNum.equals("") || accountNum.equals("****-****-****")) {
-			showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
+			showListTA.setText("°èÁÂ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
 			return false;
-		} else if (!(accountNum.matches("\\d{4}-\\d{4}-\\d{4}"))) { // ****-****-****ï¿½ï¿½ï¿½Ä¿ï¿½
-																	// ï¿½Â°ï¿½ ï¿½Ô·ï¿½ï¿½Ïµï¿½ï¿½ï¿½
-																	// ï¿½ï¿½ï¿½ï¿½
-			showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+		} else if (!(accountNum.matches("\\d{4}-\\d{4}-\\d{4}"))) { // ****-****-****Çü½Ä¿¡
+																	// ¸Â°Ô ÀÔ·ÂÇÏµµ·Ï
+																	// ¼³Á¤
+			showListTA.setText("°èÁÂ¹øÈ£°¡ Çü½Ä¿¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
 			return false;
 		}
 		return true;
@@ -250,11 +250,11 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+	 * °¢Á¾ ¸ðµç ÀÌº¥Æ® µî·ÏÇÏ±â
 	 */
 	public void eventRegist() {
 
-		/*X ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+		/*X ¹öÆ° Å¬¸¯ ½Ã Á¾·áÇÒ ¼ö ÀÖµµ·Ï ¼³Á¤*/
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -262,18 +262,18 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/* ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½ï¿½È¸ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® */
+		/* °èÁÂ¹øÈ£ Á¶È¸ ¹öÆ° Å¬¸¯ ½Ã ÀÌº¥Æ® */
 		searchAccountBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String accountNum = numAccounTF.getText(); //ï¿½ï¿½ï¿½Â¹ï¿½È£ È®ï¿½ï¿½
-				if (!checkAccountNum(accountNum)) { //ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+				String accountNum = numAccounTF.getText(); //°èÁÂ¹øÈ£ È®ÀÎ
+				if (!checkAccountNum(accountNum)) { //°èÁÂ¹øÈ£ Çü½Ä Ã¼Å©
 				} else {
-					//ï¿½Ô·Â¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//ÀÔ·Â¹ÞÀº °èÁÂ¹øÈ£ Á¤º¸ °¡Á®¿À±â
 					Account account = manager.get(accountNum); 
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (account == null) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							print(1);
 							showListTA.append(account.toString() + "\n");
@@ -281,7 +281,7 @@ public class MainFrame extends Frame {
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 1) {
 						if (account == null || account instanceof MinusAccount) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							print(1);
 							showListTA.append(account.toString() + "\n");
@@ -289,7 +289,7 @@ public class MainFrame extends Frame {
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 2) {
 						if (account == null || !(account instanceof MinusAccount)) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							print(1);
 							showListTA.append(account.toString() + "\n");
@@ -301,7 +301,7 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/* ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ® */
+		/* °èÁÂ¹øÈ£ »èÁ¦ ¹öÆ° Å¬¸¯ ½Ã ÀÌº¥Æ® */
 		deleteAccountBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -311,25 +311,25 @@ public class MainFrame extends Frame {
 					Account account = manager.get(accountNum);
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (account.equals("")) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							manager.remove(accountNum);
-							showListTA.setText("ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("°èÁÂ°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
 
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 1) {
 						if (account.equals("") || account instanceof MinusAccount) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							manager.remove(accountNum);
-							showListTA.setText("ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("°èÁÂ°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 2) {
 						if (account.equals("") || !(account instanceof MinusAccount)) {
-							showListTA.setText("ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
+							showListTA.setText("°èÁÂ¹øÈ£°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
 						} else {
 							manager.remove(accountNum);
-							showListTA.setText("ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("°èÁÂ°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
 						}
 					}
 				}
@@ -337,20 +337,20 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/*ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ®*/
+		/*¿¹±ÝÁÖ¸í °Ë»ö ¹öÆ° Å¬¸¯ ½Ã ÀÌº¥Æ®*/
 		searchNameBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//¿¹±ÝÁÖ ¸í °¡Á®¿À±â
 				String accountOwner = nameAccountTF.getText();
 				if (accountOwner.equals("")) {
-					showListTA.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
+					showListTA.setText("¿¹±ÝÁÖ¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
 				} else {
-					//ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
+					//ÀÌ¸§ÀÌ ÀÏÄ¡ÇÏ´Â ¿¹±ÝÁÖ ¸í ÀÐ¾î¿À±â
 					List searchList = manager.search(accountOwner);
 					if (kindAccountCB.getSelectedIndex() == 0) {
 						if (searchList == null) {
-							showListTA.setText("ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
 						} else {
 							print(1);
 							if (!searchList.isEmpty()) {
@@ -362,7 +362,7 @@ public class MainFrame extends Frame {
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 1) {
 						if (searchList == null) {
-							showListTA.setText("ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
 						} else {
 							print(1);
 							if (!searchList.isEmpty()) {
@@ -375,7 +375,7 @@ public class MainFrame extends Frame {
 						}
 					} else if (kindAccountCB.getSelectedIndex() == 2) {
 						if (searchList == null) {
-							showListTA.setText("ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½");
+							showListTA.setText("ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
 						} else {
 							print(1);
 							if (!searchList.isEmpty()) {
@@ -392,78 +392,78 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/*ï¿½Å±Ôµï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìºï¿½Æ®*/
+		/*½Å±Ôµî·Ï ¹öÆ° Å¬¸¯ ½Ã ÀÌº¥Æ®*/
 		registerAccountBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ï¿½ï¿½ï¿½Â¹ï¿½È£ È®ï¿½ï¿½
+				//°èÁÂ¹øÈ£ È®ÀÎ
 				String accountNum = numAccounTF.getText();
 				if (!checkAccountNum(accountNum)) {
 				}
-				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+				//¿¹±ÝÁÖ È®ÀÎ
 				String accountName = nameAccountTF.getText();
 				if (accountName.equals("")) {
-					showListTA.append("ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½\n");
+					showListTA.append("¿¹±ÝÁÖ¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä\n");
 				}
 				int password = 0;
 				long depositMoney = 0;
 				long minusMoney = 0;
 				try {
 					password = Integer.parseInt(passwordTF.getText());
-					// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+					// ÀÔÃâ±Ý °èÁÂ ¼±ÅÃ ½Ã
 					if (kindAccountCB.getSelectedIndex() == 1) {
 						try {
 							depositMoney = Long.parseLong(depositTF.getText());
 						} catch (NumberFormatException e2) {
-							depositMoney = 0; // ï¿½Ô±Ý±Ý¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½îµµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0ï¿½ï¿½)
+							depositMoney = 0; // ÀÔ±Ý±Ý¾×ÀÌ ¾ø¾îµµ °èÁÂ »ý¼ºÀº °¡´É (0¿ø)
 						} finally {
 							boolean isNew = manager.add(new Account(accountNum, accountName, password, depositMoney));
 							if (isNew) {
-								showListTA.setText("ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+								showListTA.setText("ÀÔÃâ±Ý°èÁÂ°¡ »ý¼ºµÇ¾ú½À´Ï´Ù.");
 							} else {
-								//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ error
-								showListTA.setText("ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..");
+								//±âÁ¸ÀÇ °èÁÂ¹øÈ£°¡ Á¸Àç ½Ã error
+								showListTA.setText("Áßº¹µÈ °èÁÂ°¡ Á¸ÀçÇÕ´Ï´Ù..");
 							}
 						}
 					}
-					// ï¿½ï¿½ï¿½Ì³Ê½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+					// ¸¶ÀÌ³Ê½º °èÁÂ ¼±ÅÃ ½Ã
 					else if (kindAccountCB.getSelectedIndex() == 2) {
 						try {
 							depositMoney = Long.parseLong(depositTF.getText());
 						} catch (NumberFormatException e2) {
-							depositMoney = 0; // ï¿½Ô±Ý±Ý¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½îµµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0ï¿½ï¿½)
+							depositMoney = 0; // ÀÔ±Ý±Ý¾×ÀÌ ¾ø¾îµµ °èÁÂ »ý¼ºÀº °¡´É (0¿ø)
 						}
-						// ï¿½ï¿½ï¿½Ì³Ê½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+						// ¸¶ÀÌ³Ê½º °èÁÂ È®ÀÎ
 						try {
 							minusMoney = Long.parseLong(minusMoneyTF.getText());
-							// ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£ Ã¼Å© ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+							// Áßº¹µÈ °èÁÂ¹øÈ£ Ã¼Å© ¹× »ý¼º
 							boolean isNew = manager
 									.add(new MinusAccount(accountNum, accountName, password, depositMoney, minusMoney));
 							if (isNew) {
-								showListTA.setText("ï¿½ï¿½ï¿½Ì³Ê½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+								showListTA.setText("¸¶ÀÌ³Ê½º°èÁÂ°¡ »ý¼ºµÇ¾ú½À´Ï´Ù.");
 							} else {
-								showListTA.setText("ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½..");
+								showListTA.setText("Áßº¹µÈ °èÁÂ¹øÈ£°¡ Á¸ÀçÇÕ´Ï´Ù..");
 							}
 						} catch (NumberFormatException e2) {
-							// ï¿½ï¿½ï¿½Ì³Ê½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ error
-							showListTA.setText("ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
+							// ¸¶ÀÌ³Ê½º °èÁÂ¸¦ ¼±ÅÃ ¾ÈÇÑ °æ¿ì error
+							showListTA.setText("´ëÃâ±Ý¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
 						}
 					}
 				} catch (NumberFormatException e2) {
-					// ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ error
-					showListTA.append("ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
+					// ºñ¹Ð¹øÈ£¸¦ ¼±ÅÃ ¾ÈÇÑ °æ¿ì error
+					showListTA.append("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
 				}
 				setBlank();
 			}
 		});
 
-		/* ï¿½ï¿½Ã¼ï¿½ï¿½È¸ ï¿½ï¿½Æ° */
+		/* ÀüÃ¼Á¶È¸ ¹öÆ° */
 		searchAllBt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				print(1);
-				// Overrideï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½(0(ï¿½ï¿½Ã¼), 1(ï¿½ï¿½ï¿½ï¿½ï¿½), 2(ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½))ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ listï¿½ï¿½
-				// returnï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+				// OverrideµÈ °´Ã¼¸¦ »ç¿ëÇØ¼­ ¼ýÀÚ(0(ÀüÃ¼), 1(ÀÔÃâ±Ý), 2(¸¶ÀÌ³ª½º))¸¦ ÅëÇØ ¿øÇÏ´Â list¸¦
+				// return¹Þ¾Æ¼­ Ãâ·ÂÇÑ´Ù.
 				List searchList = manager.list(kindAccountCB.getSelectedIndex());
 				if (!searchList.isEmpty()) {
 					for (Object object : searchList) {
@@ -475,24 +475,24 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° */
+		/* °èÁÂ Á¾·ù ¹öÆ° */
 		kindAccountCB.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				// ÀüÃ¼ °èÁÂ Á¾·ù ¼±ÅÃ ½Ã
 				if (kindAccountCB.getSelectedIndex() == 0) {
 					depositTF.setEditable(true);
 					minusMoneyTF.setEditable(true);
 					registerAccountBt.setEnabled(false);
 				}
-				// ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				// ÀÔÃâ±Ý°èÁÂ ¼±ÅÃ ½Ã
 				else if (kindAccountCB.getSelectedIndex() == 1) {
 					depositTF.setEditable(true);
 					minusMoneyTF.setEditable(false);
 					registerAccountBt.setEnabled(true);
 				}
-				// ï¿½ï¿½ï¿½Ì³Ê½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				// ¸¶ÀÌ³Ê½º °èÁÂ ¼±ÅÃ ½Ã
 				else if (kindAccountCB.getSelectedIndex() == 2) {
 					depositTF.setEditable(true);
 					minusMoneyTF.setEditable(true);
@@ -501,7 +501,7 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/* ï¿½ï¿½ï¿½Â¹ï¿½È£ ï¿½Ô·ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+		/* °èÁÂ¹øÈ£ ÀÔ·Â Ã¢¿¡ ¸¶¿ì½º°¡ Å¬¸¯ µÉ ¶§ ³»¿ëÀÌ ÃÊ±âÈ­ µÇµµ·Ï ¼³Á¤ */
 		numAccounTF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -510,7 +510,7 @@ public class MainFrame extends Frame {
 			}
 		});
 
-		/* ï¿½ï¿½Ð¹ï¿½È£ *ï¿½ï¿½ Ç¥ï¿½ï¿½, Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·Â¹Þ¿ï¿½ ï¿½Ï±ï¿½ */
+		/* ºñ¹Ð¹øÈ£ *·Î Ç¥½Ã, Å°º¸µå·Î ¼ýÀÚ¸¸ ÀÔ·Â¹Þ¿¡ ÇÏ±â */
 		passwordTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -520,7 +520,7 @@ public class MainFrame extends Frame {
 				}
 			}
 		});
-		/* Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·Â¹Þ¿ï¿½ ï¿½Ï±ï¿½ */
+		/* Å°º¸µå·Î ¼ýÀÚ¸¸ ÀÔ·Â¹Þ¿¡ ÇÏ±â */
 		depositTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -531,7 +531,7 @@ public class MainFrame extends Frame {
 				}
 			}
 		});
-		/* Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·Â¹Þ¿ï¿½ ï¿½Ï±ï¿½ */
+		/* Å°º¸µå·Î ¼ýÀÚ¸¸ ÀÔ·Â¹Þ¿¡ ÇÏ±â */
 		minusMoneyTF.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -546,21 +546,21 @@ public class MainFrame extends Frame {
 	}
 
 	/**
-	 * AMSï¿½ï¿½ï¿½ï¿½ AccountManagerï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. (by Class Diagram)
+	 * AMS¿¡¼­ AccountManager¸¦ ¹Þ¾Æ¿Í¼­ »ç¿ëÇÑ´Ù. (by Class Diagram)
 	 * 
 	 * @param accountManager
-	 *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AccountManagerï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ settingï¿½Ñ´ï¿½.
+	 *            ¸¸µé¾îÁø AccountManager¸¦ ¹Þ¾Æ¼­ Á÷Á¢ ÃÊ±âÈ­ÇÏ´Â µ¥ »ç¿ëÇÏ¿© Á÷Á¢ settingÇÑ´Ù.
 	 */
 	public void setAccountManager(AccountManager accountManager) {
 		manager = accountManager;
 
-		// ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		manager.add(new Account("1111-2222-3333", "ï¿½ï¿½È£ï¿½ï¿½", 1111, 100000));
-		manager.add(new Account("3333-2222-6666", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 1112, 400000));
-		manager.add(new Account("4444-7777-1111", "ï¿½è¿¬ï¿½ï¿½", 1113, 300000));
-		manager.add(new Account("6666-4444-2222", "ï¿½ï¿½ï¿½ï¿½ï¿½", 1114, 200000));
-		manager.add(new Account("4466-2244-1233", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 1115, 100000));
-		manager.add(new MinusAccount("1231-1234-2222", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 4321, 0, 1000000));
-		manager.add(new MinusAccount("1231-1234-2241", "ï¿½ï¿½ï¿½ï¿½ï¿½", 1234, 0, 100000));
+		// Å×½ºÆ®¸¦ À§ÇØ ¹Ì¸® ³Ö¾î³õ´Â ¿¹Á¦ µ¥ÀÌÅÍ
+		manager.add(new Account("1111-2222-3333", "¿ìÈ£Áø", 1111, 100000));
+		manager.add(new Account("3333-2222-6666", "¹ÚÁö¼º", 1112, 400000));
+		manager.add(new Account("4444-7777-1111", "±è¿¬¾Æ", 1113, 300000));
+		manager.add(new Account("6666-4444-2222", "¼ÕÈï¹Î", 1114, 200000));
+		manager.add(new Account("4466-2244-1233", "¹ÚÁö¼º", 1115, 100000));
+		manager.add(new MinusAccount("1231-1234-2222", "¹éÁ¾Çö", 4321, 0, 1000000));
+		manager.add(new MinusAccount("1231-1234-2241", "±è±âÁ¤", 1234, 0, 100000));
 	}
 }
