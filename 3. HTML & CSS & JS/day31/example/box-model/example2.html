@@ -8,27 +8,27 @@
 	width: 500px;
 	padding: 1em;
 	border: 1px solid blue;
-	margin: 0 auto; /* 여백 자동 조정을 통한 가운데 정렬 */
+	margin: 0 auto; /* 여백 자동 조정을 통한 가운데 정렬(좌우 auto를 통해 같은 margin) */
 	line-height: 1.5em;
 }
 
 table {
 	width: 300px;
-	border-collapse: collapse;
+	border-collapse: collapse; /*  box모델과 관련된 것은 아님, 실선으로 보이게 해줌 */
 	border: 1px solid black;
-	margin: 10px auto; 
+	margin: 10px auto;
 }
 
 tr, td {
 	border: 1px solid black;
-}	
+}
 </style>
 </head>
 <body style="padding: 0px">
 	<div id="content">
 		<p>margin의 auto값을 애용해서 박스를 가운데로...</p>
 	</div>
-	
+
 	<table>
 		<tr>
 			<td>R1 C1</td>
@@ -53,11 +53,6 @@ tr, td {
 			<td>R2 C3</td>
 		</tr>
 	</table>
-	
+
 </body>
 </html>
-
-
-
-
-
