@@ -43,6 +43,19 @@ function hypotenuse(a, b){
 	return Math.sqrt(square(a) + square(b));
 }
 
+// 비정형 인자 함수 정의 : 매개변수 쓰지 않는다
+function some3(){
+//	arguments //비정형 처리를 위해 window 객체에 저장된 매개변수 배열. '...' 모든 함수에서 접근 가능
+	console.log(arguments);
+
+	//for in문 사용 가능
+	var result = 0;
+	for ( var i in arguments) {
+		result += arguments[i];
+	}
+	return result;
+}
+
 </script>
 
 </head>
@@ -52,17 +65,25 @@ function hypotenuse(a, b){
 	var result = sum(2, 10, 4);
 //	var result = sum(3,4); //NaN
 	console.log(result);
-	
+
 	print('ss');
-	
+
 	some(function(){
 		console.log('callback function');
 	});
-	
+
 	//리턴받은 함수의 method를 실행하기 위해 사용
 	some2()();
-	
+
 	console.log(hypotenuse(3, 4));
+
+	some3();
+	some3(2);
+	some3([4, 5]);
+
+	console.log(some3(2));		//2
+	console.log(some3(2, 12));	//14
+	console.log(some3[4, 5]);	//undefined
 </script>
 </body>
 </html>
