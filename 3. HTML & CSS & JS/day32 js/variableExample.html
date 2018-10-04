@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+
+<script>
+
+	//Hoisting
+	for (var i = 0; i < 10; i++) {
+		console.log(i);
+	}
+	
+	console.log('for문 밖에서 사용한 i : ' + i);
+
+	
+	//window객체의 property로 된다 (전역변수) > window 객체 안에 key(var msg)와 value로 들어간다
+	//java의 frame과 window객체가 같다 => browser를 나타냄
+	//다른 html에서 동기화가 될 수 있기 때문에 주의 필요
+	var msg = 'scope of variable';
+	console.log(msg);
+	console.log(window.msg); //window 객체의 key를 통해 접근
+	
+	
+	function x(){
+		//지역변수  (stack에 쌓인다.)
+		var xx = 'in function';
+		xx2 = 'new msg';	//함수안에서 var를 붙이지 않으면 전역변수처럼 된다.
+	}
+	
+	//console.log(xx2);
+	
+	function y(){
+		console.log(msg);
+//		console.log(xx);	//error
+		console.log(xx2);	
+	}
+	x();
+	y();
+	console.log(xx2);	
+</script>
+</body>
+</html>
