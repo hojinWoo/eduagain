@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>For</title>
+<link rel = "stylesheet" type = 'text/css' href = 'css/table.css'>
+</head>
+<body>
+<h2>for in문</h2>
+<script>
+	//묵시적 생성 및 초기화
+	var array = [1, 5, 23, 44, 7];
+	console.log(array.length);
+	//cf. object 생성
+	var object = {};
+	
+	for(var i in array) {
+		console.log(i + ' : '+ array[i]);
+	}
+	
+	//for in문은 JS의 key값을 가져오는데 사용 (map 사용)
+	for ( var key in document) {
+		console.log(key + ' : '+ document[key]);
+	}
+	
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var message = 'name...';
+	console.log(message);
+	console.log(message.charAt(0));
+	//type을 알기 위해서 typeOf 사용
+	console.log(typeof(message));	//string
+	
+	var age = 123;
+	var flag = true;
+	console.log(typeof(age));		//number
+	console.log(typeof(flag));		//boolean
+	
+	//java의 autoboxing 개념과 비슷
+	var message2 = new String('name...');
+	console.log(typeof(message2)); 	//object
+	
+	console.log (message == message2);	//true
+	console.log (message === message2);	//false
+	
+	
+	var str = "JavaScript";
+	console.log(typeof str);			//string
+	console.log(str instanceof String);	//false
+
+	var str2 = Object(str);
+	console.log(typeof str2);			//object
+	console.log(str2 instanceof String);//true
+</script>
+</body>
+</html>

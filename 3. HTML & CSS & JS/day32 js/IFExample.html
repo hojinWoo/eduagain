@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>switch case</title>
+</head>
+<body>
+<script type="text/javascript">
+	var score = prompt('enter your score');
+
+	//To number (if you want)
+	score = parseInt(score) //function
+	console.log(score);
+	console.log(typeof(score));	//number
+	
+	//auto casting (문자열을 최우선으로 가지나 자동적으로 변환 해준다)
+	if(score >= 90){
+		console.log('수');
+	}
+	else if(score >= 80){
+		console.log('우');
+	}
+	else if(score >= 70){
+		console.log('미');
+	}
+	else if(score >= 60){
+		console.log('양');
+	}
+	else{
+		console.log('가');
+	}
+	
+	
+	switch (Math.floor(score / 10)) {
+	case 10:
+	case 9:
+		console.log('수');
+		break;
+	case 8:
+		console.log('우');
+		break;
+	default:
+		console.log('I cant be bothered');
+		break;
+	}
+	
+	
+	
+	//number로 자동 형변환
+	console.log(10 * '10') //100
+	//뮨자열 우선순위
+	console.log(10 + '10') //1010
+	
+</script>
+</body>
+</html>
