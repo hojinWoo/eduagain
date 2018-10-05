@@ -5,7 +5,7 @@
 <title></title>
 <script type="text/javascript">
 	/*사용자 정의 객체(생성자)*/
-	//Object는 최상위.
+	//function prototype이 상위.
 	function Student(name, korean, math, english, science){
 		//this를 꼭 써주어야 key와 value가 instance로 된다. (instance변수 X)
 		//공개이기 때문에 property
@@ -68,6 +68,14 @@
 	console.log('평균 : ' + student.getAverage());
 
 	console.log(Student.schoolName);
+
+	//모두 프로토타입 기반
+	//프로토타입 객체의 constructor 프로퍼티를 통해 생성자(함수)를 접근할 수 있다
+	var student2 = new student.constructor('aasd', 12, 24,53, 12);
+	console.log(student2);
+
+	console.log(Student.toString());	//Function (prototype) 객체의 toString();
+	console.log(student.toString());	//Object의 toString을 호출 (Overriding을 하면 바뀐다)
 </script>
 </body>
 </html>
