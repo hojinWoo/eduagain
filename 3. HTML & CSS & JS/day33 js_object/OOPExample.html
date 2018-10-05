@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript">
+	/*사용자 정의 객체(생성자)*/
+	//Object는 최상위.
+	function Student(name, korean, math, english, science){
+		//this를 꼭 써주어야 key와 value가 instance로 된다. (instance변수 X)
+		//공개이기 때문에 property
+		this.name		= name;
+		this.korean 	= korean;
+		this.math 		= math;
+		this.english 	= english;
+		this.science 	= science;
+
+		/*
+		//이렇게 만들면 생성자마다 method를 가지고 있기 때문에 비효율적이므로 prototype으로 관리
+		//method		//기능적 func
+		this.toString = function(){
+			return this.name +"\t" + this.korean +"\t" + this.math +"\t" + this.english +"\t" + this.science + "\t" + this.getSum() + "\t" + this.getAverage();
+		}
+		this.getSum = function(){
+			return this.korean + this.math + this.english + this.science;
+		}
+		this.getAverage = function(){
+			return this.getSum() / 4;
+		}
+		*/
+	}
+	//class 변수 개념이랑 비슷 (static 변수X)
+	Student.schoolName = 'CCCC College';
+
+
+	//prototype에 method 저장
+	//map 구조
+	Student.prototype.getSum = function(){
+		return this.korean + this.math + this.english + this.science;
+	}
+
+	Student.prototype.getAverage = function(){
+		return this.getSum() / 4;
+	}
+
+	Student.prototype.toString = function(){
+		return this.name +"\t" + this.korean +"\t" + this.math +"\t" + this.english +"\t" + this.science + "\t" + this.getSum() + "\t" + this.getAverage();
+}
+</script>
+</head>
+<body>
+<!-- test -->
+<script type="text/javascript">
+
+	var student = new Student('AA', 45, 56, 34, 66);
+	//JS는 접근방법이 2가지
+	console.log(student.name);
+	console.log(student['name']);
+
+	console.log(typeof Student);	//function
+	console.log(typeof student);	//object
+
+	console.log(student);
+	console.log(student.toString());	//Object의 toString을 호출 시 : [object Object]
+										//toString을 만드는 경우 함수 안에 있는 toString이 호출
+
+	console.log('총합 : ' + student.getSum());
+	console.log('평균 : ' + student.getAverage());
+
+	console.log(Student.schoolName);
+</script>
+</body>
+</html>
