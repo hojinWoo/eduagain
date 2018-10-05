@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<script type="text/javascript">
+	//명시적 생성
+//	var product = new Product();
+
+	//묵시적 생성
+//	var product = {};
+//	product.name = 'sdf';
+
+	var product = {
+			name: '7D 망고',
+			type: '당절임',
+			ingredient: '망고, 설탕',
+			origin: '필리핀',
+			price: 800
+	};
+
+	//동적 method
+	product.toString = function(){
+		return this.name + "\t" + this.type;
+	}
+
+	console.log(product.name);
+	console.log(product['name']);
+
+	console.log(product.toString());
+
+	delete product.price;
+
+	for ( var key in product) {
+		console.log(key+" : "+product[key]);
+	}
+
+	//String
+	var str = new String('namm');
+	for ( var key in str) {
+		console.log(key+" : "+str[key]);
+	}
+
+</script>
+</body>
+</html>

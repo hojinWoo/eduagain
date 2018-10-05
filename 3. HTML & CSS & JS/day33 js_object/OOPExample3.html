@@ -16,7 +16,6 @@
 		return 0;
 	}
 
-
 	function Rectangle(x, y, width, height){
 		//'apply' or 'call'
 		Shape.call(this, x, y);
@@ -34,6 +33,12 @@
 	Rectangle.prototype.getRound = function(){
 		return 2 * (this.width + this.height);
 	}
+
+	//생성자 상속으로 변경
+	delete Rectangle.prototype.x;
+	delete Rectangle.prototype.y;
+	Rectangle.prototype = new Rectangle();
+
 </script>
 </head>
 <body>
