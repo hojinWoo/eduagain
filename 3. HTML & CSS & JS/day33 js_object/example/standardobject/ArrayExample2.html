@@ -14,7 +14,7 @@ console.log(str);
 //array.reverse();
 
 array.sort();
-console.log(array.join());
+console.log(array.join());			//default는 ','
 
 var array2 = [100, 2, 5, 1, 105];
 
@@ -24,33 +24,22 @@ array2.sort(function(x, y){
 });
 
 for ( var key in array2) {
-	console.log(array2[key]);	
+	console.log(array2[key]);
 }
 
 var array3 = [1, 2, 3, 4, 5];
-var subArray = array3.slice(0, 2);
+var subArray = array3.slice(0, 2); //복사하면서 가지고 감
 console.log(subArray.toString());
 for ( var key in array3) {
-	console.log(array3[key]);	
+	console.log(array3[key]);
 }
 
-var subArray = array3.splice(0, 2);
+var subArray = array3.splice(0, 2);	//제거하면서 가지고 감
 console.log(subArray.toString());
 for ( var key in array3) {
-	console.log(array3[key]);	
+	console.log(array3[key]);
 }
 
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

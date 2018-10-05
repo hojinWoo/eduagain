@@ -13,15 +13,15 @@ var num = new Number(1234);
 console.log(num.toString());
 console.log(typeof num.valueOf());
 
-var weight = 78.3434343;
-console.log(weight.toFixed(2));
+var value = Number("567");
+alert(value + 1); 			 	//auto casting, 잘 사용 안함
 
-console.log(100/0);          // Infinity
-console.log(100/"김기정");   // NaN
+
+var weight = 78.3434343;
+console.log(weight.toFixed(2));	//Number객체에 들어가 있는 거 사용. auto boxing
+
+console.log(100/0);          	// Infinity(Exception 발생 X)
+console.log(100/"김기정");  	 	// NaN
 </script>
 </body>
 </html>
-
-
-
-
