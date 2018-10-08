@@ -7,23 +7,20 @@
 <body>
 <h2>스크립트엔진에 의해 미리 생성되어 있는 브라우저 관련 객체들(BOM)</h2>
 <script type="text/javascript">
+//location : 가장 많이 사용됨, JS 동적으로 이동시킬 때 자주 사용
 document.write(location.href);
 for ( var key in location) {
-	console.log(key + " : " + location[key]);	
+	console.log(key + " : " + location[key]);
 }
 
-//location.href="http://www.naver.com";
-//location.replace("http://www.naver.com");
+//바로 해당 사이트로 이동
+//location.href="https://www.naver.com";
+//location.replace("http://www.daum.net");
 </script>
-
+<!-- 인라인 방식(JS 인식 시키기) -->
 <a href="javascript:location.href='http://www.naver.com'">네이버로 이동</a>
 <a href="javascript:location.replace('http://www.daum.net')">다음로 이동</a>
+<a href="javascript:location.assign('http://www.daum.net')">다음로 이동</a>
 <a href="javascript:location.reload();">새로고침</a>
 </body>
 </html>
-
-
-
-
-
-
