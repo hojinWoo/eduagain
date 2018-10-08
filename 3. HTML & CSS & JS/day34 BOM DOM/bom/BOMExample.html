@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>브라우저와 관련된 JS 객체(BOM)</title>
+</head>
+<body>
+<h2>Browser Object Model</h2>
+<script type="text/javascript">
+	console.log(window);
+	console.log(window.constructor);
+
+	// 윈도우 내장 객체들
+//	for ( var name in window) {
+		// '.'으로 접근하면 안된다.
+//		console.log(name + " : " + window[name]);
+//	}
+
+//	window.close();
+
+	//this : window (script안에 있는 영역은 frame 안 영역)
+	console.log(this);
+	//same
+	var x = 10;
+//	window.x = 10;
+
+	// DOM 객체 확인
+	for(var name in window.document){
+		console.log(name + " : " + document[name]);
+	}
+</script>
+</body>
+</html>
