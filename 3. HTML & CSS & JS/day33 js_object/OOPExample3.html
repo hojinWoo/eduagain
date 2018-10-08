@@ -37,7 +37,7 @@
 	//생성자 상속으로 변경
 	delete Rectangle.prototype.x;
 	delete Rectangle.prototype.y;
-	Rectangle.prototype = new Rectangle();
+	Rectangle.prototype.constructor = Rectangle;
 
 </script>
 </head>
