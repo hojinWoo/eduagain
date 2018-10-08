@@ -11,32 +11,33 @@ function init(){
 
 // 이벤트소스에 시스템이벤트 리스너 등록
 window.onload =  function(){
-	//alert("문서 로드 완료요.."); 
-	
+	//alert("문서 로드 완료요..");
+
 	// 이벤트 소스에 사용자이벤트 리스너 등록
 	document.getElementById("myButton").onclick = function(){
 		console.log("버튼 클릭됨...");
-		document.getElementsByTagName("div")[0].innerHTML = "소미 바보";
+		document.getElementsByTagName("div")[0].innerHTML = "DOM 접근!!";
 		document.getElementsByTagName("div")[0].style.fontSize = 150+"pt";
 	}
-	
+
 	// 이벤트리스너 제거
 	//document.getElementById("myButton").onclick = null;
-	
+
 	document.getElementsByName("id")[0].onchange = function(){
 		console.log("변경");
 	}
-	
+
 	document.getElementsByName("id")[0].ondblclick = function(){
 		this.style.backgroundColor = "yellow";
 	}
-	
+
 	document.getElementsByTagName("div")[0].onclick = function(){
 		this.style.backgroundColor = "gold";
 	}
-	
-	
+
+
 	document.getElementById("button2").onclick = function(e){
+		//MS에서 event객체가 전달 안 되는 것을 방지하기
 		var event = e || window.event;
 		console.log(event.type);
 		event.target.style.backgroundColor = "tomato";
@@ -45,7 +46,6 @@ window.onload =  function(){
 		}
 	}
 }
-
 </script>
 </head>
 <body>

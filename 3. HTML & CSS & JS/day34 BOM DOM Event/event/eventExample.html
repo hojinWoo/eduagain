@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>이벤트 처리</title>
+</head>
+<!-- ******** 계층적 이벤트 처리 (버블링), 안에서 버튼이 이벤트 처리 안 할 시 body에서 이벤트 처리 ********* -->
+<body onclick = "alert('bubbling');">
+	<input type="button" value="click JS" id="myButton" />
+
+	<!-- 인터프리터 방식이기 때문에 JS코드는 밑에 있어야 한다 -->
+	<script type="text/javascript">
+
+		//이벤트 소스
+		var eventSource = document.getElementById("myButton");
+		//이벤트리스너 등록
+		/* eventSource.onclick = function(){
+			console.log("button 클릭!!");
+		} */
+
+		function someDo(){
+			console.log("???");
+		}
+		//1. 고전 이벤트 처리 모델 (property로 접근)
+		//자동 호출 (이름 없이 전달했기 떄문)
+//		eventSource.onclick = someDo();
+
+		//2. 표준이벤트 처리 모델 (method로 접근)
+		eventSource.addEventListener("click", function(){
+			console.log("good");
+		})
+
+		//EventCapturing, default로 지원X (지원 안하는 browser도 있음)
+//		eventSource.addEventListener("click",function(){} ,true); //표준 이벤트 모델에서 true로 줘야 처리 가능
+	</script>
+</body>
+</html>

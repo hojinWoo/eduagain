@@ -14,9 +14,13 @@ window.onload =  function(){
 	document.getElementById("parapraph").onclick = 	function(e){
 		var event = e || window.event;
 		alert("클릭이벤트 처리 완료!");
+		//이벤트 버블링 중지 (JS는 형변환이 자연스럽기 때문에 if안에 property가 있다면 true)
 		if(e.stopPropagation){
 			e.stopPropagation();
+
+		//null or undefined or 0는 false로 인식
 		}else{
+			//옛날 MS 버전 때문
 			e.cancelBubble = true;
 		}
 	}
@@ -34,8 +38,3 @@ window.onload =  function(){
 </div>
 </body>
 </html>
-
-
-
-
-

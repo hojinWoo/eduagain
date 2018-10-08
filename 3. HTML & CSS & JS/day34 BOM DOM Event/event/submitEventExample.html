@@ -5,17 +5,22 @@
 <meta charset="utf-8">
 <script>
 window.onload = function () {
+//document.getElementsByName("myForm")[0].onclick~~
+	//Form tag는 편리하게 접근하기 위해서 바로 접근 가능하게 이름으로 접근 가능
 	console.log(document.myForm.name);
 	console.log(document.myForm.action);
 	console.log(document.myForm.method);
-	
+
+	//property처럼 접근 가능 (지금은 placeholder로 먼저 사용)
 	document.myForm.name.onclick = function(){
 		//document.myForm.name.value = "";
 		this.value = "";
 	}
-	
+
+
 	document.myForm.onsubmit = function () {
 		//var name = document.myForm.name.value;
+		//구조적 접근
 		var name = document.forms[0].elements[0].value;
 		if(name == null || name.length == 0){
 			alert('이름을 입력하여 주세요.');
@@ -23,20 +28,17 @@ window.onload = function () {
 			return false; // 디폴트 이벤트핸들러 제거
 		}
 		return true;
-		//document.myForm.submit();	        
+		//document.myForm.submit();
 	};
 };
-</script> 
+</script>
 </head>
 <body>
-<form name="myForm" action="#">
+	<!-- 서버 제출 시 가장 많이 사용, form 태그에 action이 들어가 있음
+				form이 eventListener-->
+<form name="myForm" action="#"> <!-- # : 현재 page -->
   <input type="text" name="name" value="이름"/><br>
   <input type="submit" value="제출"/>
 </form>
 </body>
 </html>
-
-
-
-
-
