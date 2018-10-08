@@ -15,11 +15,16 @@
 	clockWindow = open("", "clockWindow", "left="+x+", top="+y+", width="+windowWidth+", height="+windowHeight);
 })();
 
+// 주기적인 시간마다 가능(가급적 사용 지양)
 window.setInterval(function(){
 	var now = new Date();
+
+	//부모 창의 document가 되기 때문에 아래 코드는 잘못 된 코드
 	//document.write("<p style='text-align:center'>" + now.toLocaleString() + "</p>");
+
 	clockWindow.document.write("<p style='text-align:center'>" + now.toLocaleString() + "</p>");
-}, 1000);
+	//문서 위치에 계속 찍기 위해서는 DOM 객체가 필요
+}, 1000); //1초 단위로 call back
 
 </script>
 </body>
