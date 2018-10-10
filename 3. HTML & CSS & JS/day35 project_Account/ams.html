@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>계좌정보</title>
+<link rel='stylesheet' type='text/css' href='css/table.css'>
+<script type='text/javascript' src = 'js/Account.js'></script>
+<script type='text/javascript' src = 'js/MinusAccount.js'></script>
+<script type='text/javascript' src = 'js/AccountManager.js'></script>
+<script type='text/javascript'>
+	/* 메세지를 보여주는 것은 alert 말고 해당 창 근처에 span 태그로 보여주기 */
+	window.onload = function(){
+		var acc;
+		init();
+		eventRegist();
+	}
+	
+	function init(){
+		acc = new AccountManager();
+		acc.add(new Account('1111-3333', '이숭흠', 1234, 5000000));
+		acc.add(new Account('1111-3333', '이숭흠', 1234, 5000000));
+		acc.add(new Account('1111-4444', '삼숭흠', 2123, 32432));
+		acc.add(new MinusAccount('9999-5555', '사숭훔', 3413, 100000, 300000));
+		acc.add(new MinusAccount('9999-6666', '이숭흠', 8798, 0, 100000));
+	}
+	
+
+	function eventRegist(){
+		/* 비활성화 */
+		document.getElementsByClassName('kindofAcc')[0].onclick = function(){
+			if (document.getElementsByClassName('kindofAcc')[0].selectedIndex == 1){
+				document.getElementById('minusMoneyTF').disabled = true;
+			}else{
+				document.getElementById('minusMoneyTF').disabled = false;
+			}
+		}
+		
+		
+		document.getElementById('accountNumTF').onkeyup = function(e){
+			var event = e || window.event;
+			if(e.keyCode == 13 ){
+				initAllLabel();
+				taskAccountNum(0);
+			}
+		}
+		document.getElementById('searchAcc').onclick = function(){
+			initAllLabel();
+			taskAccountNum(0);
+		}
+		document.getElementById('deleteAcc').onclick = function(){
+			initAllLabel();
+			taskAccountNum(1);
+		}
+		
+		document.getElementById('accountNameTF').onkeyup = function(e){
+			var event = e || window.event;
+			if(e.keyCode == 13 ){
+				initAllLabel();
+				taskAccountName();
+			}
+		}
+		document.getElementById('searchName').onclick = function(){
+			initAllLabel();
+			taskAccountName();
+		}
+		
+		
+		document.getElementById('createAcc').onclick = function(){
+			initAllLabel();
+			createAccount();
+		}
+		document.getElementById('searchAll').onclick = function(){
+			initAllLabel();
+			showListAll();
+		}
+	}
+	
+	/*모든 라벨 초기화*/
+	function initAllLabel(){
+		document.getElementById('kindofAccError').innerHTML = '';
+		document.getElementById('accountNumError').innerHTML = '';
+		document.getElementById('accountNameError').innerHTML = '';
+		document.getElementById('passwordError').innerHTML = '';
+		document.getElementById('minusError').innerHTML = '';
+	}
+	
+	/* 계좌번호 조회 및 삭제 */
+	function taskAccountNum(ch) {
+		var accountNum = document.getElementById('accountNumTF');
+		/* 계좌 조회 */
+		if(ch == 0){
+			var account = acc.get(accountNum.value);
+			if(account.length == 0){
+				document.getElementById('accountNumError').innerHTML = '계좌가 존재하지 않습니다';
+				accountNum.value = '';
+				return;
+			}
+//			console.log(account);
+			showList(account);
+		}
+		/* 계좌 삭제 */
+		else if(ch == 1){
+			var isdelete = acc.remove(accountNum.value);
+			if(isdelete == true){
+				document.getElementById('accountNumError').innerHTML = '계좌가 삭제되었습니다';
+			}else{
+				document.getElementById('accountNumError').innerHTML = '계좌가 존재하지 않습니다';
+			}
+		}
+		accountNum.value = '';
+	}
+	
+	/* 이름명 검색 */
+	function taskAccountName(){
+		var accountName = document.getElementById('accountNameTF');
+		var accList = acc.search(accountName.value);
+		if(accList.length == 0){
+			document.getElementById('accountNameError').innerHTML = '예금주명이 존재하지 않습니다';
+		}else{
+			showList(accList);
+		}
+		accountName.value = '';
+	}
+	
+	/* 계좌 신규등록 */
+	function createAccount(){
+		var choice = document.getElementsByClassName('kindofAcc');
+		if(choice[0].selectedIndex == 0 ){
+			document.getElementById('kindofAccError').innerHTML = '계좌 종류를 선택해주세요';
+			return;
+		}
+		var accNum = document.getElementById('accountNumTF').value;
+		if(accNum == ''){
+			document.getElementById('accountNumError').innerHTML = '계좌번호 필수';
+			return;
+		}
+		var accName = document.getElementById('accountNameTF').value;
+		if(accNum == ''){
+			document.getElementById('accountNameError').innerHTML = '계좌이름 필수';
+			return;
+		}
+		var accPw = document.getElementById('passwordTF').value;
+		if(accPw == ''){
+			document.getElementById('passwordError').innerHTML = '비밀번호 필수';
+			return;
+		}
+		var accMoney = document.getElementById('depositTF').value;
+		if(accMoney == ''){
+			accMoney = 0;
+		}
+		if(choice[0].selectedIndex == 1){
+			acc.add(new Account(accNum, accName, accPw, accMoney));
+			document.getElementById('minusError').innerHTML = '계좌 생성 완료';
+		}else if(choice[0].selectedIndex == 2 ){
+			var minusMoney = document.getElementById('minusMoneyTF').value;		
+			if(minusMoney == ''){
+				document.getElementById('minusError').innerHTML = '대출금액 필수';
+				return;
+			}
+			acc.add(new MinusAccount(accNum, accName, accPw, accMoney, minusMoney));
+			document.getElementById('minusError').innerHTML = '마이너스 계좌 생성 완료';
+		}
+		
+		document.getElementById('accountNumTF').value = '';
+		document.getElementById('accountNameTF').value = '';
+		document.getElementById('passwordTF').value = '';
+		document.getElementById('depositTF').value = '';
+		document.getElementById('minusMoneyTF').value = '';
+	}
+
+
+	/* 리스트 보이기 */
+	function showList(list){
+		var choice = document.getElementsByClassName('kindofAcc');
+		if(choice[0].selectedIndex == 0 ){
+			printList(list);
+		}else if(choice[0].selectedIndex == 1){
+			checkList = [];
+			for (var i = 0; i < list.length; i++) {
+				if(!(list[i] instanceof MinusAccount)){
+					checkList.push(list[i]);
+				}
+			}
+			printList(checkList);
+		}else{
+			printList(list instanceof MinusAccount);
+			checkList = [];
+			for (var i = 0; i < list.length; i++) {
+				if(list[i] instanceof MinusAccount){
+					checkList.push(list[i]);
+				}
+			}
+			printList(checkList);
+		}
+		
+	}
+	/* 전체 리스트 보이기 */
+	function showListAll(){
+		var choice = document.getElementsByClassName('kindofAcc');
+		if(choice[0].selectedIndex == 0 ){
+			printList(acc.list(0));
+		}else if(choice[0].selectedIndex == 1){
+			printList(acc.list(1));
+		}else{
+			printList(acc.list(2));
+		}
+	}
+	
+	/* 계좌 목록 출력하기 */
+	function printList(list){
+		var table = document.getElementById('accountTable');
+		var tablebody = document.getElementById('accountTable').getElementsByTagName('tbody')[0];
+		while(tablebody.childNodes.length > 0){
+			tablebody.removeChild(tablebody.childNodes[0]);
+		}
+		for ( var i = 0; i < list.length; i++) {
+			 var newRow = tablebody.insertRow(tablebody.rows.length);
+			 var cell1 = newRow.insertCell(0);
+			 var cell2 = newRow.insertCell(1);
+			 var cell3 = newRow.insertCell(2);
+			 var cell4 = newRow.insertCell(3);
+			 var cell5 = newRow.insertCell(4);
+			 if(!(list[i] instanceof MinusAccount)){
+				 cell1.innerHTML = '입출금';
+			 }else{
+				cell1.innerHTML = '마이너스';
+			 }
+			 cell2.innerHTML = list[i].accountNum;
+			 cell3.innerHTML = list[i].accountOwner;
+			 cell4.innerHTML = list[i].restMoney;
+			 if(list[i] instanceof MinusAccount){
+				 cell5.innerHTML = list[i].borrowMoney;
+			 }else{
+				 cell5.innerHTML = '-';
+			 }
+		}
+	}
+	
+	/* 숫자만 입력 */
+	function isNumberOnly(event){
+		var char = String.fromCharCode(event.which);
+		if(!(/[0-9]/.test(char))){
+			event.preventDefault();
+		}
+	}
+	/* 빈공간 입력 금지 */
+	function noSpace(obj){
+		var space = /\s/g;
+		if(space.exec(obj.value)){
+			obj.focus();
+			obj.value = obj.value.replace(/\s/g,'');
+			return false;
+		}
+	}
+
+
+</script>
+</head>
+<body>
+	<div class='table_layout'>
+		<div class='init'>
+			<strong>계좌종류</strong>
+			<select class = 'kindofAcc'>
+				<option value='all' selected='selected'>전체</option>
+				<option value='add'>입출금</option>
+				<option value='minus'>마이너스</option>
+			</select>
+			<label id="kindofAccError"></label>
+		</div>
+
+		<div class='init'>
+			<strong>계좌번호</strong> 
+			<input type='text' id='accountNumTF' 
+			placeholder='계좌번호를 입력하세요' maxlength='14' onkeyup="noSpace(this);" onchange='noSpace(this);'/> 
+			<input type='submit' value='조회' id = 'searchAcc'/>
+			<input type='reset' value='삭제' id = 'deleteAcc'/>
+			<label id="accountNumError"></label>
+			
+		</div>
+
+		<div class='init'>
+			<strong>예금주명</strong> <input type='text' id='accountNameTF'
+				placeholder='예금주를 입력하세요'onchange='noSpace(this);'> <input type='submit' value='검색' id = "searchName">
+				<label id="accountNameError"></label>
+		</div>
+
+		<div class='init'>
+			<strong>비밀번호</strong> 
+			<input type='text' id='passwordTF' placeholder='비밀번호를 입력하세요' onkeypress="isNumberOnly(event);"> 
+			<label id="passwordError"></label>
+		</div>
+
+		<div class='init'>
+			<strong>입금급액</strong> 
+			<input type='text' id='depositTF' placeholder='입금금액을 입력하세요' onkeypress='isNumberOnly(event);'>
+			<strong>대출금액</strong> <input type='text' id='minusMoneyTF'
+				placeholder='대출금액을 입력하세요' onkeypress='isNumberOnly(event);'> 
+				<label id="minusError"></label>
+				<input type='submit' value='신규등록' id = "createAcc" >
+				<input type='submit' value='전체조회' id = 'searchAll' style="position: absolute; right: 0;">
+		
+		</div>
+
+		<div class='init'>
+			<div class='container'>
+				<div id='left'>계좌목록</div>
+				<div id='right'>(단위 : 원)</div>
+			</div>
+			<table id = 'accountTable'>
+				<colgroup>
+					<col width='20%' />
+					<col width='20%' />
+					<col width='20%' />
+					<col width='20%' />
+					<col width='20%' />
+				</colgroup>
+				<thead>
+					<tr>
+						<th>계좌종류</th>
+						<th>계좌번호</th>
+						<th>예금주명</th>
+						<th>현재잔액</th>
+						<th>대출금액</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<th>입출금</th>
+						<td>1111-3333</td>
+						<td>이숭흠</td>
+						<td>5000000</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<th>입출금</th>
+						<td>1111-4444</td>
+						<td>삼숭흠</td>
+						<td>5000</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<th>마이너스</th>
+						<td>1111-5555</td>
+						<td>사숭흠</td>
+						<td>500</td>
+						<td>500000</td>
+					</tr>
+
+					<tr>
+						<th>마이너스</th>
+						<td>1111-6666</td>
+						<td>오숭흠</td>
+						<td>-5050000</td>
+						<td>445511220</td>
+					</tr> -->
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

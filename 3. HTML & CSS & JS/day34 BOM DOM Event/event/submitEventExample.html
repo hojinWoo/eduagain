@@ -24,8 +24,8 @@ window.onload = function () {
 		var name = document.forms[0].elements[0].value;
 		if(name == null || name.length == 0){
 			alert('이름을 입력하여 주세요.');
-			 document.myForm.name.focus();
-			return false; // 디폴트 이벤트핸들러 제거
+			 document.myForm.name.focus();	//커서 위치
+			return false; // 디폴트 이벤트핸들러 제거, return문을 주지 않으면 server로 전송이 된다.
 		}
 		return true;
 		//document.myForm.submit();
