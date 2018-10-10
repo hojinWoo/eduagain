@@ -1,3 +1,6 @@
+/**
+ * 생성자 생성 (Account 상속)
+ */
 function MinusAccount(accountNum, accountOwner, passwd, restMoney, borrowMoney){
 	Account.call(this, accountNum, accountOwner, passwd, restMoney);
 	this.borrowMoney = borrowMoney;
@@ -12,13 +15,19 @@ MinusAccount.prototype.setBorrowMoney = function(borrowMoney){
 	this.borrowMoney = borrowMoney;
 }
 
+/**
+ * @Override
+ */
 MinusAccount.prototype.deposit = function(money){
-	Account.prototype.setRestMoney(Account.prototype.getRestMoney() + money);
-	return Account.prototype.getRestMoney();
+	Account.prototype.setRestMoney(Account.prototype.getRestMoney.call(this) + money);
+	return Account.prototype.getRestMoney.call(this);
 }
-
+/**
+ * @Override
+ * 남은금액 return
+ */
 MinusAccount.prototype.getRestMoney = function(money){
-	return Account.prototype.getRestMoney() - this.getBorroyMoney();
+	return Account.prototype.getRestMoney.call(this) - this.borrowMoney;
 }
 
 MinusAccount.prototype.toString = function(){

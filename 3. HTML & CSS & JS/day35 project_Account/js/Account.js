@@ -1,4 +1,6 @@
-
+/**
+ * 생성자 생성
+ */
 function Account(accountNum, accountOwner, passwd, restMoney){
 	this.accountNum = accountNum;
 	this.accountOwner = accountOwner;
@@ -24,7 +26,7 @@ Account.prototype.getAccountOwner = function(){
  * @return	잔액
  */
 Account.prototype.getRestMoney = function(){
-	return this.passwd;
+	return this.restMoney;
 }
 /**
  * @param restMoney 잔액 설정하기
