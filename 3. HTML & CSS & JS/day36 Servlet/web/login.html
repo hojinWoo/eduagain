@@ -41,7 +41,7 @@ div {
 
 <script type="text/javascript">
 	window.onload = function(){
-		eventRegist();	
+		eventRegist();
 	}
 	function eventRegist(){
 		document.getElementById("loginButton").onclick = function(){
@@ -56,9 +56,16 @@ div {
  			alert('이름을 입력해주세요');
  		}else{
  			document.loginForm.action = "/servlet/receive.do";
- 			document.loginForm.method = "get";
+// 			document.loginForm.method = "get";
+ 			document.loginForm.method = "post";
  			document.loginForm.submit();
  		}
+
+ 		/*
+ 		get방식의 인코딩은 server.xml에서 URIEncoding을 통해 설정 가능 (서버에서 설정)
+ 		post방식은 100%인코딩 보장이 없기 때문에 직접 인코딩 처리가 필요, 현재 request에서 제공(apache5(?)부터 제공)
+
+ 		*/
  	}
 
 </script>
@@ -81,14 +88,14 @@ div {
       <option value="canada">Canada</option>
       <option value="usa">USA</option>
     </select>
-  
+
   	<!-- 아래 3가지는 똑같이 돌아간다 -->
-	<!--     
+	<!--
 	<input type="submit" value="로그인">
     <input type="image" src="">
-    <button>로그인</button> 
+    <button>로그인</button>
     -->
-    
+
     <!-- default가 없는 것 > 서버에 보내는 작업을 직접 해야 한다. 이벤트는 JS로 -->
     <input type="button" value="로그인" id = "loginButton">
   </form>

@@ -26,28 +26,35 @@ public class HTTPServletResponseServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 //		response.setStatus(HttpServletResponse.SC_BAD_REQUEST); //400 error 강제로 내기
-		
+
 		String name = request.getParameter("name");
-		
+
 		if(name != null && name.trim().length() != 0) {
 			if(name.equals("hh")) {
 				//blacklist
 				response.setStatus(HttpServletResponse.SC_FORBIDDEN);	//403
 			}
-			
+
 		}
-		
-		out.println("<html>"); 
+
+		out.println("<html>");
 		out.println("<head>");
 		out.println("<meta charset=\"utf-8\">");
 		out.println("<title></title>");
 		out.println("</head>");
 		out.println("<body style = 'font-size:20pt'>");
-		out.println("<ul>"); 
+		out.println("<ul>");
 		out.println("name : " + name);
-		out.println("</ul>"); 
+		out.println("</ul>");
 		out.println("</body>");
 		out.println("</html>");
+
+		//Dispatch : 브라우저가 자동으로 다른 URL 요청***********
+//		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);	//301
+//		response.setHeader("Location", "/servlet/hello");
+
+//위에 두줄을 한 줄로 처리 가능
+//		response.sendRedirect("/servlet/hello");
 
 	}
 
