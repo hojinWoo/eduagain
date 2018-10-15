@@ -29,6 +29,7 @@ public class MainServlet extends HttpServlet {
 				System.out.println(cookie.getName() + " : " + cookie.getValue());
 				if(cookie.getName().equals("loginId")) {
 					id = cookie.getValue();
+					break;
 				}
 			}
 		}
