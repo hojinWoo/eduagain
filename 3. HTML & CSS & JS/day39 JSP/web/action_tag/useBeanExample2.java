@@ -16,5 +16,6 @@
 예금주명 : <jsp:getProperty property="accountOwner" name="account"/><br>
 잔액 	  : <jsp:getProperty property="restMoney" name="account"/><br>
 비밀번호 : <jsp:getProperty property="passwd" name="account"/><br>
+<%-- useBean에서 검색할 때 getAttribute가 아닌 findAttribute로 검색한다 --%>
 </body>
 </html>

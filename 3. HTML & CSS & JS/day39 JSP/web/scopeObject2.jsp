@@ -10,5 +10,7 @@
 request 정보 : <%=request.getAttribute("msg")%><br>
 session 정보 : <%=session.getAttribute("msg")%><br>
 application 정보 : <%=application.getAttribute("msg")%><br>
+<%-- pageContext는 찾을 때 4개를 다 검색해서 찾는 기능이 존재 --%>
+전체에서 찾기 : <%=pageContext.findAttribute("msg") %>
 </body>
 </html>
