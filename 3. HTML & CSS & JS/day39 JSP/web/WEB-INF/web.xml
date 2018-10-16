@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>JSPStudy</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- JSP 등록 가능(옵션), url 감추기.. -->
+  <servlet>
+  	<servlet-name>defaultObject</servlet-name>
+  	<jsp-file>/defaultObject.jsp</jsp-file>
+  	<init-param>
+  	 	<param-name>location</param-name>
+    	<param-value>a:/b/c</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>defaultObject</servlet-name>
+  	<url-pattern>/default.action</url-pattern>
+  </servlet-mapping>
+  <!-- container 차원에서 error page 등록 -->
+  <error-page>
+    <!-- 최상위 클래스도 가능하고 일일히 타입별로 처리도 가능 -->
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/errorHandlingPage.jsp</location>
+  </error-page>
+  <!-- container 차원에서 error page 등록 -->
+  <!--
+  <error-page>
+    최상위 클래스도 가능하고 일일히 타입별로 처리도 가능 (500번대 에러)
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/errorHandlingPage.jsp</location>
+  </error-page>
+  -->
+  <error-page>
+    <exception-type>400</exception-type>
+    <location>/errors/error_400.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>404</exception-type>
+    <location>/errors/error_404.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>500</exception-type>
+    <location>/errors/error_500.jsp</location>
+  </error-page>
+</web-app>
