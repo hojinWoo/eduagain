@@ -1,14 +1,31 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="javax.servlet.http.Cookie" %>
 <%@ include file="../jsp/saveId.jsp" %>
-<!-- Sidebar Widgets Column -->
-<div class="col-md-4">
-<br><br><br><br><br>
-	<!-- Search Widget -->
-		<%
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- navigation -->
+	<jsp:include page="../include/navigator.jsp"/>
+	<!-- /navigation -->
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+			<%
 		if(loginId == null){
 		%>
-		<div class="card my-4">
+		<div class="card mb-4">
 		<h5 class="card-header">로그인</h5>
 		<div class="card-body">
 			<form action="../user/loginAction.jsp" method="post">
@@ -33,7 +50,6 @@
 				<input type = "checkbox" name = "saveId" checked="checked" >
 				<%} %>
 				<label style="text-align: right">아이디 저장</label>
-				<div style = "col-md-2"></div>
 			</div>
 			<br>	
 				<div class="row justify-content-around">
@@ -41,27 +57,16 @@
 				</form>
 					<input type="button" class="btn btn-secondary " value="회원가입" onclick="location.href='../user/signup.jsp'">
 			</div>
-		<%-- <%}else{%>
-		<h5 class="card-header"><%=loginId %>님 환영합니다.</h5>
-		<div class="card-body">
-			<% 
-			String uri = request.getRequestURI();
-			System.out.println(uri);
-			if(uri.equals("/board/board.jsp")){%>
-			<form action="../board/createPost.jsp" method="get">
-				<div class="row justify-content-center">
-				<br>
-				<input class="btn btn-primary" type="submit" value = "게시글 쓰기">
-				</div>
-			</form>
-			<%}%>
-			<br>
-			<form action="../user/logoutAction.jsp" method="get">
-			<span class="input-group-btn">
-					<input style="float: right;" class="btn btn-secondary" type="submit" value = "로그아웃">
-					</span>
-			</form>
-			</div> --%>
-		<%} %>
-	</div>
-</div>
+		<%}else{ response.sendRedirect("../index.jsp");}%>
+          
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+	<jsp:include page="../include/footer.jsp"/>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

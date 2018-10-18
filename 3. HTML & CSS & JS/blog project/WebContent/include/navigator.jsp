@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="javax.servlet.http.Cookie" %>
-<%@ include file="../jsp/cookie.jsp" %>
+<%@ include file="../jsp/loginId.jsp" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="../index.jsp">호진 블로그</a>

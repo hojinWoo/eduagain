@@ -5,7 +5,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
-<jsp:useBean id="user" class="kr.or.kosta.blog.user.dao.User" scope="request"/>
+<jsp:useBean id="user" class="kr.or.kosta.blog.user.dao.User"/>
 <jsp:setProperty property="*" name="user"/>
 <%
 DaoFactory factory = new UserJdbcDaoFactory();

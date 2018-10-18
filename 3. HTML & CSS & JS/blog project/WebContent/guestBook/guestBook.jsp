@@ -26,6 +26,7 @@
           <h1 class="my-4">
           <strong>방명록</strong><br>
           </h1>
+          <br><br>
           <!-- Post Write -->
           <div class="card mb-4">
             <h5 class="card-header">방명록을 작성해주세요~~</h5>
@@ -51,6 +52,7 @@
 				</form>
             </div>
           </div>
+          <br><br>
 		<%for(Guest guest : guests){ %>
 			<!-- Blog Post -->
           <div class="card mb-4">

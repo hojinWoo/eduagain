@@ -54,9 +54,9 @@
 			  <label class="col-md-3"></label>
 			  <% 
 			  if(id != null){
-				  	if (id.equals("!!")) {System.out.println("사용 불가능!!!!");%>
+				  	if (id.equals("!!")) {%>
 					 <label class="col-md-6"><small style="color: red">사용 불가능한 아이디입니다.</small></label>
-				<%}else{System.out.println("사용 가능!!!!");%>
+				<%}else{%>
 					<label class="col-md-6"><small style="color: red">사용 가능한 아이디입니다.</small></label>
 				<%}}else{%><br>
 				<%}%>

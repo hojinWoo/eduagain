@@ -29,6 +29,9 @@
 			<div class="row justify-content-center">
 				<div class="col-4"></div>
 				<div class="col-4">
+					<input type="button" class="btn btn-primary" value="로그인하기" onclick="location.href='../user/login.jsp'">
+				</div>
+				<div class="col-4">
 					<input type="button" class="btn btn-primary" value="홈으로" onclick="location.href='../index.jsp'">
 				</div>
 			</div>

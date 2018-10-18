@@ -42,8 +42,5 @@ public abstract class DaoFactory {
 	
 	public abstract UserDao getUserDao(); 
 	public abstract GuestDao getGuestDao(); 
-//	public BarDao getBarDao();
-//	public FooDao getFooDao();
-	
 	
 }

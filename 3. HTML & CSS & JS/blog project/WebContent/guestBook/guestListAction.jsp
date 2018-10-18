@@ -4,7 +4,7 @@
 <%@ page import="kr.or.kosta.blog.guest.dao.GuestDao"%>
 <%@ page import="kr.or.kosta.blog.guest.domain.GuestJdbcDaoFactory"%>
 <%@ page import="kr.or.kosta.blog.DaoFactory"%>
-<%@ include file="../jsp/cookie.jsp" %>
+<%@ include file="../jsp/loginId.jsp" %>
 <%
 String cookieId = "";
 if(loginId != null){
@@ -12,6 +12,5 @@ if(loginId != null){
 }
 DaoFactory factory = new GuestJdbcDaoFactory();
 GuestDao dao = factory.getGuestDao();
-System.out.println("ccid : "+cookieId);
 List<Guest> guests = dao.listAll(cookieId);
 %>
