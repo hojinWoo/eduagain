@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="kr.or.kosta.pattern.UserDao"%>
-<%@ page import="kr.or.kosta.pattern.JdbcDaoFactory"%>
-<%@ page import="kr.or.kosta.pattern.DaoFactory"%>
+<%@ page import="kr.or.kosta.blog.user.dao.UserDao"%>
+<%@ page import="kr.or.kosta.blog.user.domain.UserJdbcDaoFactory"%>
+<%@ page import="kr.or.kosta.blog.DaoFactory"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,17 +26,15 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
         <div class="center">
-			<form class="form-checkId" action="checkIdAction.jsp" method="post">
+			<form class="checkId" action="checkIdAction.jsp" method="post">
 		      <h1 class="h3 mb-3 font-weight-normal">회원가입</h1><br>
 		      <div class="row">
 		      <label class = "col-md-3" for="id">아이디</label>
 		      <%
 		      String id = null;
-		      System.out.println("받은거 :"+request.getParameter("cid"));
 		    		  if(request.getParameter("cid")!=null){
 		    			  if(!request.getParameter("cid").equals("!!")){
 		    				  id = request.getParameter("cid");
-		    				  System.out.println("asd" + id);
 		    				  %>
 		     					<input type="text" name="bid" class="col-md-6" value="<%=id%>" required autofocus>
 		    				  <%

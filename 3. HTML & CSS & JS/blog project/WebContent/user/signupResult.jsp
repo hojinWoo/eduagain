@@ -18,17 +18,22 @@
 	<!-- /navigation -->
     <!-- Page Content -->
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center">
         <!-- Blog Entries Column -->
-        <div class="col-md-8">
+        <div class="col-md-6">
         <div class="center">
-			<h2>회원가입이 완료되었습니다.</h2>
-			<h2>로그인 해주세요</h2>
+			<h2>회원가입이 완료되었습니다!!</h2><br>
+			<h3>다시 로그인 해주세요</h3>
+        	<img class="img-fluid rounded" src="../img/success.gif" alt="">
+        	
+			<div class="row justify-content-center">
+				<div class="col-4"></div>
+				<div class="col-4">
+					<input type="button" class="btn btn-primary" value="홈으로" onclick="location.href='../index.jsp'">
+				</div>
+			</div>
 		</div>
         </div>
-        <!-- Sidebar Widgets Column -->
-		<jsp:include page="../include/sidebar.jsp"/>
-        <!-- Sidebar Widgets Column -->
       </div>
       <!-- /.row -->
     </div>

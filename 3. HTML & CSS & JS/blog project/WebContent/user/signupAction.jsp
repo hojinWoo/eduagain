@@ -1,14 +1,15 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="kr.or.kosta.pattern.UserDao"%>
-<%@ page import="kr.or.kosta.pattern.JdbcDaoFactory"%>
-<%@ page import="kr.or.kosta.pattern.DaoFactory"%>
-<% request.setCharacterEncoding("utf-8"); %>
-<jsp:useBean id="user" class="kr.or.kosta.pattern.User" scope="request"/>
+<%@ page import="kr.or.kosta.blog.user.dao.UserDao"%>
+<%@ page import="kr.or.kosta.blog.user.domain.UserJdbcDaoFactory"%>
+<%@ page import="kr.or.kosta.blog.DaoFactory"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<jsp:useBean id="user" class="kr.or.kosta.blog.user.dao.User" scope="request"/>
 <jsp:setProperty property="*" name="user"/>
 <%
-DaoFactory factory = new JdbcDaoFactory();
+DaoFactory factory = new UserJdbcDaoFactory();
 UserDao dao = factory.getUserDao();
 dao.create(user);
+response.sendRedirect("signupResult.jsp");
 %>
-<!-- 가입결과 화면 jsp로 디스패치 -->
-<jsp:forward page="signupResult.jsp"/>

@@ -1,18 +1,21 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="kr.or.kosta.pattern.UserDao"%>
-<%@ page import="kr.or.kosta.pattern.JdbcDaoFactory"%>
-<%@ page import="kr.or.kosta.pattern.DaoFactory"%>
-<% request.setCharacterEncoding("utf-8"); %>
+<%@ page import="kr.or.kosta.blog.user.dao.User"%>
+<%@ page import="kr.or.kosta.blog.user.dao.UserDao"%>
+<%@ page import="kr.or.kosta.blog.user.domain.UserJdbcDaoFactory"%>
+<%@ page import="kr.or.kosta.blog.DaoFactory"%>
+<%@ page import="javax.servlet.RequestDispatcher"%>
 <%
+request.setCharacterEncoding("utf-8");
 String readId = request.getParameter("bid");
-DaoFactory factory = new JdbcDaoFactory();
+DaoFactory factory = new UserJdbcDaoFactory();
 UserDao dao = factory.getUserDao();
-if(dao.read(readId) == null){
+User user = dao.read(readId);
+if(user == null){
 	request.setAttribute("cid", readId);
-	System.out.println("아이디 사용 가능");
 }else{
 	request.setAttribute("cid", "!!");
-	System.out.println("아이디 이미 존재");
+	readId = "!!";
 }
+response.sendRedirect("signup.jsp?cid="+readId);
+//request.getRequestDispatcher("/user/signup.jsp").forward(request, response);
 %>
-<jsp:forward page="signup.jsp"/>
