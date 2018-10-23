@@ -2,12 +2,12 @@
 <%@ page import="kr.or.kosta.blog.user.dao.User"%>
 <%@ page import="kr.or.kosta.blog.user.dao.UserDao"%>
 <%@ page import="kr.or.kosta.blog.user.domain.UserJdbcDaoFactory"%>
-<%@ page import="kr.or.kosta.blog.DaoFactory"%>
+<%@ page import="kr.or.kosta.blog.factory.DaoFactory"%>
 <%@ page import="javax.servlet.RequestDispatcher"%>
 <%
 request.setCharacterEncoding("utf-8");
 String readId = request.getParameter("bid");
-DaoFactory factory = new UserJdbcDaoFactory();
+DaoFactory factory = (DaoFactory)application.getAttribute("factory");
 UserDao dao = factory.getUserDao();
 User user = dao.read(readId);
 if(user == null){

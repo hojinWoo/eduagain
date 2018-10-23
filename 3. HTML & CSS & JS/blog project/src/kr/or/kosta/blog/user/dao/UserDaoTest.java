@@ -3,7 +3,7 @@ package kr.or.kosta.blog.user.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import kr.or.kosta.blog.DaoFactory;
+import kr.or.kosta.blog.factory.DaoFactory;
 import kr.or.kosta.blog.user.domain.UserJdbcDaoFactory;
 
 public class UserDaoTest {

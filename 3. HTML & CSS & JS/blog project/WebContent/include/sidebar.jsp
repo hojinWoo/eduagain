@@ -26,6 +26,15 @@
 				<input type="password" class="form-control col-md-8"  id = "pw" name = "pw"  placeholder="비밀번호를 입력해주세요..">
 			</div>
 			<br>
+			<% 
+			  if(request.getParameter("login") != null){
+				  	if (request.getParameter("login").equals("false")) {%>
+				  	<div class="row">
+				  	 <label class="col-md-4"></label>
+					 <label class="col-md-8"><small style="color: red">로그인이 실패하였습니다.</small></label>
+					</div>
+				<%}%>
+			  <%}%>
 			<div class = "row justify-content-end align-items-center">
 			<% if(saveId == null){ %>
 				<input type = "checkbox" name = "saveId" >

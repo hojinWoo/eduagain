@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ include file="../guestBook/guestListAction.jsp" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,9 +37,9 @@
               	if(loginId != null){
               	%>
 	            	<input type="hidden" id= "user_id" name="user_id" value="<%=loginId%>">
-            		<textarea class="form-control" rows="3" id = "contents" name="contents"></textarea>
+            		<textarea class="form-control" rows="3" id = "contents" maxlength="400" name="contents" placeholder="방명록 남겨주세요^^"></textarea>
               	<%}else{%>
-              		<textarea class="form-control" rows="3" disabled="disabled">로그인  후 작성이 가능합니다.</textarea>
+              		<textarea class="form-control" rows="3" maxlength="400" disabled="disabled">로그인  후 작성이 가능합니다.</textarea>
               	<%} %>
               	</div>
               	<div class="col-md-3 col align-self-center">
@@ -58,7 +58,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <h2 class="card-title"><%=guest.getUser_id() %></h2>
-              <p class="card-text"><%=guest.getContents() %></p>
+              <pre class="card-text"><%=guest.getContents() %></pre>
             </div>
             <div class="card-footer text-muted">
               <%=guest.getRegdate()%>

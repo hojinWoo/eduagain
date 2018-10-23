@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 
 import javax.sql.DataSource;
 
-import kr.or.kosta.blog.DaoFactory;
+import kr.or.kosta.blog.article.dao.ArticleDao;
+import kr.or.kosta.blog.factory.DaoFactory;
 import kr.or.kosta.blog.guest.dao.GuestDao;
 import kr.or.kosta.blog.guest.dao.JdbcGuestDao;
 import kr.or.kosta.blog.user.dao.UserDao;
@@ -19,17 +20,13 @@ public class GuestJdbcDaoFactory extends DaoFactory{
 
 	@Override
 	public GuestDao getGuestDao() {
-		GuestDao dao = new JdbcGuestDao();
-		Class cls = dao.getClass();
-		
-		Method method;
-		try {
-			method = cls.getMethod("setDataSource", DataSource.class);
-			method.invoke(dao, createDataSource());
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dao;
+		return null;
+	}
+
+	@Override
+	public ArticleDao getArticleDao() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

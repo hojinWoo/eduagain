@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,9 +27,11 @@
         	<img class="img-fluid rounded" src="../img/success.gif" alt="">
         	
 			<div class="row justify-content-center">
-				<div class="col-4"></div>
 				<div class="col-4">
 					<input type="button" class="btn btn-primary" value="로그인하기" onclick="location.href='../user/login.jsp'">
+				</div>
+				<div class = "col-1">
+					<label></label>
 				</div>
 				<div class="col-4">
 					<input type="button" class="btn btn-primary" value="홈으로" onclick="location.href='../index.jsp'">

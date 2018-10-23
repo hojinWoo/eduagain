@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@page import="kr.or.kosta.blog.factory.DaoFactory"%>
+<%@page import="kr.or.kosta.blog.factory.JdbcDaoFactory"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,7 +27,7 @@
 
           <h1 class="my-4">
           <strong>사라있다 블로그</strong><br>
-            <small>bootstrap을 이용한 개인 블로그</small>
+            <small>bootstrap을 이용한 개인 취향 저격 블로그</small>
           </h1>
 
 

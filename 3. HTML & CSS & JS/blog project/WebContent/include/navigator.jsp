@@ -22,6 +22,7 @@
 				<% if(loginId != null){ %>
 					<li class="nav-item"><a class="nav-link" href="../user/logoutAction.jsp">로그아웃</a></li>
 				<%}else{ %>
+					<li class="nav-item"><a class="nav-link" href="../user/login.jsp">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="../user/signup.jsp">회원가입</a></li>
 				<%}%>
 			</ul>

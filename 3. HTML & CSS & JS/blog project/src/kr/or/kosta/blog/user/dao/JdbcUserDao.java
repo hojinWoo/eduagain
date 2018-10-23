@@ -28,7 +28,7 @@ public class JdbcUserDao implements UserDao {
 	}
 
 	@Override
-	public void create(User user) throws Exception {
+	public boolean create(User user) throws Exception {
 		Connection con =  null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO users \r\n" + 
@@ -45,12 +45,17 @@ public class JdbcUserDao implements UserDao {
 			pstmt.setString(3, user.getPasswd());
 			pstmt.setString(4, user.getEmail());
 			pstmt.executeUpdate();
-		}finally {
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+			return false;
+		}
+		finally {
 			try {
 				if(pstmt != null) pstmt.close();
 				if(con != null)   con.close();
 			}catch (Exception e) {}
 		}
+		return true;
 	}
 
 	@Override
