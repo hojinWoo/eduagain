@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.or.kosta.shoppingmall.demo.controller.HelloController;
+import kr.or.kosta.shoppingmall.demo.controller.TodayController;
 
 
 /**
@@ -53,7 +54,7 @@ public class SimpleFrontControllerServlet_V2 extends HttpServlet {
 				controller = new HelloController();
 				break;
 			case "/today":
-//				controller = new TodayController();
+				controller = new TodayController();
 				break;
 		}
 		

@@ -77,19 +77,19 @@ apache-tomcat-8.0.53/webapps/ROOT
 
 ##### Dynamic Web Project 생성
 
-![image1](img/image 001.png)
+![image1](img/image001.png)
 
 > Target runtime 수정
 
 
 
-![image2](img/image 002.png)
+![image2](img/image002.png)
 
 > apache tomcat 위치 등록
 
 
 
-![image3](img/image 003.png)
+![image3](img/image003.png)
 
 > version은 실습에서 2.5 사용
 >
@@ -97,13 +97,13 @@ apache-tomcat-8.0.53/webapps/ROOT
 
 
 
-![image4](img/image 004.png)
+![image4](img/image004.png)
 
 > 원하는 root 이름으로 변경
 
 
 
-![image5](img/image 005.png)
+![image5](img/image005.png)
 
 > 설정 완료
 
