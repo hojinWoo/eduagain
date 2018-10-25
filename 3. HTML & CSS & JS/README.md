@@ -106,3 +106,22 @@ apache-tomcat-8.0.53/webapps/ROOT
 ![image5](./img/image 005.png)
 
 > 설정 완료
+
+
+
+
+
+## JSTL(JSP Standard Tag Library)
+
+[아파치](www.apache.org)에서 다운받아서 추가 or <u>tomcat에서 가져와서</u> jar 파일 추가 필요
+
+ (/apache-tomcat/webapps/examples/WEB-INF/lib) 에 파일 존재
+
+- taglibs-standard-impl-1.2.5.jar
+- taglibs-standard-spec-1.2.5.jar
+
+```java
+//JSP 파일에서 tag 지정 필요 >> 'c'(prefix)를 통해 jstl 사용 가능
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+```
+
