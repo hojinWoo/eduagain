@@ -19,14 +19,14 @@ public class JdbcDaoFactory extends DaoFactory {
 	
 	private Hashtable<String, Object> daos;
 	
-	public JdbcDaoFactory(String userMapperLocation) {
+	public JdbcDaoFactory(String daoMapperLocation) {
 		daos = new Hashtable<String, Object>();
 		
 		// 매핑정보를 저장할 Properties 객체 생성
 		Properties prop = new Properties();
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream(userMapperLocation);
+			fis = new FileInputStream(daoMapperLocation);
 			prop.load(fis);
 			Iterator keyIter = prop.keySet().iterator();
 			while (keyIter.hasNext()) {
@@ -69,7 +69,7 @@ public class JdbcDaoFactory extends DaoFactory {
 	public static void main(String[] args) throws Exception {
 //		DaoFactory factory = new JdbcDaoFactory();
 //		UserDao dao = factory.getUserDao();
-		String mapper = "C:/Users/KOSTA/Desktop/eclipse workspace/Model2Study/web/WEB-INF/user-mapper.properties";
+		String mapper = "C:/Users/KOSTA/Desktop/eclipse workspace/Model2Study/web/WEB-INF/dao-mapper.properties";
 		DaoFactory factory = new JdbcDaoFactory(mapper);
 		UserDao dao = (UserDao)factory.getDao(JdbcUserDao.class);
 		
