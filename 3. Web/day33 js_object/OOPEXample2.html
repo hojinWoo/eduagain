@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	//내장 객체	 테스트
+	var string = new String('ha');
+	console.log(string.charAt(1));
+
+	var today = new Date();
+	console.log(today.toString());
+
+	var array = new Array();
+	array.push(1);
+	array.push('fff');
+	console.log(array.pop());
+	console.log(array.pop());
+
+	//매개변수로 함수(마지막은 실행코드)를 넣을 수도 있다. (필요할 때만 호출)
+	//동적 생성 가능
+	var sum = new Function("x", "y", "return x+y;");
+	console.log(sum(10, 20));
+</script>
+</body>
+</html>

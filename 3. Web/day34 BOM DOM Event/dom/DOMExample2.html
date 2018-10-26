@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM 이해(생성)</title>
+</head>
+<body>
+<!-- CREATE -->
+<script type="text/javascript">
+	// 동적 엘리먼트 생성
+	var element = document.createElement("h1");
+	var text = document.createTextNode("안녕하세요 DOM");
+	element.appendChild(text);
+
+	//Body 태그 접근 및 자식으로 붙이기(너무 코드가 길어서..)
+	//document.getElementsByTagName("body").item(0).appendChild(element);
+	//body property는 DOM객체는 아님
+	//(그냥 간결화 시켜줌, 대부분의 브라우저에서 다 지원하나 Explore는 혹시나 체크 필요..)
+	document.body.appendChild(element);
+	//jQuery에서 더 쉽게 접근 가능
+
+	var imgE = document.createElement("img");
+	//imgE.src = "icons5575.png";
+	//property(src)를 연결
+	imgE.setAttribute("src", "icons4681.png");
+	document.body.appendChild(imgE);
+
+	//-----위에 방법들이 다들 너무 길어서 자동적으로 DOM 처리 해주기!!!!!!!!----------
+	//innerHTML 사용해서 붙이기(자동적으로 DOM처리), 기존 것 덮어서 처리 (표준은 X)
+	document.body.innerHTML += "<h2>동적 엘리먼트 추가</h2>";
+	document.body.innerHTML += "<img src='icons5575.png'/>";
+</script>
+</body>
+</html>

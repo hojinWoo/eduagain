@@ -1,0 +1,11 @@
+<%!
+//확장자가 중요하지 않고, text로 이루어져 있기만 하면 된다. 잘 사용X
+int count;
+
+public void jspInit(){
+	count = 0;
+}
+public void jspDestroy(){
+	count = 0;
+}
+%>

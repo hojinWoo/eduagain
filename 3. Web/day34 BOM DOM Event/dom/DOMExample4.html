@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM 이해</title>
+</head>
+<body>
+	<h1 id="header">CSS 동적 적용하기</h1>
+
+	<h2 class="myClass">AAAAAAAAAA</h2>
+	<h2 class="myClass">BBBBBBBBBB</h2>
+	<h2 class="myClass">CCCCCCCCCC</h2>
+	<h2 class="myClass">AAAAAAAAAA</h2>
+
+<script type="text/javascript">
+	//header 이름으로 접근
+	//var header = document.getElementById("header");
+
+	//추가기능 : 선택자로 접근
+	var header = document.querySelector("#header");
+	header.style.color = "blue";
+
+	//css에서 background가 2가지가 존재하기 때문에
+	//1. 내부에 dash처럼 특수문자가 있는 경우 대괄호를 사용
+	//header.style["background-color"] = "yellow";
+	//2. JS에서 camel표기법으로 사용해도 가능 (연관배열형태)
+	header.style.backgroundColor = "yellow";
+	header.style.border = "2px double red";
+
+	//추가기능 : 선택자로 접근
+	var list = document.querySelectorAll(".myClass");
+	for (var i = 0; i < list.length; i++) {
+		list[i].style.color = "#0000FF";
+	}
+</script>
+
+</body>
+</html>

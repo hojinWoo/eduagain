@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Post</title>
+</head>
+<body>
+  <h2>form 관련 태그들</h2>
+
+  <form action="/servlet/receive.do" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+      <legend> 로그인 정보 </legend>
+      <label>아이디 : <input type="text" name="userId" autocomplete="off"></label><br> 
+      <label>비밀번호 : <input type="password" name="userPw"></label><br>
+      <input type="submit" value="로그인"> <input type="reset" value="취소">
+    </fieldset>
+    <select name="teams" multiple>
+    <!-- 전달 값은 value로 날아간다 -->
+      <option value = "tiger">두산 타이거즈
+      <option value = "lions">SK 라이온즈
+      <option value = "giants">한화 자이언츠
+    </select>
+    
+    <textarea  name="message" rows="5" cols="50">점심먹고 합시다....</textarea><br>
+    
+    <label>남자<input type="radio" name="gender" value = "male"></label>
+    <label>여자<input type="radio" name="gender" value = "female" checked></label>
+    
+    <input type="hidden" name="some" value="test">
+    <input type="file" name="file_upload">
+    
+    <label>등산<input type="checkbox" name = "hobby" value = "hiking"></label>
+    <label>산책<input type="checkbox" name = "hobby" value = "walking"></label>
+    <label>독서<input type="checkbox" name = "hobby" value = "readingBook"></label>
+    
+    <!-- <input type="image" src="./images/icons4687.png"> -->
+    <button>버튼</button>
+  </form>
+</body>
+</html>

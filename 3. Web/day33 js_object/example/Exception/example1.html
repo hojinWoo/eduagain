@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type = "text/javascript">
+      //JS는 Null pointer Exception 발생시에만 Error객체를 return
+
+      document.write("<h3>Start Application....</h3>");
+      var str = null;
+      document.write(str.charAt(5)); //java의 nullpointer exception처럼 Process가 죽음
+      //Null pointer exception처럼 try-catch 를 쓰는 것이 아님
+
+      document.write(10/0);  //infinity, error X
+
+      var array = [10, 20, 30];
+      document.write(array[0]);
+      document.write(array[3]); //undefined, error X
+
+      document.write("<h3>Stop Application...</h3>");
+    </script>
+  </body>
+</html>

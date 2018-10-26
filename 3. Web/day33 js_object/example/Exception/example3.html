@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>사용자 강제 예외 발생</title>
+  </head>
+  <body>
+    <script type = "text/javascript">
+      document.write("<h3>Start Application....</h3>");
+      try{
+        var num = prompt("enter number");
+        if (num > 5 || num < 1){
+          //예외 강제 발생 (사실 잘 사용 X )
+          throw "it must be 0 to 5";
+        }
+      }
+      //e : error 객체
+      catch(e){
+        console.write(e.toString())
+      }finally{
+        console.write("always")
+      }
+      document.write("<h3>Stop Application...</h3>");
+    </script>
+  </body>
+</html>

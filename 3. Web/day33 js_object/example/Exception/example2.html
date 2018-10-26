@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>사후 처리</title>
+  </head>
+  <body>
+    <script type = "text/javascript">
+      document.write("<h3>Start Application....</h3>");
+      try{
+        var str = null;
+        document.write(str.charAt(5));
+      }
+      //e : error 객체
+      catch(e){
+        console.write(e.toString())
+      }finally{
+        console.write("always")
+      }
+      document.write("<h3>Stop Application...</h3>");
+    </script>
+  </body>
+</html>

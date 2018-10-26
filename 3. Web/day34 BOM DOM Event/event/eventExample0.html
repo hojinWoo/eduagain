@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>이벤트 처리</title>
+<script type="text/javascript">
+//아직 이벤트는 발생 안했기 때문에 자동 호출
+window.onload = function(){
+	init();
+	eventRegist();
+}
+
+function init(){
+	console.log("Dom tree completed");
+}
+function eventRegist(){
+	document.getElementById("myButton").onclick = function(){
+		console.log("clicked");
+	}
+}
+
+function exit(){
+	close();
+}
+</script>
+</head>
+<body>
+	<input type="button" value="click JS" id="myButton" />
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>브라우저 객체</title>
+</head>
+<body>
+<h2>스크립트엔진에 의해 미리 생성되어 있는 브라우저 관련 객체들(BOM)</h2>
+<iframe src="http://www.daum.net"></iframe>
+<iframe src="http://www.daum.net"></iframe>
+<iframe src="http://www.daum.net"></iframe>
+<iframe src="http://www.daum.net"></iframe>
+
+<script type="text/javascript">
+
+// *************** 대표적인 프로퍼티들...****************
+// 창의 위치 값들
+console.log(window.screenX);
+console.log(window.screenLeft);
+console.log(window.screenY);
+console.log(window.screenTop);
+
+//console.log(window.document);
+console.log(window.document.constructor);  //HTMLDocument()
+console.log(window.frames.constructor);    //Window()
+console.log(window.history.constructor);   //Histroy()
+console.log(window.location.constructor);  //Location()
+console.log(navigator.constructor);        //Navigator()
+console.log(window.frames.length);         //4 : frame, iframe이 들어있는 경우
+
+console.log(frames[0].constructor);
+console.log(frames[0].document);
+
+//브라우저 자체는 읽기 전용이여서 변경 안되나 내가 만든 창은 변경 가능
+//screenX = 100;
+//screenY = 100;
+</script>
+
+</body>
+</html>

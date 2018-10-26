@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- 가장 많이 사용되는 속성 -->
+<!-- layout 배치 시 문서 위에 웹 요스를 떠 있게 함. 문서의 레이아웃 지정 -->
+<title>Box 모델 float 속성</title>
+<style type="text/css">
+.outside {
+	background: olive;
+	font: 11px/1.6em Verdana;
+	padding: 10px;
+	text-align: justify;
+	height: 200px;
+}
+
+#left {
+	width: 100px;
+	height: 100px;
+	background: gold;
+	float: left;
+}
+
+#right {
+	width: 100px;
+	height: 100px;
+	background: tomato;
+	float: right;
+}
+
+#right2 {
+	width: 100px;
+	height: 100px;
+	background: silver;
+	float: left;
+}
+
+#footer {
+	height: 100px;
+	background: teal;
+	clear: both;
+	/* float 속성은 없애서 -> 상속 받아서 사용되기 때문.. */
+	/* static 속성이 된다.*/
+}
+</style>
+</head>
+<body>
+
+	<div class="outside">
+		<div id="left">
+			Left Block Box
+		</div>
+		<div id="right">
+			Right Block Box
+		</div>
+		<div id="right2">Other Block Box</div>
+		ABCD float float float float float float float float float float float
+		ABCD float float float float float float float float float float float
+		ABCD float float float float float float float float float float float
+		ABCD float float float float float float float float float float float
+		<div id="footer">
+			Footer Block Box
+		</div>
+	</div>
+
+</body>
+</html>

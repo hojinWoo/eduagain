@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM 이해(읽기)</title>
+</head>
+<body>
+	<span id="mySpan">스판입니다..</span>
+	<div>비다이드1입니다.</div>
+	<div>비다이드2입니다.</div>
+	<input type="text" name="userId" >
+<!-- READ -->
+<script type="text/javascript">
+	//DOM : documnet 밑에 있는 모든 객체들
+	//HTML도 DOM 밑에 있어서 접근 가능,
+	//DOM API : browser에서 메모리상의 각각의 객체들에 접근 가능하도록 제공
+
+	//Documnet API를 이용한 DOM 객체 접근
+//document.get~~
+//documnet.getElementsByTagName("h2");
+
+	//window
+	//Document (DOM객체의 최상위)
+
+	console.log("브라우저에 의해 BOM과 DOM이 생성 완료됨...");
+
+	//alert(document.nodeType);
+
+	// 현재 문서의 html 엘리먼트를 접근하고 싶어요..
+	var rootE = window.document.documentElement;
+	//var rootE = document.documentElement;
+	console.log(rootE.constructor);
+	//가장 중요한 3가지 : nodeName, nodeType, nodeValue
+	console.log(rootE.nodeType);	//1
+	console.log(rootE.nodeName);	//HTML
+	console.log(rootE.nodeValue);	//null
+
+
+	// html 엘리먼트의 자식 엘리먼트들 접근하기..
+	var nodeList = rootE.childNodes;
+	console.log(nodeList.constructor);	//NodeList()
+	console.log("html 엘리먼트의 자식엘리먼트 수: " + nodeList.length);	//3 : head, body, head와 body 사이에 있는 공백을 1개로 취급
+																																		//(head앞과 body 뒤 공백은 브라우저에서 자체 삭제)
+
+	var e = window.document.getElementById("mySpan");
+	console.log(e.constructor);
+	console.log(e.nodeType);			//1
+	console.log(e.nodeName);			//SAPN
+	console.log(e.nodeValue);			//null (element로 접근해야 하기 때문)
+
+	var array = document.getElementsByTagName("div");
+	console.log(array.length);
+
+	//for in문으로 하면 다른 것들도 다 같이 들어오기 때문에 사용 지양
+
+	//for (var i = 0; i < array.length; i++) {
+	for (var i = 0; i < array.length; i++) {
+//	var e = array[i];
+		//NodeList는 Array를 상속받아서 확장해서 만든 것이기 때문에 item을 사용하는 것을 권장
+		var e = array.item(i);
+		//console.log(e.nodeName);
+		//e.childeNodes[0].nodeValue;
+		var text = e.firstChild;	//childeNodes로 접근하면 배열로 전체를 return받기 때문에 각각 접근 시 firstChild or lastChild로 접근해서 사용함.
+		console.log(text.nodeType);		//3 : text node
+		console.log(text.nodeName);		//#text
+		console.log(text.nodeValue);	//실제 들어있는 값!! (자식으로 접근해야 한다.)
+	}
+
+	//nodeList가 return
+	var array = document.getElementsByName("userId");
+	console.log(array.constructor);	//NodeList()
+	var input = array.item(0);
+	console.log(input.constructor);	//HTMLInputElement()
+
+	// 현재문서의 최상위 엘리먼트(html) 접근 속성
+	var htmlE = document.documentElement;
+	console.log(htmlE.nodeType);	//1 : element node
+	console.log(htmlE.nodeName);	//HTML
+	console.log(htmlE.nodeValue);	//null
+
+	document.childNodes[0];
+	//documnet.getElementsByName
+
+
+	//접근방법은 다양함.
+
+	//nodeName
+	/*
+	문서 노드(document node)	#document
+	요소 노드(element node)		태그 이름 (영문자로 대문자)
+	속성 노드(attribute node)	속성 이름
+	텍스트 노드(text node)		 #text
+	*/
+
+	//nodeValue
+	/*
+	요소 노드(element node)		undefined
+	속성 노드(attribute node)	해당 속성의 속성값
+	텍스트 노드(text node)		 해당 텍스트 문자열
+	 */
+
+	//nodeType
+	/*
+	요소 노드(element node) 	1
+	속성 노드(attribute node)	2
+	텍스트 노드(text node)		 3
+	주석 노드(comment node)		8
+	문서 노드(document node)	9
+	 */
+</script>
+
+</body>
+</html>
