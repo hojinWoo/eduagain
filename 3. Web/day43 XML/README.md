@@ -8,7 +8,8 @@ XML (eXtensible Markup Language)
 
 #### XML File
 
-- DTD File
+- DTD File	(Document Type Definition)
+  : 외부 DTD 서브셋이 정의되어 있는 문서 
 - XML File	
 - XML Schema File
 - XSL
