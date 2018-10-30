@@ -3,10 +3,10 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
                         
 <!-- 네임스페이스(사용영역) 설정 -->
-<mapper namespace="kr.or.kosta.ems.employee">
+<mapper namespace="kr.or.kosta.shoppingmall.employee">
 	
 	<!-- 전체사원 조회를 위한 SQL 매핑 -->
-	<select id="selectAll" resultType="kr.or.kosta.ems.employee.domain.Employee" >
+	<select id="selectAll" resultType="kr.or.kosta.shoppingmall.employee.domain.Employee" >
 	<!-- <select id="selectAll" resultType="Employee" > -->
 		SELECT employee_id                      AS "id", 
 		       first_name                       AS "firstName", 
@@ -33,7 +33,7 @@
 		WHERE  employee_id = #{value} 
 	</select>
 	
-	<!-- 사원번호에 해당하는 급여 조회 -->
+	<!-- 사원번호에 해당하는 급여 조회, parameterType 생략 가능 -->
 	<select id="selectSalaryById"  parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		SELECT salary
 		FROM   employees
@@ -83,7 +83,7 @@
 	</select>
 	
 	<!-- 자주 사용되고, 자바빈의 속성이름과 테이블 컬럼이름이 다른 경우 resultMap 설정 -->
-	<resultMap  id="employeeResultMap" type="kr.or.kosta.ems.employee.domain.Employee">
+	<resultMap  id="employeeResultMap" type="kr.or.kosta.shoppingmall.employee.domain.Employee">
 		<result property="id"           column="employee_id"/>
 		<result property="email"        column="email"/>
 		<result property="phoneNumber"  column="phone_number"/>
@@ -137,13 +137,13 @@
 	 -->
 	
 	<!-- 사원 정보 수정(set, if 태그를 이용한 동적 SQL) -->
-	<update id="updateEmployee" parameterType="Employee">
+	<update id="updateEmployee2" parameterType="Employee">
 		UPDATE employees
 		<set>
 	        <if test="firstName != null">first_name = #{firstName},</if>
 	        <if test="lastName != null">last_name = #{lastName},</if>
 	        <if test="salary != null">salary = #{salary}</if>
-	        <!-- MyBatis는 SET절의 끝에 콤마(,)가 있으면 제거 -->
+	        <!-- MyBatis는 SET절의 끝에 콤마(,)가 있으면 제거되기 때문에 따로 추가 필요 -->
 	    </set>
 	    WHERE employee_id = #{id}
 	</update>
