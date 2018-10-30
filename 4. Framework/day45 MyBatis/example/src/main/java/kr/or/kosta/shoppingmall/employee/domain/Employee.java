@@ -1,4 +1,4 @@
-package kr.or.kosta.ems.employee.domain;
+package kr.or.kosta.shoppingmall.employee.domain;
 
 /**
  * 사원 추상화 도메인(Domain) 클래스

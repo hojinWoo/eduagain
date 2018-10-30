@@ -88,7 +88,6 @@ public class MybatisTest {
 	
 //	@Test
 	public void testSelectListLike() {
-		Map<String, Integer> map = new HashMap<String, Integer>();
 		String name = "%A%";
 		SqlSession session = factory.openSession(true);		
 		List<Employee> list = session.selectList(NAMESPACE + ".selectEmployeesByLastName", name);
@@ -119,6 +118,19 @@ public class MybatisTest {
 		SqlSession session = factory.openSession();		
 		session.commit();
 		session.update(NAMESPACE + ".updateEmployee", emp);
+		session.close();
+	}
+	
+	@Test
+	public void updateDynamic() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", "name");	//id or name
+		map.put("searchValue", "%a%");	
+		SqlSession session = factory.openSession(true);		
+		List<Employee> list = session.selectList(NAMESPACE + ".dynamicSQL", map);
+		for (Employee employee : list) {
+			logger.debug(employee.toString());
+		}
 		session.close();
 	}
 }

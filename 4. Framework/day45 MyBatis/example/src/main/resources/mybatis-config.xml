@@ -11,6 +11,7 @@
 	<!--  MyBatis에서 사용할 자바클래스(패키지명 포함 풀네임)에 대한 짧은 별칭 등록 -->
 	<typeAliases>
 		<typeAlias type="kr.or.kosta.shoppingmall.employee.domain.Employee" alias="Employee"/>
+		<typeAlias type="kr.or.kosta.shoppingmall.user.domain.User" alias="User"/>
 	</typeAliases>
 	
 	<!-- 다수의 Database에 접근하거나 개발, 테스트, 운영 환경에 맞는 다중 환경 설정 지원 -->
@@ -48,6 +49,7 @@
 	<mappers>
 		<!-- 클래스패스에 위치한 XML 매퍼 파일 지정, 한개의 컨테이너에서 처리하기 때문에 id 충돌 조심 - namespace로 충돌 방지 -->
 		<mapper resource="mappers/EmployeeMapper.xml"  />
+		<mapper resource="mappers/UserMapper.xml"  />
 				
 		<!-- URL을 사용한 XML 매퍼 파일 지정 -->
 		<!-- <mapper url="file:///c:/someProject/mapper/SomeMapper.xml" />	 -->
