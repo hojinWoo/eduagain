@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>미션) 계산기(JSP)</title>
+</head>
+ <script type="text/javascript" src="js/ajax.js"></script>
+<body>
+  <input type="number" name="num1">
+  <select name="operator">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+  </select>
+  <input type="number" name="num2">
+  <span id="output"></span>
+  <input type="button" id="result" value="결과보기">
+ 
+<script type="text/javascript">
+
+window.onload = function(){
+	var button = document.getElementById('result');
+	/* JSP로 처리 */
+	button.onclick = function(){
+		var num1 = document.getElementsByName("num1")[0].value;
+		var num2 = document.getElementsByName("num2")[0].value;
+		var op = document.getElementsByName("operator")[0].value;
+		
+//		var uri = "calculate.jsp";
+		var url = "ajax.mall";
+		var param = encodeURI("num1="+num1+"&operator="+op+"&num2="+num2);
+		
+		ajax({
+			method: "get",
+			url: url,
+			param: param,
+			callback: receiveServer
+		});
+	}
+	
+	function receiveServer(request){
+		setResult(request.responseText);
+	}
+	
+	function setResult(result){
+		var span = document.getElementById('output');
+		if(span){
+			/* 기존 data를 지키기 위해서 iframe을 사용 */
+			span.innerHTML = result;
+		}
+	}
+}
+
+</script>
+</body>
+</html>
+

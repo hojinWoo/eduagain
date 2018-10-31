@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.shoppingmall.user">
+	
+	<insert id="create" > 
+		Insert 		into users
+		values 				(#{id}, 
+			 				#{name}, 
+			 				#{passwd}, 
+			 				#{email}, 
+			 				#{regdate})
+	</insert>
+	
+	
+	<select id="read"  parameterType="String" resultType="User">
+		select 		id,
+			 		name,
+			 		passwd,
+			 		email,
+			 		TO_CHAR(regdate, 'YYYY\"년\" MM\"월\" DD\"일\" DAY') AS regdate
+		FROM		users
+		Where		id = {id}	 		
+	</select>
+	
+	<update id="update"  parameterType="User">
+		update		users
+		<set>		
+			<if test="passwd != null">	passwd = #{passwd},</if>
+			<if test="email != null">	email = #{email}</if>
+		</set>
+		where		id = {id}
+	</update>
+	
+	
+	<select id="listAll"  resultType="User">
+		select 		id,
+			 		name,
+			 		passwd,
+			 		email,
+			 		TO_CHAR(regdate, 'YYYY\"년\" MM\"월\" DD\"일\" DAY') AS regdate
+		FROM		users
+	</select>
+	
+	
+	<select id="certify"  parameterType="map" resultType="User">
+		select 		id,
+			 		name,
+			 		passwd,
+			 		email,
+			 		TO_CHAR(regdate, 'YYYY\"년\" MM\"월\" DD\"일\" DAY') AS regdate
+		FROM		users
+		WHERE		id = #{id} AND passwd = #{passwd}
+	</select>
+		
+</mapper>

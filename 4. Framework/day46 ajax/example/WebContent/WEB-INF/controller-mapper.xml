@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- properties > xml파일로 변경 -->
+<beans>
+	<bean type = "controller" name="/ajax" class="kr.or.kosta.shoppingmall.demo.controller.AjaxController" />
+</beans>

@@ -7,41 +7,12 @@
 window.onload = function(){
 	document.getElementById('send').onclick = function(){
 		var message = document.getElementById('message').value;
-//		sendServer(message);
-		sendServerPost(message);
+		sendServer(message);
 	}
 }
 
 function sendServer(message){
-var request = new XMLHttpRequest();
-	
-	/* for ( var name iterable) {
-		console.log(name + " : " + request[name]);
-	} */
-	var url = "server.jsp?message="+message;
-	request.open("get", url, true);	//init
-	
-	request.onreadystatechange = function(){
-		/* appenMessage(request.responseText); */
-		if(request.readyState == 4){ //서버 수신 완벽하게 완료
-			if(request.status == 200){
-				appenMessage(request.responseText);
-			}else if(request.status == 400){
-				alert('잘못된 요청입니다.');
-			}
-		}else{
-			console.log('서버로부터 데이터 수신 중..');
-		}
-	}
-	
-	request.send();
-}
-
-function sendServerPost(message){
 	var request = new XMLHttpRequest();
-	/* for ( var name iterable) {
-	console.log(name + " : " + request[name]);
-	} */
 	
 	//POST
 	var param = "message="+message;
@@ -50,7 +21,6 @@ function sendServerPost(message){
 	request.open('post', url, true);	//init
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 	request.onreadystatechange = function(){
-		/* appenMessage(request.responseText); */
 		if(request.readyState == 4){ //서버 수신 완벽하게 완료
 			if(request.status == 200){
 				appenMessage(request.responseText);
