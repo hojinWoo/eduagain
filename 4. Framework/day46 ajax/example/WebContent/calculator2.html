@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>미션) 계산기(JSP)</title>
+</head>
+<body>
+  <input type="number" name="num1">
+  <select name="operator">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+  </select>
+  <input type="number" name="num2">
+  <span id="output"></span>
+  <input type="button" id="result" value="결과보기">
+<script type="text/javascript">
+
+window.onload = function(){
+	var button = document.getElementById('result');
+	/* JSP로 처리 */
+	button.onclick = function(){
+		var num1 = document.getElementsByName("num1")[0].value;
+		var num2 = document.getElementsByName("num2")[0].value;
+		var op = document.getElementsByName("operator")[0].options;
+		var index = document.getElementsByName("operator")[0].selectedIndex;
+		
+		var uri = "";
+		uri = encodeURI(uri);
+		setResult(uri);
+	}
+	function setResult(uri){
+		var span = document.getElementById('output');
+		if(span){
+			/* 기존 data를 지키기 위해서 iframe을 사용 */
+			span.innerHTML = "<iframe src = '"uri"'>"
+		}
+	}
+}
+
+</script>
+</body>
+</html>
+
