@@ -72,10 +72,24 @@
     		</dependency>
     ```
 
-
-  > Project 우클릭 > Maven > Update Project
+  > 파일 수정 후 >> Project 우클릭 > Maven > Update Project
   >
   > error가 나는 경우 .m2 폴더 삭제 후 다시 update하기 (sts bug)
+
+- [Lombok Library](https://projectlombok.org/all-versions) (plugin)설치, market place에 없어서 수동 설치 필요
+  알집파일 위치에서 Dos창 열어서 명령어 입력
+
+  ```bash
+  java -jar lombok-1.18.2.jar
+  ```
+
+  > 이클립스가 있는 곳에 eclipse.exe파일 등록 필요!!
+  >
+  > 완료 후 이클립스 껐다가 다시 열기 (바탕화면에 이클립스 바로가기가 있는 경우도 삭제 후 다시 생성하기)
+  >
+  > 설치가 완료되어있다면 이클립스가 있는 곳에 lombok.jar파일이 들어있다
+
+
 
 
 

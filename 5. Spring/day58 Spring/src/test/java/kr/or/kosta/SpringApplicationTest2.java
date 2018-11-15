@@ -19,8 +19,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SpringApplicationTest2 {
 
-	Logger logger = LoggerFactory.getLogger(SpringApplicationTest2.class);
-	
 	// @Setter(onMethod_= {@Autowired})
 	@Inject
 	private Restaurant restaurant;	//inject(or autowired)만 선언하면 spring container에서 포함되어 실행
@@ -28,6 +26,6 @@ public class SpringApplicationTest2 {
 	@Test
 	public void test() {
 		Chef chef = restaurant.getChef();
-		logger.info(chef.toString());
+		log.info(chef.toString());
 	}
 }
