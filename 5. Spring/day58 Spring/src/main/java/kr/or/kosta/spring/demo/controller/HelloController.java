@@ -17,7 +17,7 @@ public class HelloController implements Controller {
 		ModelAndView mav = new ModelAndView();
 		String message = "Spring MVC 모듈 테스트...";
 		mav.addObject("message", message);
-		mav.setViewName("hello");//jsp 파일 이름으로 설정 (확장자 없이 쓸 수 있다.)
+		mav.setViewName("demo/hello");//jsp 파일 이름으로 설정 (확장자 없이 쓸 수 있다.)
 		return mav;
 	}
 
