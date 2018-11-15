@@ -72,12 +72,31 @@
     		</dependency>
     ```
 
+  - 167 line
+
+    ```xml
+     			<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                    </configuration>
+                </plugin>
+    ```
+
+    > 마찬가지로 1.6으로 되어있다.
+
   > 파일 수정 후 >> Project 우클릭 > Maven > Update Project
   >
   > error가 나는 경우 .m2 폴더 삭제 후 다시 update하기 (sts bug)
 
 - [Lombok Library](https://projectlombok.org/all-versions) (plugin)설치, market place에 없어서 수동 설치 필요
-  알집파일 위치에서 Dos창 열어서 명령어 입력
+  다운받은 알집파일이 있는 위치에서 dos창 열어서 명령어 입력
 
   ```bash
   java -jar lombok-1.18.2.jar
@@ -89,13 +108,35 @@
   >
   > 설치가 완료되어있다면 이클립스가 있는 곳에 lombok.jar파일이 들어있다
 
+- Oracle JDBC 등록
 
+  1. 실제 WEB-INF/lib에 jar 파일 등록
 
+  2. 사설파일 porm.xml등록 (잘 안되는 경우도 있어서 다른 코드를 넣는 것도 추천.)
+
+     ```xml
+     	<!-- Oracle Jdbc Driver maven Repository -->
+     	<repositories>
+     	     <repository>
+     	          <id>codelds</id>
+     	          <url>https://code.lds.org/nexus/content/groups/main-repo</url>
+     	     </repository>
+     	</repositories>
+     
+     		<!-- oracle jdbc driver -->
+     		<dependency>
+     		     <groupId>com.oracle</groupId>
+     		     <artifactId>ojdbc6</artifactId>
+     		     <version>11.2.0.3</version>
+     		</dependency>
+     ```
+
+     > Oracle Driver Connection사용하려면 java 버전이 1.7이상이 되어야 한다.
 
 
 ## 개념 정리
 
-### POJO (Plain Old Java Object)
+### POJO (Plain Old Java Object), 순수 Java Class
 
 - **IoC / DI**
 - **AOP**
@@ -132,4 +173,3 @@
 
 - Bean Scanner는 자동으로 Bean으로 등록 :  기본적으로 Bean의 아이디로 클래스  이름(클래스 이름의 첫 글자만  소문자로 바꾼 것)을 사용
   - Bean Scanner 설정 필요!! **context:component-scan**
-- 

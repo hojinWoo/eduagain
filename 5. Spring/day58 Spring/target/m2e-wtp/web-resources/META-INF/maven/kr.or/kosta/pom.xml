@@ -7,6 +7,15 @@
 	<name>SpringStudy</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	
+	<!-- Oracle Jdbc Driver maven Repository -->
+	<repositories>
+	     <repository>
+	          <id>codelds</id>
+	          <url>https://code.lds.org/nexus/content/groups/main-repo</url>
+	     </repository>
+	</repositories>
+	
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.0.10.RELEASE</org.springframework-version>
@@ -131,8 +140,13 @@
 		   <version>1.18.2</version>
 		   <scope>provided</scope>
 		</dependency>
-				
-		       
+		
+		<!-- oracle jdbc driver -->
+		<dependency>
+		     <groupId>com.oracle</groupId>
+		     <artifactId>ojdbc6</artifactId>
+		     <version>11.2.0.3</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
@@ -155,8 +169,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
