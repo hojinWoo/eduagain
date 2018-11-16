@@ -11,8 +11,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kosta.spring.employee.command.LoginCommand;
 import kr.or.kosta.spring.employee.domain.Employee;
@@ -34,6 +33,10 @@ import lombok.extern.log4j.Log4j;
 
 /**
  * 사원 관련 요청 처리 세부 컨트롤러 (web 1.0 사용 시절)
+ * 
+ * 
+ * RESTful service - @ResponseBody 활용(ResponseEntity 반환) 
+ * ResponseEntity - 데이터와 함께 Http 응답 메시지의 응답코드와 응답메시지 같이 전달 가능) 
  * @author hojin
  */
 
@@ -41,8 +44,6 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/employee")
 @Log4j
 public class EmployeeController {
-
-    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     // 사원 목록
     @RequestMapping("list")
@@ -240,13 +241,13 @@ public class EmployeeController {
 	 }
 
 	 /** RESTful service - @RequestBody, @ResponseBody 활용 */
-	 // 테스트 시 Postman 활용
+	 // 테스트 시 Chrome Postman 활용, url로 post 요청하고 body에 정보를 담아서 보내면 된다. (JSON 형식으로)
 	 @PostMapping(value = "/echo", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public @ResponseBody ResponseEntity<Employee> echo(@RequestBody Employee employee) {
 	      log.info("사원정보 수신 : " + employee);
 	      // 테스트 에코
-	      //ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.OK).body(employee);
-	      ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(employee);
+	      ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.OK).body(employee);
+	      //ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(employee);
 	      return result;
 	 }
 
