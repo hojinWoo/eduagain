@@ -3,7 +3,9 @@ package kr.or.kosta.spring.employee.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -161,6 +167,7 @@ public class EmployeeController {
 
 	 /********** RESTful 사용하기 ***********/
 	 /** RESTful service - JSON 직접 출력(비권장) */
+	 // url : employee/100
 	 @GetMapping(value="/{employee_id}")
 	 public void detail(@PathVariable("employee_id") int employeeId, HttpServletResponse response) throws IOException {
 	      log.info("사원정보 요청 : " + employeeId);
@@ -171,14 +178,82 @@ public class EmployeeController {
 	      out.println(employeeJson);
 	 }
 
-	 /** RESTful service - @ResponseBody 활용(Json Text 반환) */
+	 /** RESTful service - @ResponseBody 활용(Json Text 반환 시), 한글 설정 및 mime type 설정 */
 	 @GetMapping(value="/{employeeId}/1",produces = "text/plain; charset=utf8")
 	 public @ResponseBody String detail(@PathVariable int employeeId){
 	      log.info("사원정보 요청 : " + employeeId);
-	      String employeeJson = "{\"employeeId\": \""+employeeId+"\", \"firstName\" : \"기정\", \"lastName\" : \"김\"}";
+	      String employeeJson = "{\"employeeId\": \""+employeeId+"\", \"firstName\" : \"가가\", \"lastName\" : \"강\"}";
 	      return employeeJson;
 	 }
 
+	 /** RESTful service - @ResponseBody 활용(자바 객체 반환) */
+	 /* 마샬링 작업을 위해 XML, JSON 파싱 라이브러리(jackson) 추가 필요(pom.xml) */
+	 @GetMapping(value="/{employeeId}/2", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 //@GetMapping(value="/{employeeId}/2", produces=MediaType.APPLICATION_XML_VALUE)
+	 //@GetMapping(value="/{employeeId}/2", produces={MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE}) - 생략시 기본값
+	 public @ResponseBody Employee detail2(@PathVariable int employeeId) {
+	      log.info("사원정보 요청 : " + employeeId);
+	      Employee employee = new Employee();
+	      employee.setEmployeeId(employeeId);
+	      employee.setFirstName("길동");
+	      employee.setLastName("홍");
+	      return employee;			//JSON으로 formatting도 알아서 된다.
+	 }
+
+	 /** RESTful service - @ResponseBody 활용(콜렉션 Map 반환) */
+	 @GetMapping(value="/{employeeId}/3")
+	 // 기본 xml 응답, /{employeeId}/3.json 요청시 json 응답 
+	 public @ResponseBody Map<String, Object> detail3(@PathVariable int employeeId) {
+	      log.info("사원정보 요청 : " + employeeId);
+	      Map<String, Object> employeeMap = new HashMap<String, Object>();
+	      employeeMap.put("employeeId", employeeId);
+	      employeeMap.put("firstName", "찬호");
+	      employeeMap.put("lastName", "박");
+	      return employeeMap;
+	 }
+
+	 /** RESTful service - @ResponseBody 활용(콜렉션 List 반환) */
+	 @GetMapping(value = "/", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public @ResponseBody List<Employee> list() {
+	      log.info("사원목록 요청");
+	      List<Employee> list = new ArrayList<Employee>();
+	      list.add(new Employee(100, "firstName1", "lastName1", "email1"));
+	      list.add(new Employee(101, "firstName2", "lastName2", "email2"));
+	      list.add(new Employee(102, "firstName3", "lastName3", "email3"));
+	      return list;
+	 }
+
+	 /** RESTful service - @ResponseBody 활용(ResponseEntity 반환) */
+	 /** ResponseEntity - 데이터와 함께 Http 응답 메시지의 응답코드와 응답메시지 같이 전달 가능) */
+	 @GetMapping(value = "/result", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public @ResponseBody ResponseEntity<Employee> list2() {
+	      log.info("사원정보 요청");
+	      Employee employee = new Employee();
+	      employee.setEmployeeId(1000);
+	      employee.setFirstName("길동");
+	      employee.setLastName("홍");
+
+	      ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.OK).body(employee);
+	      //ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(employee);
+	      //ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.NOT_FOUND).body(employee);
+	      return result;
+	 }
+
+	 /** RESTful service - @RequestBody, @ResponseBody 활용 */
+	 // 테스트 시 Postman 활용
+	 @PostMapping(value = "/echo", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public @ResponseBody ResponseEntity<Employee> echo(@RequestBody Employee employee) {
+	      log.info("사원정보 수신 : " + employee);
+	      // 테스트 에코
+	      //ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.OK).body(employee);
+	      ResponseEntity<Employee> result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(employee);
+	      return result;
+	 }
+
+	 @GetMapping(value = "/echo")
+	 public void echo() {
+	      log.info("echo Get 요청");
+	 }
 
 
 }

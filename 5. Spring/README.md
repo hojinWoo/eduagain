@@ -107,6 +107,8 @@
   > 완료 후 이클립스 껐다가 다시 열기 (바탕화면에 이클립스 바로가기가 있는 경우도 삭제 후 다시 생성하기)
   >
   > 설치가 완료되어있다면 이클립스가 있는 곳에 lombok.jar파일이 들어있다
+  >
+  > > [Lombok 설명](https://projectlombok.org/features/all	)
 
 - Oracle JDBC 등록
 
