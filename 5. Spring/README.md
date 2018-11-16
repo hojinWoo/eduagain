@@ -135,6 +135,10 @@
 
      > Oracle Driver Connection사용하려면 java 버전이 1.7이상이 되어야 한다.
 
+- [Postman](https://chrome.google.com/webstore/search/postman) : 크롬에서 가상 데이터를 보내고 받을 때 사용하는 확장 플러그인
+
+
+
 
 ## 개념 정리
 
