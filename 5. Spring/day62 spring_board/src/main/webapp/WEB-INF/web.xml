@@ -9,12 +9,12 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
-	<!-- Creates the Spring Container shared by all Servlets and Filters, 톰캣 실행 시 자동으로 실행 - 설정파일은 context-param에 등록 -->
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Processes application requests, fronController 역할 -->
+	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -29,8 +29,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<!-- 한글 처리 필터 등록 -->
+
+		<!-- 한글 처리 필터 등록 -->
 	<filter>
      <filter-name>encoding</filter-name>
      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -45,5 +45,4 @@
 	     <url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-
 </web-app>

@@ -23,9 +23,4 @@
 	
 	<context:component-scan base-package="kr.or.kosta" />
 	
-	<!-- 2.5버전 이전 annotation에서는 직접 controller, Bean을 등록 -->
-	<!-- http://localhost/kosta/hello -->
-	<beans:bean name = "/hello" class="kr.or.kosta.spring.demo.controller.HelloController"> <!-- 동일한 이름으로 등록 시 id가 아닌 name을 사용 -->
-	</beans:bean>
-	
 </beans:beans>
