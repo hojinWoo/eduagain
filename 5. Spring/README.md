@@ -179,3 +179,75 @@
 
 - Bean Scanner는 자동으로 Bean으로 등록 :  기본적으로 Bean의 아이디로 클래스  이름(클래스 이름의 첫 글자만  소문자로 바꾼 것)을 사용
   - Bean Scanner 설정 필요!! **context:component-scan**
+
+
+
+### AOP(Aspect-Oriented Programming)
+
+관심사의 분리를 통해서 모듈성을 향상시키고자  하는 프로그래밍 개발 방식(ex. 암호화처리, 인증, transaction, Log 기록 등) - Cross Cuting
+
+##### 주요 용어
+
+- ``Aspect``
+
+  공통기능(횡단 관심사)에 대한 추상적인 명칭 (Advice + Pointcut)
+
+- ``Joinpoint``
+
+  공통기능을 적용할 대상(field, constructor, method)
+
+- ``Advice``
+
+  Joinpoint에서 실행되는 코드
+
+- ``Pointcut``
+
+  처리가 Joinpoing에 이르렀을 때 Advice를 호출할 지 선별
+
+
+
+##### Spring은 <u>Proxy 기반 AOP</u> : business객체가 실행되기 전 Runtime에 Proxy가 중간에서 먼저 처리 후에 넘긴다. 
+
+
+
+##### Advice 종류(pointcut)
+
+- Before
+
+- After
+
+- AfterReturning
+
+  Joinpoint가 정상 종료한 다음 실행되는 Advice
+
+- Aroud
+
+  Joinpoint 앞뒤에 실행되는 Advice
+
+- AfterThrowing
+
+  Joinpoint에서 예외가 발생했을 때 실행되는 Advice (ex. ControllerAdvice)
+
+
+
+##### Pointcut 표현식
+
+- ``execution``
+
+  조건에 맞는 method 실행시 실행
+
+- ``within``
+
+  특정 타입내에 선언된 모든 method
+
+- ``target``
+
+  타깃 객체가 특정 인터페이스를 구현하는 조인포인트일 경우 실행
+
+- ``this``
+
+  프록시가 특정 인터페이스를 구현하는 조인포인트일 경우 실행
+
+- ``args``
+
+  ``args(java.io.Serialize)``아규먼트가 특정 타입을 갖는 경우
