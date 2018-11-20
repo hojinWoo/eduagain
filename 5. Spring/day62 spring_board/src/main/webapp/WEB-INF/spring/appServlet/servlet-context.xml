@@ -23,4 +23,16 @@
 	
 	<context:component-scan base-package="kr.or.kosta" />
 	
+	<!-- 인터셉터 등록 -->
+	<beans:bean id="loggerInterceptor" class="kr.or.kosta.web.interceptor.LoggerInterceptor"></beans:bean>
+	
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/resources/**"/>	<!-- 웹에 관련된 정적인 문서 보관 why? spring은 webapp으로 접근 불가하기 때문 WEB-INF로 접근만 가능-->
+			<beans:ref bean="loggerInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
