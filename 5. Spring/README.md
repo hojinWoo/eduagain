@@ -251,3 +251,18 @@
 - ``args``
 
   ``args(java.io.Serialize)``아규먼트가 특정 타입을 갖는 경우
+
+
+
+#### Transaction 관리
+
+쪼개질 수 없는 하나의 단위 작업(ex. DB : commit, rollback 등)
+
+**Service**에서 Transaction 처리 관리(DAO에서 하는 것 X, 게시판에서는 Mybatis가 commit 처리 했음)
+
+##### ACID 원칙
+
+- ``Atomicity``
+- ``Consistency``
+- ``Isolation``
+- ``Durability``
