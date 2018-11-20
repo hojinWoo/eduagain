@@ -24,7 +24,7 @@
 	<context:component-scan base-package="kr.or.kosta" />
 	
 	<!-- 인터셉터 등록 -->
-	<beans:bean id="loggerInterceptor" class="kr.or.kosta.web.interceptor.LoggerInterceptor"></beans:bean>
+	<beans:bean id="loggerInterceptor" class="kr.or.kosta.common.web.interceptor.LoggerInterceptor"></beans:bean>
 	
 	<!-- 인터셉터 설정 -->
 	<interceptors>
