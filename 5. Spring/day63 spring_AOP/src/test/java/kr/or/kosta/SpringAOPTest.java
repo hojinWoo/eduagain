@@ -25,7 +25,7 @@ public class SpringAOPTest {
 		someService.foo("Hello Spring AOP~~~");
 	}
 	
-	@Test
+//	@Test
 	public void testSomeService2() throws SQLException {
 		String msg = someService.bar();
 		log.info(msg);
