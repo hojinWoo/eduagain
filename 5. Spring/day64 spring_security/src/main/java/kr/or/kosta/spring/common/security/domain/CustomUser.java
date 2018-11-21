@@ -10,6 +10,10 @@ import org.springframework.security.core.userdetails.User;
 import kr.or.kosta.spring.member.domain.Member;
 import lombok.Getter;
 
+/**
+ * Custom UserDetails 구현 클래스
+ * @author hojin
+ */
 @Getter
 public class CustomUser extends User/* implements UserDetails */{
 	
