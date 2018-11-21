@@ -1,6 +1,7 @@
 package kr.or.kosta.spring.common.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import kr.or.kosta.spring.common.security.domain.CustomUser;
 import kr.or.kosta.spring.member.domain.Member;
 import kr.or.kosta.spring.member.mapper.MemberMapper;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 /**
@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CustomUserDetailsService implements UserDetailsService {
 	
-	@Setter(onMethod_ = { @Autowired })
+	@Inject
 	private MemberMapper memberMapper;
 	
 	@Override
